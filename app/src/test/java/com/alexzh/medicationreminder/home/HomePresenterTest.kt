@@ -17,4 +17,10 @@ class HomePresenterTest {
         homePresenter.loadMore()
         verify(homeView).showLoader()
     }
+
+    @Test
+    fun `Hide loader after loading additional data`() {
+        homePresenter.loadMore()
+        verify(homeView).hideLoader()
+    }
 }
