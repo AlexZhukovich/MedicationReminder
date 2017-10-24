@@ -2,12 +2,25 @@
 
 buildscript {
     ext.kotlin_version = '1.1.51'
+    ext.gradle_version = '3.0.0-rc1'
+    ext.support_library_version = '26.1.0'
+    ext.constraint_layout_version = '1.0.2'
+    ext.rxjava_version = '2.1.1'
+    ext.rxandroid_version = '2.0.1'
+    ext.architecture_comp_version = '1.0.0-rc1'
+    ext.glide_version = '4.2.0'
+    ext.junit_version = '4.12'
+    ext.mockito_kotlin_version = '1.5.0'
+    ext.test_runner = '1.0.1'
+    ext.espresso_version = '3.0.1'
+    ext.uiautomator_version = '2.1.1'
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-rc1'
+        classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
