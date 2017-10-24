@@ -9,8 +9,9 @@ import org.junit.Test
 class HomePresenterTest {
 
     private val homeView = mock<Home.View>()
+    private val repository = mock<Home.Repository>()
 
-    private val homePresenter = HomePresenter(homeView)
+    private val homePresenter = HomePresenter(homeView, repository)
 
     @Test
     fun `Show loader during loading additional data`() {
@@ -22,5 +23,11 @@ class HomePresenterTest {
     fun `Hide loader after loading additional data`() {
         homePresenter.loadMore()
         verify(homeView).hideLoader()
+    }
+
+    @Test
+    fun `Call repository during loading additional data`() {
+        homePresenter.loadMore()
+        verify(repository).getMorePills()
     }
 }

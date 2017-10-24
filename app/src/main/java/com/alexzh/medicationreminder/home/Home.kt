@@ -9,4 +9,8 @@ interface Home {
     interface Presenter {
         fun loadMore()
     }
+
+    interface Repository {
+        fun getMorePills()
+    }
 }
