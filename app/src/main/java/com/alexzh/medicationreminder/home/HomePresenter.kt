@@ -7,8 +7,7 @@ class HomePresenter(private val view: Home.View, private val repository: Home.Re
     override fun loadMore() {
         view.showLoader()
         repository.getMorePills()
-                .doOnError(this::handleError)
-                .subscribe(this::handleSuccess)
+                .subscribe(this::handleSuccess, this::handleError)
         view.hideLoader()
     }
 
