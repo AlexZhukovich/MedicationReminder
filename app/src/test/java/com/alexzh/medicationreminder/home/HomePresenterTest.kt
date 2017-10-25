@@ -55,4 +55,11 @@ class HomePresenterTest {
         pillsSubject.onError(RuntimeException())
         verify(homeView).showLoadingError()
     }
+
+    @Test
+    fun `Don't show error message after success loading`() {
+        homePresenter.loadMore()
+        pillsSubject.onSuccess(pills)
+        verify(homeView, never()).showLoadingError()
+    }
 }
