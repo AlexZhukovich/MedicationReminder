@@ -31,12 +31,6 @@ class HomePresenterTest {
     }
 
     @Test
-    fun `Hide loader after loading additional data`() {
-        homePresenter.loadMore()
-        verify(homeView).hideLoader()
-    }
-
-    @Test
     fun `Call repository during loading additional data`() {
         homePresenter.loadMore()
         verify(repository).getMorePills()
