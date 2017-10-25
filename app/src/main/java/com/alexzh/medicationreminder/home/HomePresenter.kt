@@ -5,10 +5,10 @@ import com.alexzh.medicationreminder.data.model.Pill
 class HomePresenter(private val view: Home.View, private val repository: Home.Repository) : Home.Presenter {
 
     override fun loadMore() {
-        view.showLoader()
         repository.getMorePills()
+                .doOnSubscribe{ view.showLoader() }
+                .doFinally { view.hideLoader() }
                 .subscribe(this::handleSuccess, this::handleError)
-        view.hideLoader()
     }
 
     private fun handleSuccess(pills: List<Pill>) {
