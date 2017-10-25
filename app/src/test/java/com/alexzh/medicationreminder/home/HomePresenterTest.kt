@@ -70,4 +70,12 @@ class HomePresenterTest {
         pillsSubject.onSuccess(pills)
         verify(homeView).hideLoader()
     }
+
+    @Test
+    fun `Hide loading after interruption of loading additional data`() {
+        homePresenter.loadMore()
+        homePresenter.onDestroy()
+        pillsSubject.onError(RuntimeException())
+        verify(homeView).hideLoader()
+    }
 }

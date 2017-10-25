@@ -13,6 +13,7 @@ interface Home {
 
     interface Presenter {
         fun loadMore()
+        fun onDestroy()
     }
 
     interface Repository {

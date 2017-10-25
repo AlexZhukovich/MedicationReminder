@@ -1,12 +1,15 @@
 package com.alexzh.medicationreminder.home
 
 import com.alexzh.medicationreminder.data.model.Pill
+import io.reactivex.disposables.Disposable
 
 class HomePresenter(private val view: Home.View, private val repository: Home.Repository) : Home.Presenter {
 
+    private var mDisposable: Disposable? = null
+
     override fun loadMore() {
-        repository.getMorePills()
-                .doOnSubscribe{ view.showLoader() }
+        mDisposable = repository.getMorePills()
+                .doOnSubscribe { view.showLoader() }
                 .doFinally { view.hideLoader() }
                 .subscribe(this::handleSuccess, this::handleError)
     }
@@ -17,5 +20,9 @@ class HomePresenter(private val view: Home.View, private val repository: Home.Re
 
     private fun handleError(t: Throwable) {
         view.showLoadingError()
+    }
+
+    override fun onDestroy() {
+        mDisposable?.dispose()
     }
 }
