@@ -7,11 +7,16 @@ class HomePresenter(private val view: Home.View, private val repository: Home.Re
     override fun loadMore() {
         view.showLoader()
         repository.getMorePills()
+                .doOnError(this::handleError)
                 .subscribe(this::handleSuccess)
         view.hideLoader()
     }
 
     private fun handleSuccess(pills: List<Pill>) {
         view.showPills(pills)
+    }
+
+    private fun handleError(t: Throwable) {
+        view.showLoadingError()
     }
 }

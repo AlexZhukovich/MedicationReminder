@@ -8,6 +8,7 @@ interface Home {
         fun showLoader()
         fun hideLoader()
         fun showPills(pills: List<Pill>) {}
+        fun showLoadingError()
     }
 
     interface Presenter {
