@@ -13,12 +13,12 @@ class HomePresenterTest {
         val PILL_NAME = "pill"
         val PILL_DESCRIPTION = "pill description"
     }
-    private val pill = Pill(PILL_NAME, PILL_DESCRIPTION)
+    private val pills = listOf(Pill(PILL_NAME, PILL_DESCRIPTION))
 
     private val pillsSubject = SingleSubject.create<List<Pill>>()
 
     private val homeView = mock<Home.View>()
-    private val repository = spy<Home.Repository>().apply {
+    private val repository = mock<Home.Repository>().apply {
         whenever(this.getMorePills()).thenReturn(pillsSubject)
     }
 
@@ -45,7 +45,7 @@ class HomePresenterTest {
     @Test
     fun `Show results after loading the pills`() {
         homePresenter.loadMore()
-        pillsSubject.onSuccess(listOf(pill))
+        pillsSubject.onSuccess(pills)
         verify(homeView).showPills(any())
     }
 }
