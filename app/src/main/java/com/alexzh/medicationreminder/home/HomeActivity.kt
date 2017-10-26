@@ -1,9 +1,10 @@
-package com.alexzh.medicationreminder
+package com.alexzh.medicationreminder.home
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.alexzh.medicationreminder.R
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

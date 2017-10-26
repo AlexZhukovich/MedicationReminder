@@ -3,7 +3,6 @@
 package com.alexzh.medicationreminder.home
 
 import android.view.View
-import com.alexzh.medicationreminder.MainActivity
 import com.alexzh.medicationreminder.R
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -15,8 +14,8 @@ import org.robolectric.RobolectricTestRunner
 class HomeActivityTest {
 
     @Test
-    fun `Activity was created`() {
-        val activity = Robolectric.setupActivity(MainActivity::class.java)
+    fun `HomeActivity contains the RecyclerView`() {
+        val activity = Robolectric.setupActivity(HomeActivity::class.java)
         val recyclerView = activity.findViewById<View>(R.id.recyclerView)
 
         assertEquals(recyclerView.visibility, View.VISIBLE)
