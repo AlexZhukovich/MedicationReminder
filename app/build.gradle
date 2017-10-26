@@ -24,6 +24,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -55,6 +60,9 @@ dependencies {
 
     // JUnit
     testImplementation "junit:junit:$junit_version"
+
+    // Robolectric
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
 
     // MockitoKotlin
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin_version"
