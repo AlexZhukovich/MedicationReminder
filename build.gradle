@@ -15,6 +15,7 @@ buildscript {
     ext.test_runner = '1.0.1'
     ext.espresso_version = '3.0.1'
     ext.uiautomator_version = '2.1.1'
+    ext.jacoco_android_version = '0.1.2'
 
     repositories {
         google()
@@ -23,6 +24,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.dicedmelon.gradle:jacoco-android:$jacoco_android_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
