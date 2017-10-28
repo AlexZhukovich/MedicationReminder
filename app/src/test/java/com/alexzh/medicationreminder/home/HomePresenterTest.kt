@@ -5,6 +5,7 @@ package com.alexzh.medicationreminder.home
 import com.alexzh.medicationreminder.data.model.Pill
 import com.nhaarman.mockito_kotlin.*
 import io.reactivex.subjects.SingleSubject
+import org.junit.Before
 import org.junit.Test
 
 class HomePresenterTest {
@@ -23,6 +24,11 @@ class HomePresenterTest {
     }
 
     private val homePresenter = HomePresenter(homeView, repository)
+
+//    @Before
+//    fun setUp() {
+//        homePresenter.attachView(homeView)
+//    }
 
     @Test
     fun `Show loader during loading additional data`() {
