@@ -68,7 +68,8 @@ dependencies {
     // Robolectric
     testImplementation "org.robolectric:robolectric:$robolectric_version"
 
-    // MockitoKotlin
+    // Mockito
+    androidTestImplementation "org.mockito:mockito-android:$mockito_android_version"
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin_version"
     androidTestImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin_version"
 
@@ -77,6 +78,7 @@ dependencies {
 
     // Espresso
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espresso_version"
 
     // UiAutomator
     androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiautomator_version"
