@@ -5,6 +5,7 @@ package com.alexzh.medicationreminder.home
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.nhaarman.mockito_kotlin.*
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.SingleSubject
 import org.junit.Test
 
@@ -23,7 +24,7 @@ class HomePresenterTest {
         whenever(this.getMorePills()).thenReturn(pillsSubject)
     }
 
-    private val homePresenter = HomePresenter(homeView, repository)
+    private val homePresenter = HomePresenter(homeView, repository, Schedulers.trampoline(), Schedulers.trampoline())
 
     @Test
     fun `Show loader during loading additional data`() {
