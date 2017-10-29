@@ -2,6 +2,7 @@
 
 package com.alexzh.medicationreminder.home
 
+import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.nhaarman.mockito_kotlin.*
 import io.reactivex.subjects.SingleSubject
@@ -18,7 +19,7 @@ class HomePresenterTest {
     private val pillsSubject = SingleSubject.create<List<Pill>>()
 
     private val homeView = mock<Home.View>()
-    private val repository = mock<Home.Repository>().apply {
+    private val repository = mock<PillsRepository>().apply {
         whenever(this.getMorePills()).thenReturn(pillsSubject)
     }
 

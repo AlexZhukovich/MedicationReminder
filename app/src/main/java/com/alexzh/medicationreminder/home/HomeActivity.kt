@@ -5,15 +5,16 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import com.alexzh.medicationreminder.R
+import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeActivity : AppCompatActivity(), Home.View {
     companion object {
-        lateinit var mRepository: Home.Repository
+        lateinit var mPillsRepository: PillsRepository
     }
 
-    private val mPresenter: Home.Presenter by lazy { HomePresenter(this, mRepository) }
+    private val mPresenter: Home.Presenter by lazy { HomePresenter(this, mPillsRepository) }
     private val mAdapter by lazy { PillsAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {

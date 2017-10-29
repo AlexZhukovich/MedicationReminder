@@ -1,7 +1,6 @@
 package com.alexzh.medicationreminder.home
 
 import com.alexzh.medicationreminder.data.model.Pill
-import io.reactivex.Single
 
 interface Home {
     interface View {
@@ -14,9 +13,5 @@ interface Home {
     interface Presenter {
         fun loadMore()
         fun onDestroy()
-    }
-
-    interface Repository {
-        fun getMorePills() : Single<List<Pill>>
     }
 }

@@ -1,14 +1,15 @@
 package com.alexzh.medicationreminder.home
 
+import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import io.reactivex.disposables.Disposable
 
-class HomePresenter(private val view: Home.View, private val repository: Home.Repository) : Home.Presenter {
+class HomePresenter(private val view: Home.View, private val pillsRepository: PillsRepository) : Home.Presenter {
 
     private var mDisposable: Disposable? = null
 
     override fun loadMore() {
-        mDisposable = repository.getMorePills()
+        mDisposable = pillsRepository.getMorePills()
                 .doOnSubscribe { view.showLoader() }
                 .doFinally { view.hideLoader() }
                 .subscribe(this::handleSuccess, this::handleError)
