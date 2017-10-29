@@ -1,7 +1,9 @@
 package com.alexzh.medicationreminder.home
 
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.RecyclerViewItemCountAssertion
@@ -33,5 +35,13 @@ class HomeActivityMockUITest {
 
         onView(withId(R.id.recyclerView))
                 .check(RecyclerViewItemCountAssertion(1))
+    }
+
+    @Test
+    fun shouldDisplayLoadingError() {
+        mPillsSubject.onError(RuntimeException())
+
+        onView(withId(android.support.design.R.id.snackbar_text))
+                .check(matches(withText(R.string.message_load_data_error)))
     }
 }

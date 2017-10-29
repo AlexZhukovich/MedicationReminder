@@ -1,6 +1,7 @@
 package com.alexzh.medicationreminder.home
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
@@ -46,7 +47,7 @@ class HomeActivity : AppCompatActivity(), Home.View {
     }
 
     override fun showLoadingError() {
-
+        Snackbar.make(layout, R.string.message_load_data_error, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun showPills(pills: List<Pill>) {
