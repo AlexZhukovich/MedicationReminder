@@ -11,6 +11,7 @@ import com.alexzh.medicationreminder.data.model.Pill
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.subjects.SingleSubject
+import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 
@@ -48,5 +49,13 @@ class HomeActivityMockUITest {
     fun shouldDisplayProgressBarDuringLoadingData() {
         onView(withId(R.id.progressBar))
                 .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun shouldNotDisplayProgressBarAfterSuccessLoading() {
+        mPillsSubject.onSuccess(listOf(Pill("title", "description")))
+
+        onView(withId(R.id.progressBar))
+                .check(matches(not(isDisplayed())))
     }
 }

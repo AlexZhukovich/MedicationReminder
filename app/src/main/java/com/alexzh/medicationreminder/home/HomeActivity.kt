@@ -44,7 +44,7 @@ class HomeActivity : AppCompatActivity(), Home.View {
     }
 
     override fun hideLoader() {
-
+        progressBar.visibility = View.GONE
     }
 
     override fun showLoadingError() {
