@@ -20,6 +20,8 @@ class HomeActivityMockUITest {
     private val mRepository = mock<PillsRepository>()
     private val mPillsSubject = SingleSubject.create<List<Pill>>()
 
+    private val pills = listOf(Pill("title", "description"))
+
     @Rule @JvmField
     val mActivityRule = object: ActivityTestRule<HomeActivity>(HomeActivity::class.java) {
         override fun beforeActivityLaunched() {
@@ -31,7 +33,7 @@ class HomeActivityMockUITest {
 
     @Test
     fun shouldDisplayTestPill() {
-        mPillsSubject.onSuccess(listOf(Pill("title", "description")))
+        mPillsSubject.onSuccess(pills)
 
         onView(withId(R.id.recyclerView))
                 .check(RecyclerViewItemCountAssertion(1))
@@ -53,7 +55,7 @@ class HomeActivityMockUITest {
 
     @Test
     fun shouldNotDisplayProgressBarAfterSuccessLoading() {
-        mPillsSubject.onSuccess(listOf(Pill("title", "description")))
+        mPillsSubject.onSuccess(pills)
 
         onView(withId(R.id.progressBar))
                 .check(matches(not(isDisplayed())))
