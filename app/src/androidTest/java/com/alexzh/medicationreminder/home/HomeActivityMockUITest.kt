@@ -60,4 +60,12 @@ class HomeActivityMockUITest {
         onView(withId(R.id.progressBar))
                 .check(matches(not(isDisplayed())))
     }
+
+    @Test
+    fun shouldNotDisplayProgressBarAfterLoadingError() {
+        mPillsSubject.onError(RuntimeException())
+
+        onView(withId(R.id.progressBar))
+                .check(matches(not(isDisplayed())))
+    }
 }
