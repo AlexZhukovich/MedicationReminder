@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
+import android.view.View
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
@@ -39,7 +40,7 @@ class HomeActivity : AppCompatActivity(), Home.View {
     }
 
     override fun showLoader() {
-
+        progressBar.visibility = View.VISIBLE
     }
 
     override fun hideLoader() {
