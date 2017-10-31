@@ -78,19 +78,13 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:$test_runner"
 
     // Espresso
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
-    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espresso_version"
+    androidTestImplementation ("com.android.support.test.espresso:espresso-core:$espresso_version", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation ("com.android.support.test.espresso:espresso-contrib:$espresso_version", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 
     // UiAutomator
     androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiautomator_version"
-}
-
-/*
-All dependencies shared between test and production apps should be excluded from the test APK!
- */
-configurations.compile.dependencies.each { compileDependency ->
-    println "Excluding implementation dependency: ${compileDependency.getName()}"
-    configurations.androidTestCompile.dependencies.each { androidTestCompileDependency ->
-        configurations.androidTestCompile.exclude module: "${compileDependency.getName()}"
-    }
 }
