@@ -83,5 +83,14 @@ dependencies {
 
     // UiAutomator
     androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiautomator_version"
+}
 
+/*
+All dependencies shared between test and production apps should be excluded from the test APK!
+ */
+configurations.compile.dependencies.each { compileDependency ->
+    println "Excluding implementation dependency: ${compileDependency.getName()}"
+    configurations.androidTestCompile.dependencies.each { androidTestCompileDependency ->
+        configurations.androidTestCompile.exclude module: "${compileDependency.getName()}"
+    }
 }
