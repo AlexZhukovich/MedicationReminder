@@ -83,4 +83,10 @@ class HomeActivityMockUITest {
         onView(withId(R.id.progressBar))
                 .check(matches(not(isDisplayed())))
     }
+
+    @Test
+    fun shouldDisplayAddButton() {
+        onView(withId(R.id.add))
+                .check(matches(isDisplayed()))
+    }
 }

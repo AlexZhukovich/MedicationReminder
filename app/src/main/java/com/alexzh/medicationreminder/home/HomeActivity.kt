@@ -10,6 +10,7 @@ import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class HomeActivity : AppCompatActivity(), Home.View {
     companion object {
