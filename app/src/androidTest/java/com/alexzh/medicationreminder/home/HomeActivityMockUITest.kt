@@ -1,9 +1,12 @@
 package com.alexzh.medicationreminder.home
 
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
+import android.support.v7.widget.RecyclerView
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.RecyclerViewItemCountAssertion
 import com.alexzh.medicationreminder.data.PillsRepository
@@ -37,6 +40,18 @@ class HomeActivityMockUITest {
 
         onView(withId(R.id.recyclerView))
                 .check(RecyclerViewItemCountAssertion(1))
+    }
+
+    @Test
+    fun shouldDisplayTitleAfterClickOnPill() {
+        val position = 0
+        mPillsSubject.onSuccess(pills)
+
+        onView(withId(R.id.recyclerView))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(position, ViewActions.click()))
+
+        onView(withId(android.support.design.R.id.snackbar_text))
+                .check(matches(withText(pills[position].name)))
     }
 
     @Test

@@ -17,7 +17,7 @@ class HomeActivity : AppCompatActivity(), Home.View {
     }
 
     private val mPresenter: Home.Presenter by lazy { HomePresenter(this, mPillsRepository) }
-    private val mAdapter by lazy { PillsAdapter() }
+    private val mAdapter by lazy { PillsAdapter(this::handleItemClick) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,5 +53,9 @@ class HomeActivity : AppCompatActivity(), Home.View {
 
     override fun showPills(pills: List<Pill>) {
         mAdapter.addPills(pills)
+    }
+
+    private fun handleItemClick(pill: Pill) {
+        Snackbar.make(layout, pill.name, Snackbar.LENGTH_SHORT).show()
     }
 }
