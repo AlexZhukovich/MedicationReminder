@@ -28,6 +28,8 @@ class HomeActivity : AppCompatActivity(), Home.View {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = mAdapter
+
+        add.setOnClickListener { handleAddButtonClick() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -58,5 +60,9 @@ class HomeActivity : AppCompatActivity(), Home.View {
 
     private fun handleItemClick(pill: Pill) {
         Snackbar.make(layout, pill.name, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun handleAddButtonClick() {
+        Snackbar.make(layout, "Add button clicked", Snackbar.LENGTH_SHORT).show()
     }
 }

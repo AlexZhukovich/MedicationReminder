@@ -1,7 +1,7 @@
 package com.alexzh.medicationreminder.home
 
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions
+import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import android.support.test.espresso.matcher.ViewMatchers.*
@@ -48,7 +48,7 @@ class HomeActivityMockUITest {
         mPillsSubject.onSuccess(pills)
 
         onView(withId(R.id.recyclerView))
-                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(position, ViewActions.click()))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(position, click()))
 
         onView(withId(android.support.design.R.id.snackbar_text))
                 .check(matches(withText(pills[position].name)))
@@ -88,5 +88,15 @@ class HomeActivityMockUITest {
     fun shouldDisplayAddButton() {
         onView(withId(R.id.add))
                 .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun shouldCheckAddButtonInteraction() {
+        onView(withId(R.id.add))
+                .check(matches(isDisplayed()))
+                .perform(click())
+
+        onView(withId(android.support.design.R.id.snackbar_text))
+                .check(matches(withText("Add button clicked")))
     }
 }
