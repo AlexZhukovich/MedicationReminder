@@ -89,14 +89,4 @@ class HomeActivityMockUITest {
         onView(withId(R.id.add))
                 .check(matches(isDisplayed()))
     }
-
-    @Test
-    fun shouldCheckAddButtonInteraction() {
-        onView(withId(R.id.add))
-                .check(matches(isDisplayed()))
-                .perform(click())
-
-        onView(withId(android.support.design.R.id.snackbar_text))
-                .check(matches(withText("Add button clicked")))
-    }
 }
