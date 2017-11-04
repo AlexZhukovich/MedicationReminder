@@ -11,8 +11,11 @@ import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.alexzh.medicationreminder.pilldetail.PillDetailActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.activity_main.add
+import kotlinx.android.synthetic.main.activity_main.progressBar
+import kotlinx.android.synthetic.main.activity_main.layout
+import kotlinx.android.synthetic.main.content_main.recyclerView
 
 class HomeActivity : AppCompatActivity(), Home.View {
     companion object {

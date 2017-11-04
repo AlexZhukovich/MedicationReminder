@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.data.model.Pill
-import kotlinx.android.synthetic.main.item_pill.view.*
+import kotlinx.android.synthetic.main.item_pill.view.pillTitle
 
 class PillsAdapter(private val itemClick: (Pill) -> Unit) : RecyclerView.Adapter<PillsAdapter.ViewHolder>() {
     private val mPills = mutableListOf<Pill>()

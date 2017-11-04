@@ -4,7 +4,11 @@ package com.alexzh.medicationreminder.home
 
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.never
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.SingleSubject
 import org.junit.Test
