@@ -20,13 +20,10 @@ class PillDetailActivityMockUITest {
     val mActivityRule = ActivityTestRule<PillDetailActivity>(PillDetailActivity::class.java)
 
     @Test
-    fun shouldDisplayBackButton() {
+    fun shouldCheckToolbarForNewPill() {
         onView(withContentDescription(NAVIGATE_UP_DESCRIPTION))
                 .check(matches(isDisplayed()))
-    }
 
-    @Test
-    fun shouldDisplayToolbarTitle() {
         onView(withText(R.string.action_add_pill))
                 .check(matches(isDisplayed()))
     }
