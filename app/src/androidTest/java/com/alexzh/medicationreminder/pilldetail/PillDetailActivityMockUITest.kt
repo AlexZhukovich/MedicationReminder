@@ -33,4 +33,18 @@ class PillDetailActivityMockUITest {
         onView(withText(R.string.action_add_pill))
                 .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun shouldCheckToolbarForEditPill() {
+        val intent = Intent(InstrumentationRegistry.getTargetContext(), PillDetailActivity::class.java)
+        intent.putExtra("pill_id_key", 1L)
+
+        mActivityRule.launchActivity(intent)
+
+        onView(withContentDescription(NAVIGATE_UP_DESCRIPTION))
+                .check(matches(isDisplayed()))
+
+        onView(withText(R.string.action_edit_pill))
+                .check(matches(isDisplayed()))
+    }
 }
