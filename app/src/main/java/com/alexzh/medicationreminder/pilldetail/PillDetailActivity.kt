@@ -11,6 +11,8 @@ class PillDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pill_detail)
 
+        toolbar.setTitle(R.string.action_add_pill)
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

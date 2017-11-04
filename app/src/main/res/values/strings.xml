@@ -2,5 +2,7 @@
     <string name="app_name">MedicationReminder</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_add_pill">Add a pill</string>
+
     <string name="message_load_data_error">Something went wrong</string>
 </resources>
