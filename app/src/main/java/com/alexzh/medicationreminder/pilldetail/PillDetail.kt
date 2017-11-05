@@ -5,6 +5,7 @@ import com.alexzh.medicationreminder.data.model.Pill
 interface PillDetail {
     interface Presenter {
         fun loadPillInfo(pillId : Long)
+        fun onDestroy()
     }
 
     interface View {

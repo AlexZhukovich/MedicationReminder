@@ -4,10 +4,11 @@ package com.alexzh.medicationreminder.pilldetail
 
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
-import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockito_kotlin.never
+import com.nhaarman.mockito_kotlin.verify
 import io.reactivex.subjects.SingleSubject
 import org.junit.Test
 import java.lang.RuntimeException
@@ -52,5 +53,13 @@ class PillDetailPresenterTest {
         pillSubject.onError(RuntimeException())
 
         verify(view).showErrorMessage()
+    }
+
+    @Test
+    fun `Don't show results after loading interruption`() {
+        presenter.loadPillInfo(PILL_ID)
+        presenter.onDestroy()
+
+        verify(view, never()).showPillInfo(any())
     }
 }
