@@ -9,5 +9,6 @@ interface PillDetail {
 
     interface View {
         fun showPillInfo(pill: Pill)
+        fun showErrorMessage()
     }
 }

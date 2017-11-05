@@ -10,6 +10,7 @@ import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.subjects.SingleSubject
 import org.junit.Test
+import java.lang.RuntimeException
 
 class PillDetailPresenterTest {
 
@@ -42,5 +43,14 @@ class PillDetailPresenterTest {
         pillSubject.onSuccess(Pill(PILL_NAME, PILL_DESCRIPTION))
 
         verify(view).showPillInfo(any())
+    }
+
+    @Test
+    fun `Show error message after loading error`() {
+        presenter.loadPillInfo(PILL_ID)
+
+        pillSubject.onError(RuntimeException())
+
+        verify(view).showErrorMessage()
     }
 }

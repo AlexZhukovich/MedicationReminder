@@ -9,6 +9,6 @@ class PillDetailPresenter(private val repository: PillsRepository,
         repository.getPillById(pillId)
                 .subscribe(
                         { view.showPillInfo(it) },
-                        {})
+                        { view.showErrorMessage() })
     }
 }
