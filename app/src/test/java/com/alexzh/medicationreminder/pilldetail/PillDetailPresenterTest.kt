@@ -23,4 +23,11 @@ class PillDetailPresenterTest {
 
         verify(repository).getPillById(any())
     }
+
+    @Test
+    fun `Call repository during loading data with pill ID`() {
+        presenter.loadPillInfo(PILL_ID)
+
+        verify(repository).getPillById(PILL_ID)
+    }
 }
