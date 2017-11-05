@@ -5,6 +5,10 @@ import com.alexzh.medicationreminder.data.model.Pill
 import io.reactivex.Single
 
 class LocalPillsPillsRepository : PillsRepository {
+    override fun getPillById(id: Long): Single<Pill> {
+        return Single.just(Pill("", ""))
+    }
+
     override fun getMorePills(): Single<List<Pill>> {
         return Single.just(listOf())
     }

@@ -5,4 +5,5 @@ import io.reactivex.Single
 
 interface PillsRepository {
     fun getMorePills() : Single<List<Pill>>
+    fun getPillById(id: Long) : Single<Pill>
 }
