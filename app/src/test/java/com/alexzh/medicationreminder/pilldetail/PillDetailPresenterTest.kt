@@ -56,18 +56,11 @@ class PillDetailPresenterTest {
     }
 
     @Test
-    fun `Don't show results after loading interruption`() {
-        presenter.loadPillInfo(PILL_ID)
-        presenter.onDestroy()
-
-        verify(view, never()).showPillInfo(any())
-    }
-
-    @Test
-    fun `Doesn't show error message after loading interruption`() {
+    fun `Don't show results and error message after loading interruption`() {
         presenter.loadPillInfo(PILL_ID)
         presenter.onDestroy()
 
         verify(view, never()).showErrorMessage()
+        verify(view, never()).showPillInfo(any())
     }
 }
