@@ -9,6 +9,7 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import com.nhaarman.mockito_kotlin.never
 import com.nhaarman.mockito_kotlin.verify
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.SingleSubject
 import org.junit.Test
 import java.lang.RuntimeException
@@ -28,7 +29,7 @@ class PillDetailPresenterTest {
         whenever(this.getPillById(any())).thenReturn(pillSubject)
     }
 
-    private val presenter = PillDetailPresenter(repository, view)
+    private val presenter = PillDetailPresenter(repository, view, Schedulers.trampoline(), Schedulers.trampoline())
 
     @Test
     fun `Call repository during loading data with pill ID`() {

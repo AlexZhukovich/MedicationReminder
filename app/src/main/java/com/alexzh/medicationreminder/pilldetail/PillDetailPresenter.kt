@@ -2,15 +2,22 @@ package com.alexzh.medicationreminder.pilldetail
 
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 class PillDetailPresenter(private val repository: PillsRepository,
-                          private val view: PillDetail.View) : PillDetail.Presenter {
+                          private val view: PillDetail.View,
+                          private val ioScheduler: Scheduler = Schedulers.io(),
+                          private val uiScheduler: Scheduler = AndroidSchedulers.mainThread()) : PillDetail.Presenter {
 
     private var mDisposable: Disposable? = null
 
     override fun loadPillInfo(pillId: Long) {
         mDisposable = repository.getPillById(pillId)
+                .subscribeOn(ioScheduler)
+                .observeOn(uiScheduler)
                 .subscribe(this::handleSuccess, this::handleError)
     }
 
