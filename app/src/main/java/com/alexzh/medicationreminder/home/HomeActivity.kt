@@ -64,7 +64,9 @@ class HomeActivity : AppCompatActivity(), Home.View {
     }
 
     private fun handleItemClick(pill: Pill) {
-        Snackbar.make(layout, pill.name, Snackbar.LENGTH_SHORT).show()
+        val detailIntent = Intent(this, PillDetailActivity::class.java)
+        detailIntent.putExtra(PillDetailActivity.PILL_ID_KEY, pill.id)
+        startActivity(detailIntent)
     }
 
     private fun handleAddButtonClick() {

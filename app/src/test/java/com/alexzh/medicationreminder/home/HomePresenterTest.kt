@@ -16,10 +16,11 @@ import org.junit.Test
 class HomePresenterTest {
 
     companion object {
+        val PILL_ID = 1L
         val PILL_NAME = "pill"
         val PILL_DESCRIPTION = "pill description"
     }
-    private val pills = listOf(Pill(PILL_NAME, PILL_DESCRIPTION))
+    private val pills = listOf(Pill(PILL_ID, PILL_NAME, PILL_DESCRIPTION))
 
     private val pillsSubject = SingleSubject.create<List<Pill>>()
 

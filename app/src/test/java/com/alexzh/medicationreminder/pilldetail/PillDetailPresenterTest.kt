@@ -29,7 +29,7 @@ class PillDetailPresenterTest {
         whenever(this.getPillById(any())).thenReturn(pillSubject)
     }
 
-    private val presenter = PillDetailPresenter(repository, view, Schedulers.trampoline(), Schedulers.trampoline())
+    private val presenter = PillDetailPresenter(view, repository, Schedulers.trampoline(), Schedulers.trampoline())
 
     @Test
     fun `Call repository during loading data with pill ID`() {
@@ -42,7 +42,7 @@ class PillDetailPresenterTest {
     fun `Display pill info after loading`() {
         presenter.loadPillInfo(PILL_ID)
 
-        pillSubject.onSuccess(Pill(PILL_NAME, PILL_DESCRIPTION))
+        pillSubject.onSuccess(Pill(PILL_ID, PILL_NAME, PILL_DESCRIPTION))
 
         verify(view).showPillInfo(any())
     }

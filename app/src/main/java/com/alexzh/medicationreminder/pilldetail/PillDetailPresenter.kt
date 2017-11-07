@@ -8,8 +8,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-class PillDetailPresenter(private val repository: PillsRepository,
-                          private val view: PillDetail.View,
+class PillDetailPresenter(private val view: PillDetail.View,
+                          private val repository: PillsRepository,
                           private val ioScheduler: Scheduler = Schedulers.io(),
                           private val uiScheduler: Scheduler = AndroidSchedulers.mainThread()) : PillDetail.Presenter {
 
