@@ -6,6 +6,7 @@ import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class PillDetailPresenter(private val repository: PillsRepository,
                           private val view: PillDetail.View,
@@ -30,6 +31,7 @@ class PillDetailPresenter(private val repository: PillsRepository,
     }
 
     private fun handleError(t: Throwable) {
+        Timber.e(t, "There was an error loading the pill.")
         view.showErrorMessage()
     }
 }
