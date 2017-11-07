@@ -3,6 +3,7 @@ package com.alexzh.medicationreminder.app
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
@@ -18,6 +19,10 @@ import org.junit.Rule
 import org.junit.Test
 
 class AppMockUITest {
+
+    companion object {
+        val NAVIGATE_UP_DESCRIPTION = "Navigate up"
+    }
 
     private val mRepository = mock<PillsRepository>()
     private val mPillsSubject = SingleSubject.create<List<Pill>>()
@@ -40,5 +45,25 @@ class AppMockUITest {
 
         onView(withId(R.id.pillName))
                 .check(matches(withText("")))
+    }
+
+    @Test
+    fun shouldCheckNavigateUpButton() {
+        onView(withId(R.id.recyclerView))
+                .check(matches(isDisplayed()))
+
+        onView(withId(R.id.add))
+                .check(matches(isDisplayed()))
+                .perform(click())
+
+        onView(withId(R.id.pillName))
+                .check(matches(withText("")))
+
+        onView(ViewMatchers.withContentDescription(NAVIGATE_UP_DESCRIPTION))
+                .check(matches(isDisplayed()))
+                .perform(click())
+
+        onView(withId(R.id.recyclerView))
+                .check(matches(isDisplayed()))
     }
 }
