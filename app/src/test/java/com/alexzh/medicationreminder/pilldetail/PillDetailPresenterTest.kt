@@ -57,6 +57,15 @@ class PillDetailPresenterTest {
     }
 
     @Test
+    fun `Close activity after loading error`() {
+        presenter.loadPillInfo(PILL_ID)
+
+        pillSubject.onError(RuntimeException())
+
+        verify(view).close()
+    }
+
+    @Test
     fun `Don't show results and error message after loading interruption`() {
         presenter.loadPillInfo(PILL_ID)
         presenter.onDestroy()
