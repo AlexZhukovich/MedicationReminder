@@ -85,4 +85,17 @@ class AppMockUITest {
         onView(withId(R.id.pillName))
                 .check(matches(withText("test pill name")))
     }
+
+    @Test
+    fun shouldClickToTheFirstPillAndCloseDetailActivityAfterLoadingError() {
+        mPillsSubject.onSuccess(listOf(Pill(1L, "test pill name", "test pill description")))
+        onView(withId(R.id.recyclerView))
+                .check(matches(isDisplayed()))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+
+        mPillSubject.onError(RuntimeException())
+
+        onView(withId(R.id.recyclerView))
+                .check(matches(isDisplayed()))
+    }
 }
