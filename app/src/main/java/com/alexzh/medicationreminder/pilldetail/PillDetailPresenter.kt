@@ -33,5 +33,6 @@ class PillDetailPresenter(private val view: PillDetail.View,
     private fun handleError(t: Throwable) {
         Timber.e(t, "There was an error loading the pill.")
         view.showErrorMessage()
+        view.close()
     }
 }

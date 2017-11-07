@@ -3,6 +3,7 @@ package com.alexzh.medicationreminder.pilldetail
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
@@ -45,12 +46,16 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
     }
 
     override fun showErrorMessage() {
-
+        Toast.makeText(this, R.string.message_load_data_error, Toast.LENGTH_SHORT).show()
     }
 
     override fun onStop() {
         mPresenter.onDestroy()
         super.onStop()
+    }
+
+    override fun close() {
+        finish()
     }
 
     override fun onSupportNavigateUp(): Boolean {
