@@ -64,9 +64,7 @@ class HomeActivity : AppCompatActivity(), Home.View {
     }
 
     private fun handleItemClick(pill: Pill) {
-        val detailIntent = Intent(this, PillDetailActivity::class.java)
-        detailIntent.putExtra(PillDetailActivity.PILL_ID_KEY, pill.id)
-        startActivity(detailIntent)
+        startActivity(PillDetailActivity.newIntent(this@HomeActivity, pill.id))
     }
 
     private fun handleAddButtonClick() {

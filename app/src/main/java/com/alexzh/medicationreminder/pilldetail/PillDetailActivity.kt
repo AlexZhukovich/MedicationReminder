@@ -1,5 +1,6 @@
 package com.alexzh.medicationreminder.pilldetail
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +18,12 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
         val PILL_ID_INVALID = -1L
 
         lateinit var mPillsRepository: PillsRepository
+
+        fun newIntent(context: Context, id: Long) : Intent {
+            val detailIntent = Intent(context, PillDetailActivity::class.java)
+            detailIntent.putExtra(PILL_ID_KEY, id)
+            return detailIntent
+        }
     }
 
     private val mPresenter: PillDetail.Presenter by lazy { PillDetailPresenter(this, mPillsRepository) }
