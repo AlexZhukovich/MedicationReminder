@@ -11,6 +11,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import android.support.v7.widget.RecyclerView
 import com.alexzh.medicationreminder.R
+import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.alexzh.medicationreminder.home.HomeActivity
@@ -26,6 +27,7 @@ class AppMockUITest {
 
     companion object {
         private val NAVIGATE_UP_DESCRIPTION = "Navigate up"
+        private val FIRST_ITEM = 0
     }
 
     private val mRepository = mock<PillsRepository>()
@@ -76,22 +78,22 @@ class AppMockUITest {
 
     @Test
     fun shouldClickToTheFirstPillAndCheckDetailActivity() {
-        mPillsSubject.onSuccess(listOf(Pill(1L, "test pill name", "test pill description")))
+        mPillsSubject.onSuccess(TestData.getPills())
         onView(withId(R.id.recyclerView))
                 .check(matches(isDisplayed()))
-                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(FIRST_ITEM, click()))
 
-        mPillSubject.onSuccess(Pill(1L, "test pill name", "test pill description"))
+        mPillSubject.onSuccess(TestData.getFirstPill())
         onView(withId(R.id.pillName))
-                .check(matches(withText("test pill name")))
+                .check(matches(withText(TestData.getFirstPill().name)))
     }
 
     @Test
     fun shouldClickToTheFirstPillAndCloseDetailActivityAfterLoadingError() {
-        mPillsSubject.onSuccess(listOf(Pill(1L, "test pill name", "test pill description")))
+        mPillsSubject.onSuccess(TestData.getPills())
         onView(withId(R.id.recyclerView))
                 .check(matches(isDisplayed()))
-                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(FIRST_ITEM, click()))
 
         mPillSubject.onError(RuntimeException())
 

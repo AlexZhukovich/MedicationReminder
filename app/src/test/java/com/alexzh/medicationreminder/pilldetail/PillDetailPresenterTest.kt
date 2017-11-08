@@ -2,6 +2,7 @@
 
 package com.alexzh.medicationreminder.pilldetail
 
+import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.nhaarman.mockito_kotlin.mock
@@ -16,12 +17,6 @@ import java.lang.RuntimeException
 
 class PillDetailPresenterTest {
 
-    companion object {
-        val PILL_ID = 1L
-        val PILL_NAME = "pill"
-        val PILL_DESCRIPTION = "pill description"
-    }
-
     private val pillSubject = SingleSubject.create<Pill>()
 
     private val view = mock<PillDetail.View>()
@@ -33,23 +28,23 @@ class PillDetailPresenterTest {
 
     @Test
     fun `Call repository during loading data with pill ID`() {
-        presenter.loadPillInfo(PILL_ID)
+        presenter.loadPillInfo(TestData.getFirstPill().id)
 
-        verify(repository).getPillById(PILL_ID)
+        verify(repository).getPillById(TestData.getFirstPill().id)
     }
 
     @Test
     fun `Display pill info after loading`() {
-        presenter.loadPillInfo(PILL_ID)
+        presenter.loadPillInfo(TestData.getFirstPill().id)
 
-        pillSubject.onSuccess(Pill(PILL_ID, PILL_NAME, PILL_DESCRIPTION))
+        pillSubject.onSuccess(TestData.getFirstPill())
 
         verify(view).showPillInfo(any())
     }
 
     @Test
     fun `Show error message after loading error`() {
-        presenter.loadPillInfo(PILL_ID)
+        presenter.loadPillInfo(TestData.getFirstPill().id)
 
         pillSubject.onError(RuntimeException())
 
@@ -58,7 +53,7 @@ class PillDetailPresenterTest {
 
     @Test
     fun `Close activity after loading error`() {
-        presenter.loadPillInfo(PILL_ID)
+        presenter.loadPillInfo(TestData.getFirstPill().id)
 
         pillSubject.onError(RuntimeException())
 
@@ -67,7 +62,7 @@ class PillDetailPresenterTest {
 
     @Test
     fun `Don't show results and error message after loading interruption`() {
-        presenter.loadPillInfo(PILL_ID)
+        presenter.loadPillInfo(TestData.getSecondPill().id)
         presenter.onDestroy()
 
         verify(view, never()).showErrorMessage()

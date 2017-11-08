@@ -8,6 +8,7 @@ import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.rule.ActivityTestRule
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.RecyclerViewItemCountAssertion
+import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.nhaarman.mockito_kotlin.mock
@@ -22,8 +23,6 @@ class HomeActivityMockUITest {
     private val mRepository = mock<PillsRepository>()
     private val mPillsSubject = SingleSubject.create<List<Pill>>()
 
-    private val pills = listOf(Pill(1L, "title", "description"))
-
     @Rule @JvmField
     val mActivityRule = object: ActivityTestRule<HomeActivity>(HomeActivity::class.java) {
         override fun beforeActivityLaunched() {
@@ -35,10 +34,10 @@ class HomeActivityMockUITest {
 
     @Test
     fun shouldDisplayTestPill() {
-        mPillsSubject.onSuccess(pills)
+        mPillsSubject.onSuccess(TestData.getPills())
 
         onView(withId(R.id.recyclerView))
-                .check(RecyclerViewItemCountAssertion(1))
+                .check(RecyclerViewItemCountAssertion(TestData.getPills().size))
     }
 
     @Test
@@ -57,7 +56,7 @@ class HomeActivityMockUITest {
 
     @Test
     fun shouldNotDisplayProgressBarAfterSuccessLoading() {
-        mPillsSubject.onSuccess(pills)
+        mPillsSubject.onSuccess(TestData.getPills())
 
         onView(withId(R.id.progressBar))
                 .check(matches(not(isDisplayed())))

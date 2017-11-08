@@ -9,6 +9,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.rule.ActivityTestRule
 import com.alexzh.medicationreminder.R
+import com.alexzh.medicationreminder.TestData
 import org.junit.Rule
 import org.junit.Test
 
@@ -37,7 +38,7 @@ class PillDetailActivityMockUITest {
     @Test
     fun shouldCheckToolbarForEditPill() {
         val intent = Intent(InstrumentationRegistry.getTargetContext(), PillDetailActivity::class.java)
-        intent.putExtra("pill_id_key", 1L)
+        intent.putExtra("pill_id_key", TestData.getFirstPill().id)
 
         mActivityRule.launchActivity(intent)
 

@@ -2,6 +2,7 @@
 
 package com.alexzh.medicationreminder.home
 
+import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.nhaarman.mockito_kotlin.mock
@@ -14,13 +15,6 @@ import io.reactivex.subjects.SingleSubject
 import org.junit.Test
 
 class HomePresenterTest {
-
-    companion object {
-        val PILL_ID = 1L
-        val PILL_NAME = "pill"
-        val PILL_DESCRIPTION = "pill description"
-    }
-    private val pills = listOf(Pill(PILL_ID, PILL_NAME, PILL_DESCRIPTION))
 
     private val pillsSubject = SingleSubject.create<List<Pill>>()
 
@@ -46,7 +40,7 @@ class HomePresenterTest {
     @Test
     fun `Show results after loading the pills`() {
         homePresenter.loadMore()
-        pillsSubject.onSuccess(pills)
+        pillsSubject.onSuccess(TestData.getPills())
         verify(homeView).showPills(any())
     }
 
@@ -60,7 +54,7 @@ class HomePresenterTest {
     @Test
     fun `Don't show error message after success loading`() {
         homePresenter.loadMore()
-        pillsSubject.onSuccess(pills)
+        pillsSubject.onSuccess(TestData.getPills())
         verify(homeView, never()).showLoadingError()
     }
 
@@ -74,7 +68,7 @@ class HomePresenterTest {
     @Test
     fun `Hide loader after success loading`() {
         homePresenter.loadMore()
-        pillsSubject.onSuccess(pills)
+        pillsSubject.onSuccess(TestData.getPills())
         verify(homeView).hideLoader()
     }
 
