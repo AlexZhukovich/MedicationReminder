@@ -2,7 +2,6 @@
 
 package com.alexzh.medicationreminder.home
 
-import android.content.Intent
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.alexzh.medicationreminder.R
@@ -14,6 +13,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 
 @RunWith(RobolectricTestRunner::class)
@@ -43,14 +43,10 @@ class HomeActivityTest {
 
     @Test
     fun `Validate newIntent instance from PillDetailActivity`() {
-        val activity = Robolectric.buildActivity(HomeActivity::class.java).create().get()
+        val context = RuntimeEnvironment.application
+        val actualIntent = PillDetailActivity.newIntent(context, TestData.getFirstPill().id)
 
-        val expectedIntent = Intent(activity, PillDetailActivity::class.java)
-        expectedIntent.putExtra(PillDetailActivity.PILL_ID_KEY, TestData.getFirstPill().id)
-
-        val actualIntent = PillDetailActivity.newIntent(activity, TestData.getFirstPill().id)
-
-        assertEquals(expectedIntent.getLongExtra(PillDetailActivity.PILL_ID_KEY, DEFAULT_LONG_VALUE),
+        assertEquals(TestData.getFirstPill().id,
                      actualIntent.getLongExtra(PillDetailActivity.PILL_ID_KEY, DEFAULT_LONG_VALUE))
     }
 }
