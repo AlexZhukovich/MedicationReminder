@@ -42,7 +42,7 @@ class HomeActivityTest {
     }
 
     @Test
-    fun `Validate newIntent instance from PillDetailActivity`() {
+    fun `Validate newIntent instance from PillDetailActivity for the existing pill`() {
         val context = RuntimeEnvironment.application
         val actualIntent = PillDetailActivity.newIntent(context, TestData.getFirstPill().id)
 
