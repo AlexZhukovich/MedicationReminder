@@ -19,7 +19,7 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
 
         lateinit var mPillsRepository: PillsRepository
 
-        fun newIntent(context: Context, id: Long) : Intent {
+        fun newIntent(context: Context, id: Long = PILL_ID_INVALID) : Intent {
             val detailIntent = Intent(context, PillDetailActivity::class.java)
             detailIntent.putExtra(PILL_ID_KEY, id)
             return detailIntent

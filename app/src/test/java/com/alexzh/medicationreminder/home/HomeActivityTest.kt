@@ -49,4 +49,13 @@ class HomeActivityTest {
         assertEquals(TestData.getFirstPill().id,
                      actualIntent.getLongExtra(PillDetailActivity.PILL_ID_KEY, DEFAULT_LONG_VALUE))
     }
+
+    @Test
+    fun `Validate newIntent instance from PillDetailActivity for a new pill`() {
+        val context = RuntimeEnvironment.application
+        val actualIntent = PillDetailActivity.newIntent(context)
+
+        assertEquals(DEFAULT_LONG_VALUE,
+                     actualIntent.getLongExtra(PillDetailActivity.PILL_ID_KEY, DEFAULT_LONG_VALUE))
+    }
 }

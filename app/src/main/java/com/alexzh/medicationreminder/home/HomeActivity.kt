@@ -1,6 +1,5 @@
 package com.alexzh.medicationreminder.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -68,6 +67,6 @@ class HomeActivity : AppCompatActivity(), Home.View {
     }
 
     private fun handleAddButtonClick() {
-        startActivity(Intent(this@HomeActivity, PillDetailActivity::class.java))
+        startActivity(PillDetailActivity.newIntent(this@HomeActivity))
     }
 }
