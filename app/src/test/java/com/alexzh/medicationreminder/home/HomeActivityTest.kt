@@ -1,6 +1,7 @@
 @file:Suppress("IllegalIdentifier")
 
 package com.alexzh.medicationreminder.home
+
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.pilldetail.PillDetailActivity
 import org.junit.Assert.assertEquals
