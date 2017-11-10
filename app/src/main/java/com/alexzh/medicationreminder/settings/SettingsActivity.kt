@@ -17,8 +17,8 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-
         setupToolbar()
+        supportFragmentManager.beginTransaction().replace(R.id.container, SettingsFragment()).commit()
     }
 
     private fun setupToolbar() {

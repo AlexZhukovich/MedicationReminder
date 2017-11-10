@@ -6,4 +6,6 @@
     <string name="action_edit_pill">Edit a pill</string>
 
     <string name="message_load_data_error">Something went wrong</string>
+
+    <string name="pref_title_category_about">About</string>
 </resources>

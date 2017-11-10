@@ -58,6 +58,7 @@ dependencies {
     implementation "com.android.support:design:$support_library_version"
     implementation "com.android.support:appcompat-v7:$support_library_version"
     implementation "com.android.support:recyclerview-v7:$support_library_version"
+    implementation "com.android.support:preference-v14:$support_library_version"
 
     // Constraint layout
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
