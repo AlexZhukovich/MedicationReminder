@@ -46,7 +46,7 @@ class HomeActivity : AppCompatActivity(), Home.View {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_settings -> startActivity(Intent(this@HomeActivity, SettingsActivity::class.java))
+            R.id.action_settings -> startActivity(SettingsActivity.newInstance(this@HomeActivity))
         }
         return super.onOptionsItemSelected(item)
     }
