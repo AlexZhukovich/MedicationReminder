@@ -24,14 +24,6 @@ class HomeActivityTest {
     }
 
     @Test
-    fun `HomeActivity contains the RecyclerView`() {
-        val activity = Robolectric.setupActivity(HomeActivity::class.java)
-        val recyclerView = activity.findViewById<View>(R.id.recyclerView)
-
-        assertEquals(recyclerView.visibility, View.VISIBLE)
-    }
-
-    @Test
     fun `HomeActivity contains the Settings menu item`() {
         val activity = Robolectric.setupActivity(HomeActivity::class.java)
         val toolbar = activity.findViewById<View>(R.id.toolbar) as Toolbar
