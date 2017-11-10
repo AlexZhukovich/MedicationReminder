@@ -1,6 +1,7 @@
 package com.alexzh.medicationreminder.home
 
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.Espresso.openContextualActionModeOverflowMenu
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
@@ -73,6 +74,14 @@ class HomeActivityMockUITest {
     @Test
     fun shouldDisplayAddButton() {
         onView(withId(R.id.add))
+                .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun shouldDisplaySettingsMenuItem() {
+        openContextualActionModeOverflowMenu()
+
+        onView(withText(R.string.action_settings))
                 .check(matches(isDisplayed()))
     }
 }
