@@ -1,15 +1,18 @@
 package com.alexzh.medicationreminder.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.alexzh.medicationreminder.pilldetail.PillDetailActivity
+import com.alexzh.medicationreminder.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.activity_main.add
 import kotlinx.android.synthetic.main.activity_main.progressBar
@@ -39,6 +42,13 @@ class HomeActivity : AppCompatActivity(), Home.View {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.home_activity_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings -> startActivity(Intent(this@HomeActivity, SettingsActivity::class.java))
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {

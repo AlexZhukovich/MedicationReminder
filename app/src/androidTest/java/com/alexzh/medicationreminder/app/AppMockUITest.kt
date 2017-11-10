@@ -1,6 +1,7 @@
 package com.alexzh.medicationreminder.app
 
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.Espresso.openContextualActionModeOverflowMenu
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
@@ -96,6 +97,25 @@ class AppMockUITest {
                 .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(FIRST_ITEM, click()))
 
         mPillSubject.onError(RuntimeException())
+
+        onView(withId(R.id.recyclerView))
+                .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun shouldCheckNavigationUpButtonFromSettings() {
+        openContextualActionModeOverflowMenu()
+
+        onView(withText(R.string.action_settings))
+                .check(matches(isDisplayed()))
+                .perform(click())
+
+        onView(withText(R.string.action_settings))
+                .check(matches(isDisplayed()))
+
+        onView(ViewMatchers.withContentDescription(NAVIGATE_UP_DESCRIPTION))
+                .check(matches(isDisplayed()))
+                .perform(click())
 
         onView(withId(R.id.recyclerView))
                 .check(matches(isDisplayed()))
