@@ -6,5 +6,6 @@ interface Settings {
     }
     interface View {
         fun showAppVersion(version: String)
+        fun showUnknownAppVersion(t: Throwable)
     }
 }

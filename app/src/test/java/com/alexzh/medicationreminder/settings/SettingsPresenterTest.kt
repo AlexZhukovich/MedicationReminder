@@ -3,6 +3,7 @@
 package com.alexzh.medicationreminder.settings
 
 import com.alexzh.medicationreminder.data.AppInfoRepository
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
@@ -37,5 +38,14 @@ class SettingsPresenterTest {
         appInfoSubject.onSuccess(APP_VERSION)
 
         verify(view).showAppVersion(APP_VERSION)
+    }
+
+    @Test
+    fun `Display Unknown app version after loading error`() {
+        presenter.loadAppVersion()
+
+        appInfoSubject.onError(RuntimeException())
+
+        verify(view).showUnknownAppVersion(any())
     }
 }
