@@ -3,9 +3,12 @@
 package com.alexzh.medicationreminder.settings
 
 import com.alexzh.medicationreminder.data.AppInfoRepository
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.never
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.SingleSubject
 import org.junit.Test
 
@@ -21,7 +24,7 @@ class SettingsPresenterTest {
     private val repository = mock<AppInfoRepository>().apply {
         whenever(this.getAppVersion()).thenReturn(appInfoSubject)
     }
-    private val presenter = SettingsPresenter(view, repository)
+    private val presenter = SettingsPresenter(view, repository, Schedulers.trampoline(), Schedulers.trampoline())
 
     @Test
     fun `Call repository during loading app version`() {
@@ -46,5 +49,14 @@ class SettingsPresenterTest {
         appInfoSubject.onError(RuntimeException())
 
         verify(view).showUnknownAppVersion()
+    }
+
+    @Test
+    fun `Don't show results or error after loading interruption`() {
+        presenter.loadAppVersion()
+        presenter.onDestroy()
+
+        verify(view, never()).showAppVersion(any())
+        verify(view, never()).showUnknownAppVersion()
     }
 }
