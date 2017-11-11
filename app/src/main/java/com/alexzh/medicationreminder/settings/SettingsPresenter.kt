@@ -8,11 +8,15 @@ class SettingsPresenter(private val view: Settings.View,
 
     override fun loadAppVersion() {
         repository.getAppVersion()
-                .subscribe(
-                        {view.showAppVersion(it)},
-                        {
-                            Timber.e(it, "There was an error loading the app version.")
-                            view.showUnknownAppVersion(it)
-                        })
+                .subscribe(this::handleSuccess, this::handleError)
+    }
+
+    private fun handleSuccess(version: String) {
+        view.showAppVersion(version)
+    }
+
+    private fun handleError(t: Throwable) {
+        Timber.e(t, "There was an error loading the app version.")
+        view.showUnknownAppVersion()
     }
 }
