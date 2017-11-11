@@ -4,4 +4,7 @@ interface Settings {
     interface Presenter {
         fun loadAppVersion()
     }
+    interface View {
+        fun showAppVersion(version: String)
+    }
 }
