@@ -19,7 +19,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Settings.View {
     }
 
     override fun showUnknownAppVersion() {
-
+        findPreference(getString(R.string.pref_key_app_version)).setSummary(R.string.pref_summary_app_version_unknown)
     }
 
     override fun showAppVersion(version: String) {

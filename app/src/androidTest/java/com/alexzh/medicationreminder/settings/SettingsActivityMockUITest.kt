@@ -1,5 +1,6 @@
 package com.alexzh.medicationreminder.settings
 
+import android.content.pm.PackageManager
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -45,6 +46,17 @@ class SettingsActivityMockUITest {
         mAppInfoSubject.onSuccess(APP_VERSION)
 
         onView(withText(APP_VERSION))
+                .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun shouldDisplayUnknownAppVersionPreference() {
+        onView(withText(R.string.pref_title_app_version))
+                .check(matches(isDisplayed()))
+
+        mAppInfoSubject.onError(PackageManager.NameNotFoundException())
+
+        onView(withText(R.string.pref_summary_app_version_unknown))
                 .check(matches(isDisplayed()))
     }
 }
