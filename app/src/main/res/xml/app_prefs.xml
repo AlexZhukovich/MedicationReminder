@@ -4,5 +4,9 @@
     <android.support.v7.preference.PreferenceCategory
         android:title="@string/pref_title_category_about">
 
+        <android.support.v7.preference.Preference
+            android:key="@string/pref_key_app_version"
+            android:title="@string/pref_title_app_version" />
+
     </android.support.v7.preference.PreferenceCategory>
 </android.support.v7.preference.PreferenceScreen>

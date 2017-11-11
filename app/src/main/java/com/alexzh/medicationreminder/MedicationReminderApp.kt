@@ -1,9 +1,11 @@
 package com.alexzh.medicationreminder
 
 import android.app.Application
+import com.alexzh.medicationreminder.data.local.LocalAppInfoRepository
 import com.alexzh.medicationreminder.data.local.LocalPillsPillsRepository
 import com.alexzh.medicationreminder.home.HomeActivity
 import com.alexzh.medicationreminder.pilldetail.PillDetailActivity
+import com.alexzh.medicationreminder.settings.SettingsFragment
 import timber.log.Timber
 
 class MedicationReminderApp : Application() {
@@ -13,6 +15,7 @@ class MedicationReminderApp : Application() {
         setupTimber()
         setupHomeActivity()
         setupPillDetailActivity()
+        setupSettings()
     }
 
     private fun setupTimber() {
@@ -27,5 +30,9 @@ class MedicationReminderApp : Application() {
 
     private fun setupPillDetailActivity() {
         PillDetailActivity.mPillsRepository = LocalPillsPillsRepository()
+    }
+
+    private fun setupSettings() {
+        SettingsFragment.mRepository = LocalAppInfoRepository(this)
     }
 }
