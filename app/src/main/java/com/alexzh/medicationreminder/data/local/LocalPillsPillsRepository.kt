@@ -6,7 +6,7 @@ import io.reactivex.Single
 
 class LocalPillsPillsRepository : PillsRepository {
     override fun getPillById(id: Long): Single<Pill> {
-        return Single.just(Pill(1L, "Test pill", "Test description"))
+        return Single.just(Pill(1L, "Test pill", "Test description", "100 mg"))
     }
 
     override fun getMorePills(): Single<List<Pill>> {

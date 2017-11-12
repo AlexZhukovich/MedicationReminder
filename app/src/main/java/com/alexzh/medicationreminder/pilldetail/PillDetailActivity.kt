@@ -10,6 +10,7 @@ import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import kotlinx.android.synthetic.main.activity_pill_detail.toolbar
 import kotlinx.android.synthetic.main.activity_pill_detail.pillName
+import kotlinx.android.synthetic.main.activity_pill_detail.pillDosage
 
 class PillDetailActivity : AppCompatActivity(), PillDetail.View {
 
@@ -51,6 +52,7 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
 
     override fun showPillInfo(pill: Pill) {
         pillName.setText(pill.name)
+        pillDosage.setText(pill.dosage)
     }
 
     override fun showErrorMessage() {
