@@ -30,18 +30,21 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pill_detail)
 
-        setupToolbar(intent)
+        val pillId = getPillId(intent)
+        if (pillId == PILL_ID_INVALID) {
+            setupToolbar(true)
+        } else {
+            setupToolbar(false)
+            mPresenter.loadPillInfo(pillId)
+        }
     }
 
-    private fun setupToolbar(intent: Intent) {
-        val id = intent.getLongExtra(PILL_ID_KEY, PILL_ID_INVALID)
-        if (id == PILL_ID_INVALID) {
+    private fun setupToolbar(isNewPill : Boolean) {
+        if (isNewPill) {
             toolbar.setTitle(R.string.action_add_pill)
         } else {
             toolbar.setTitle(R.string.action_edit_pill)
-            mPresenter.loadPillInfo(id)
         }
-
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -67,4 +70,6 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
         onBackPressed()
         return true
     }
+
+    private fun getPillId(intent: Intent) : Long = intent.getLongExtra(PILL_ID_KEY, PILL_ID_INVALID)
 }
