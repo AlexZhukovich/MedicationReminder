@@ -5,6 +5,8 @@
     <string name="action_add_pill">Add a pill</string>
     <string name="action_edit_pill">Edit a pill</string>
 
+    <string name="hint_medication_name">Medication name</string>
+
     <string name="message_load_data_error">Something went wrong</string>
 
     <string name="pref_key_app_version" translatable="false">app_version_key</string>

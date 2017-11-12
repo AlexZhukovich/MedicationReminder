@@ -4,6 +4,8 @@ import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.matcher.ViewMatchers.withHint
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -33,6 +35,16 @@ class PillDetailActivityMockUITest {
 
         onView(withText(R.string.action_add_pill))
                 .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun shouldCheckMedicationNameHintForNewPill() {
+        mActivityRule.launchActivity(Intent(
+                InstrumentationRegistry.getTargetContext(),
+                PillDetailActivity::class.java))
+
+        onView(withId(R.id.pillName))
+                .check(matches(withHint(R.string.hint_medication_name)))
     }
 
     @Test
