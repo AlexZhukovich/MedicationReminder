@@ -6,6 +6,7 @@
     <string name="action_edit_pill">Edit a pill</string>
 
     <string name="hint_medication_name">Medication name</string>
+    <string name="hint_medication_dosage">Dosage</string>
 
     <string name="message_load_data_error">Something went wrong</string>
 

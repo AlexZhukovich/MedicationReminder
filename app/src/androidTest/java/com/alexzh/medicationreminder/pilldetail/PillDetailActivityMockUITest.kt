@@ -48,6 +48,16 @@ class PillDetailActivityMockUITest {
     }
 
     @Test
+    fun shouldCheckMedicationDosageHint() {
+        mActivityRule.launchActivity(Intent(
+                InstrumentationRegistry.getTargetContext(),
+                PillDetailActivity::class.java))
+
+        onView(withId(R.id.pillDosage))
+                .check(matches(withHint(R.string.hint_medication_dosage)))
+    }
+
+    @Test
     fun shouldCheckToolbarForEditPill() {
         val intent = Intent(InstrumentationRegistry.getTargetContext(), PillDetailActivity::class.java)
         intent.putExtra("pill_id_key", TestData.getFirstPill().id)

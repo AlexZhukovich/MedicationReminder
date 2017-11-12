@@ -35,6 +35,16 @@
                     android:textSize="36sp"
                     android:hint="@string/hint_medication_name"/>
 
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/pillDosage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/pillName"
+                    android:hint="@string/hint_medication_dosage"
+                    android:inputType="numberDecimal"
+                    android:textSize="18sp" />
+
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
