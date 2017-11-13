@@ -70,9 +70,9 @@ class PillDetailActivityMockUITest {
 
     @Test
     fun shouldCheckToolbarForEditPill() {
-        val intent = Intent(InstrumentationRegistry.getTargetContext(), PillDetailActivity::class.java)
-        intent.putExtra("pill_id_key", TestData.getFirstPill().id)
-
+        val intent = Intent(InstrumentationRegistry.getTargetContext(), PillDetailActivity::class.java).apply {
+            putExtra("pill_id_key", TestData.getFirstPill().id)
+        }
         mActivityRule.launchActivity(intent)
 
         onView(withContentDescription(NAVIGATE_UP_DESCRIPTION))
@@ -85,8 +85,9 @@ class PillDetailActivityMockUITest {
     @Test
     fun shouldCheckNameAndDosagePill() {
         PillDetailActivity.mPillsRepository = mRepository
-        val intent = Intent(InstrumentationRegistry.getTargetContext(), PillDetailActivity::class.java)
-        intent.putExtra("pill_id_key", TestData.getFirstPill().id)
+        val intent = Intent(InstrumentationRegistry.getTargetContext(), PillDetailActivity::class.java).apply {
+            putExtra("pill_id_key", TestData.getFirstPill().id)
+        }
         mActivityRule.launchActivity(intent)
 
         mPillSubject.onSuccess(TestData.getFirstPill())
