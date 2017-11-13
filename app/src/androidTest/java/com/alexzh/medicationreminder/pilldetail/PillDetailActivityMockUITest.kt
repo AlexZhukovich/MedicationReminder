@@ -36,7 +36,7 @@ class PillDetailActivityMockUITest {
     val mActivityRule = ActivityTestRule<PillDetailActivity>(PillDetailActivity::class.java, true, false)
 
     @Test
-    fun shouldCheckToolbarForNewPill() {
+    fun shouldDisplayMedicationNameAndDosageHints() {
         mActivityRule.launchActivity(Intent(
                 InstrumentationRegistry.getTargetContext(),
                 PillDetailActivity::class.java))
@@ -46,51 +46,27 @@ class PillDetailActivityMockUITest {
 
         onView(withText(R.string.action_add_pill))
                 .check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun shouldCheckMedicationNameHintForNewPill() {
-        mActivityRule.launchActivity(Intent(
-                InstrumentationRegistry.getTargetContext(),
-                PillDetailActivity::class.java))
 
         onView(withId(R.id.pillName))
                 .check(matches(withHint(R.string.hint_medication_name)))
-    }
-
-    @Test
-    fun shouldCheckMedicationDosageHint() {
-        mActivityRule.launchActivity(Intent(
-                InstrumentationRegistry.getTargetContext(),
-                PillDetailActivity::class.java))
 
         onView(withId(R.id.pillDosage))
                 .check(matches(withHint(R.string.hint_medication_dosage)))
     }
 
     @Test
-    fun shouldCheckToolbarForEditPill() {
-        val intent = Intent(InstrumentationRegistry.getTargetContext(), PillDetailActivity::class.java).apply {
-            putExtra("pill_id_key", TestData.getFirstPill().id)
-        }
+    fun shouldDisplayMedicationNameAndDosage() {
+        PillDetailActivity.mPillsRepository = mRepository
+        val intent = PillDetailActivity.newIntent(InstrumentationRegistry.getTargetContext(), TestData.getFirstPill().id)
         mActivityRule.launchActivity(intent)
+
+        mPillSubject.onSuccess(TestData.getFirstPill())
 
         onView(withContentDescription(NAVIGATE_UP_DESCRIPTION))
                 .check(matches(isDisplayed()))
 
         onView(withText(R.string.action_edit_pill))
                 .check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun shouldCheckNameAndDosagePill() {
-        PillDetailActivity.mPillsRepository = mRepository
-        val intent = Intent(InstrumentationRegistry.getTargetContext(), PillDetailActivity::class.java).apply {
-            putExtra("pill_id_key", TestData.getFirstPill().id)
-        }
-        mActivityRule.launchActivity(intent)
-
-        mPillSubject.onSuccess(TestData.getFirstPill())
 
         onView(withId(R.id.pillName))
                 .check(matches(withText(TestData.getFirstPill().name)))
