@@ -2,7 +2,7 @@ package com.alexzh.medicationreminder
 
 import android.app.Application
 import com.alexzh.medicationreminder.data.local.LocalAppInfoRepository
-import com.alexzh.medicationreminder.data.local.LocalPillsPillsRepository
+import com.alexzh.medicationreminder.data.local.LocalPillsRepository
 import com.alexzh.medicationreminder.home.HomeActivity
 import com.alexzh.medicationreminder.pilldetail.PillDetailActivity
 import com.alexzh.medicationreminder.settings.SettingsFragment
@@ -25,11 +25,11 @@ class MedicationReminderApp : Application() {
     }
 
     private fun setupHomeActivity() {
-        HomeActivity.mPillsRepository = LocalPillsPillsRepository()
+        HomeActivity.mPillsRepository = LocalPillsRepository()
     }
 
     private fun setupPillDetailActivity() {
-        PillDetailActivity.mPillsRepository = LocalPillsPillsRepository()
+        PillDetailActivity.mPillsRepository = LocalPillsRepository()
     }
 
     private fun setupSettings() {
