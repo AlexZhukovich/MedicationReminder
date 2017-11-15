@@ -7,7 +7,7 @@ buildscript {
     ext.constraint_layout_version = '1.0.2'
     ext.rxjava_version = '2.1.1'
     ext.rxandroid_version = '2.0.1'
-    ext.architecture_comp_version = '1.0.0-rc1'
+    ext.architecture_comp_version = '1.0.0'
     ext.glide_version = '4.2.0'
     ext.timber_version = '4.6.0'
     ext.junit_version = '4.12'

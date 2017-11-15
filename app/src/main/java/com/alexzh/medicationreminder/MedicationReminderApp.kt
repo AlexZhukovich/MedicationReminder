@@ -3,12 +3,18 @@ package com.alexzh.medicationreminder
 import android.app.Application
 import com.alexzh.medicationreminder.data.local.LocalAppInfoRepository
 import com.alexzh.medicationreminder.data.local.LocalPillsRepository
+import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
 import com.alexzh.medicationreminder.home.HomeActivity
 import com.alexzh.medicationreminder.pilldetail.PillDetailActivity
 import com.alexzh.medicationreminder.settings.SettingsFragment
 import timber.log.Timber
+import com.alexzh.medicationreminder.data.PillsRepository
 
 class MedicationReminderApp : Application() {
+
+    private val mPillRepository: PillsRepository by lazy {
+        LocalPillsRepository(MedicationReminderDatabase.getInstance(this).pillDao())
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -25,11 +31,11 @@ class MedicationReminderApp : Application() {
     }
 
     private fun setupHomeActivity() {
-        HomeActivity.mPillsRepository = LocalPillsRepository()
+        HomeActivity.mPillsRepository = mPillRepository
     }
 
     private fun setupPillDetailActivity() {
-        PillDetailActivity.mPillsRepository = LocalPillsRepository()
+        PillDetailActivity.mPillsRepository = mPillRepository
     }
 
     private fun setupSettings() {

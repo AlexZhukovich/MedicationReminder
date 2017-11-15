@@ -67,6 +67,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 
+    // Android Architecture Core
+    androidTestImplementation "android.arch.core:core-testing:$architecture_comp_version"
+
     // Room
     implementation "android.arch.persistence.room:runtime:$architecture_comp_version"
     kapt "android.arch.persistence.room:compiler:$architecture_comp_version"
