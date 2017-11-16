@@ -4,6 +4,7 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
 import org.junit.Rule
 import org.junit.Test
@@ -26,5 +27,19 @@ class PillDaoTest {
         mDatabase.pillDao().getPills()
                            .test()
                            .assertValue(listOf())
+    }
+
+    @Test
+    fun shouldInsertPill() {
+        val context = InstrumentationRegistry.getContext()
+        mDatabase = Room.inMemoryDatabaseBuilder(context, MedicationReminderDatabase::class.java)
+                .allowMainThreadQueries()
+                .build()
+
+        mDatabase.pillDao().insertPill(TestData.getFirstPill())
+
+        mDatabase.pillDao().getPills()
+                           .test()
+                           .assertValue(listOf(TestData.getFirstPill()))
     }
 }
