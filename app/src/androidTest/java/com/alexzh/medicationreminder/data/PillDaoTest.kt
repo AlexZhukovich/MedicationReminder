@@ -39,10 +39,8 @@ class PillDaoTest {
         mPillDao.insertPill(TestData.getFirstPill())
 
         mPillDao.getPillById(TestData.getFirstPill().id)
-
-        mPillDao.getPills()
                 .test()
-                .assertValue(listOf(TestData.getFirstPill()))
+                .assertValue(TestData.getFirstPill())
     }
 
     @Test
@@ -50,8 +48,8 @@ class PillDaoTest {
         mPillDao.insertPill(TestData.getFirstPill())
 
         mPillDao.getPills()
-                           .test()
-                           .assertValue(listOf(TestData.getFirstPill()))
+                .test()
+                .assertValue(listOf(TestData.getFirstPill()))
     }
 
     @Test
