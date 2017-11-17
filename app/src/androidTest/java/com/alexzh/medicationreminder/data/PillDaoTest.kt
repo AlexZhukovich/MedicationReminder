@@ -108,4 +108,13 @@ class PillDaoTest {
                 .test()
                 .assertValue(EMPTY_PILL_LIST)
     }
+
+    @Test
+    fun shouldPillsTableStayEmptyAfterRemovingAllPillsFromEmptyTable() {
+        mPillDao.deleteAllPills()
+
+        mPillDao.getPills()
+                .test()
+                .assertValue(EMPTY_PILL_LIST)
+    }
 }
