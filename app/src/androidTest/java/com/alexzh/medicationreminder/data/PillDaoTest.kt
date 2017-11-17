@@ -34,4 +34,19 @@ class PillDaoTest {
                            .test()
                            .assertValue(listOf(TestData.getFirstPill()))
     }
+
+    @Test
+    fun shouldUpdateExistingPill() {
+        mDatabase.pillDao().insertPill(TestData.getSecondPill())
+
+        val pill = TestData.getSecondPill().copy(
+                name = "updated second pill name",
+                description = "updated second pill description")
+
+        mDatabase.pillDao().updatePill(pill)
+
+        mDatabase.pillDao().getPills()
+                .test()
+                .assertValue(listOf(pill))
+    }
 }

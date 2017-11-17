@@ -1,9 +1,6 @@
 package com.alexzh.medicationreminder.data.local
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.alexzh.medicationreminder.data.model.Pill
 import io.reactivex.Single
 
@@ -28,4 +25,10 @@ interface PillDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPill(pill: Pill)
+
+    /**
+     * Update an existing pill in the database.
+     */
+    @Update
+    fun updatePill(pill: Pill)
 }
