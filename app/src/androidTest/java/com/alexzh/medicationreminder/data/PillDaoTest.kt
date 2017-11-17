@@ -35,6 +35,17 @@ class PillDaoTest {
     }
 
     @Test
+    fun shouldLoadExistingPillById() {
+        mPillDao.insertPill(TestData.getFirstPill())
+
+        mPillDao.getPillById(TestData.getFirstPill().id)
+
+        mPillDao.getPills()
+                .test()
+                .assertValue(listOf(TestData.getFirstPill()))
+    }
+
+    @Test
     fun shouldInsertPill() {
         mPillDao.insertPill(TestData.getFirstPill())
 

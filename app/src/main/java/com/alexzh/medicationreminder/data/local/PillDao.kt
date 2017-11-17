@@ -19,6 +19,15 @@ interface PillDao {
     fun getPills() : Single<List<Pill>>
 
     /**
+     * Get existing pill by id.
+     *
+     * @param pillId the id of the existing pill.
+     * @return the pill.
+     */
+    @Query("SELECT * FROM pills WHERE id = :pillId")
+    fun getPillById(pillId: Long) : Single<Pill>
+
+    /**
      * Insert a pill in the database. If the pill already exists, replace it.
      *
      * @param pill the pill to be inserted.
