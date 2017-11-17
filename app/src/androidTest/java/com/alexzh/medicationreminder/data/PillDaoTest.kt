@@ -49,4 +49,13 @@ class PillDaoTest {
                 .test()
                 .assertValue(listOf(pill))
     }
+
+    @Test
+    fun shouldUpdateNotInsertNewPill() {
+        mDatabase.pillDao().updatePill(TestData.getFirstPill())
+
+        mDatabase.pillDao().getPills()
+                .test()
+                .assertValue(listOf())
+    }
 }
