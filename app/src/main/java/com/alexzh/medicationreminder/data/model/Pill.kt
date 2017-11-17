@@ -3,7 +3,7 @@ package com.alexzh.medicationreminder.data.model
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
-@Entity(tableName = "pill")
+@Entity(tableName = "pills")
 data class Pill(@PrimaryKey(autoGenerate = true) val id: Long,
                 val name: String,
                 val description: String,

@@ -7,12 +7,25 @@ import android.arch.persistence.room.Query
 import com.alexzh.medicationreminder.data.model.Pill
 import io.reactivex.Single
 
+/**
+ * Data Access Object for the pills table.
+ */
 @Dao
 interface PillDao {
 
-    @Query("SELECT * FROM pill")
+    /**
+     * Get all pills from the table.
+     *
+     * @return the pills.
+     */
+    @Query("SELECT * FROM pills")
     fun getPills() : Single<List<Pill>>
 
+    /**
+     * Insert a pill in the database. If the pill already exists, replace it.
+     *
+     * @param pill the pill to be inserted.
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPill(firstPill: Pill)
+    fun insertPill(pill: Pill)
 }
