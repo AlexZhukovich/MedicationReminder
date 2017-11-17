@@ -97,4 +97,15 @@ class PillDaoTest {
                 .test()
                 .assertValue(EMPTY_PILL_LIST)
     }
+
+    @Test
+    fun shouldRemoveAllPills() {
+        mPillDao.insertPills(TestData.getPills())
+
+        mPillDao.deleteAllPills()
+
+        mPillDao.getPills()
+                .test()
+                .assertValue(EMPTY_PILL_LIST)
+    }
 }

@@ -50,4 +50,10 @@ interface PillDao {
      */
     @Delete
     fun deletePill(pill: Pill)
+
+    /**
+     * Delete all pills from the database.
+     */
+    @Query("DELETE FROM pills")
+    fun deleteAllPills()
 }
