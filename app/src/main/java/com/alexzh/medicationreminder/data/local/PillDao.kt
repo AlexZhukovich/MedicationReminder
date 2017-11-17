@@ -31,4 +31,12 @@ interface PillDao {
      */
     @Update
     fun updatePill(pill: Pill)
+
+    /**
+     * Delete an existing pill from the database.
+     *
+     * @param pill the pill to be removed.
+     */
+    @Delete
+    fun deletePill(pill: Pill)
 }
