@@ -44,6 +44,15 @@ class PillDaoTest {
     }
 
     @Test
+    fun shouldInsertListOfPills () {
+        mPillDao.insertPills(TestData.getPills())
+
+        mPillDao.getPills()
+                .test()
+                .assertValue(TestData.getPills())
+    }
+
+    @Test
     fun shouldUpdateExistingPill() {
         mPillDao.insertPill(TestData.getSecondPill())
 
