@@ -28,6 +28,8 @@ interface PillDao {
 
     /**
      * Update an existing pill in the database.
+     *
+     * @param pill the pill to be updated.
      */
     @Update
     fun updatePill(pill: Pill)
