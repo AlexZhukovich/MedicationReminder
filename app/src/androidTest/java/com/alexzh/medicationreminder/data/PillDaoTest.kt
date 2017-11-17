@@ -6,6 +6,7 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
+import com.alexzh.medicationreminder.data.model.Pill
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -13,6 +14,11 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class PillDaoTest {
+
+    companion object {
+        val EMPTY_PILL_LIST = listOf<Pill>()
+    }
+
     private lateinit var mDatabase: MedicationReminderDatabase
 
     @Rule @JvmField
@@ -56,6 +62,6 @@ class PillDaoTest {
 
         mDatabase.pillDao().getPills()
                 .test()
-                .assertValue(listOf())
+                .assertValue(EMPTY_PILL_LIST)
     }
 }
