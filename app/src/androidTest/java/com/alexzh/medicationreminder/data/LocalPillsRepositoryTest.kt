@@ -63,6 +63,15 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
+    fun shouldInsertListOfPills() {
+        mPillsRepository.insertPills(TestData.getPills())
+
+        mPillsRepository.getPills()
+                .test()
+                .assertValue(TestData.getPills())
+    }
+
+    @Test
     fun shouldUpdateExistingPill() {
         mPillsRepository.insertPill(TestData.getFirstPill())
 

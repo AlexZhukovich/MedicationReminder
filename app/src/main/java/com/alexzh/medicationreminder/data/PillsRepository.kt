@@ -9,4 +9,5 @@ interface PillsRepository {
     fun insertPill(pill: Pill)
     fun updatePill(pill: Pill)
     fun deletePill(pill: Pill)
+    fun insertPills(pills: List<Pill>)
 }

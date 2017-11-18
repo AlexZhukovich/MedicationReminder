@@ -31,6 +31,13 @@ class LocalPillsRepository(private val pillDao: PillDao) : PillsRepository {
     override fun insertPill(pill: Pill) = pillDao.insertPill(pill)
 
     /**
+     * Insert list of pills in the database. If the pill already exists, replace it.
+     *
+     * @param pills the list of pills.
+     */
+    override fun insertPills(pills: List<Pill>) = pillDao.insertPills(pills)
+
+    /**
      * Update an existing pill.
      *
      * @param pill the pill to be updated.
