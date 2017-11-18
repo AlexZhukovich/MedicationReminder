@@ -61,4 +61,16 @@ class LocalPillsRepositoryTest {
                 .test()
                 .assertValue(listOf(TestData.getFirstPill()))
     }
+
+    @Test
+    fun shouldUpdateExistingPill() {
+        mPillsRepository.insertPill(TestData.getFirstPill())
+
+        val updatedPill = TestData.getFirstPill().copy(name = "updated pill name")
+        mPillsRepository.updatePill(updatedPill)
+
+        mPillsRepository.getPills()
+                .test()
+                .assertValue(listOf(updatedPill))
+    }
 }
