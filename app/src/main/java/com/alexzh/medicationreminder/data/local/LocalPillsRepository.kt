@@ -9,7 +9,5 @@ class LocalPillsRepository(private val pillDao: PillDao) : PillsRepository {
         return Single.just(Pill(1L, "Test pill", "Test description", "100 mg"))
     }
 
-    override fun getMorePills(): Single<List<Pill>> {
-        return pillDao.getPills()
-    }
+    override fun getMorePills(): Single<List<Pill>> = pillDao.getPills()
 }
