@@ -130,7 +130,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldRemovePill() {
+    fun shouldDeleteExistingPill() {
         mPillDao.insertPill(TestData.getFirstPill())
         mPillDao.insertPill(TestData.getSecondPill())
 
