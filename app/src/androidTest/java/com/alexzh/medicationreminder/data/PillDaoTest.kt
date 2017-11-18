@@ -139,11 +139,10 @@ class PillDaoTest {
         mPillDao.getPills()
                 .test()
                 .assertValue(listOf(TestData.getSecondPill()))
-
     }
 
     @Test
-    fun shouldPillsTableStayEmptyAfterRemovingNonExistingPill () {
+    fun shouldDeleteNonExistingPill () {
         mPillDao.deletePill(TestData.getFirstPill())
 
         mPillDao.getPills()
