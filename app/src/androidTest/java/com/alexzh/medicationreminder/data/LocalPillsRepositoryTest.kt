@@ -6,24 +6,32 @@ import android.support.test.runner.AndroidJUnit4
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.local.LocalPillsRepository
 import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
+import com.alexzh.medicationreminder.data.local.PillDao
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class LocalPillsRepositoryTest {
 
-    @Test
-    fun shouldGetAllPills() {
+    private lateinit var mPillsRepository: PillsRepository
+    private lateinit var mPillsDao: PillDao
+
+    @Before
+    fun setUp() {
         val context = InstrumentationRegistry.getContext()
         val database = Room.inMemoryDatabaseBuilder(context, MedicationReminderDatabase::class.java)
                 .allowMainThreadQueries()
                 .build()
-        val pillsDao = database.pillDao()
-        val pillsRepository = LocalPillsRepository(pillsDao)
+        mPillsDao = database.pillDao()
+        mPillsRepository = LocalPillsRepository(mPillsDao)
+    }
 
-        pillsDao.insertPills(TestData.getPills())
+    @Test
+    fun shouldGetAllPills() {
+        mPillsDao.insertPills(TestData.getPills())
 
-        pillsRepository.getMorePills()
+        mPillsRepository.getMorePills()
                 .test()
                 .assertValue(TestData.getPills())
     }
