@@ -78,7 +78,16 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldInsertListOfPills () {
+    fun shouldInsertEmptyListOfPills() {
+        mPillDao.insertPills(EMPTY_PILL_LIST)
+
+        mPillDao.getPills()
+                .test()
+                .assertValue(EMPTY_PILL_LIST)
+    }
+
+    @Test
+    fun shouldInsertListOfPills() {
         mPillDao.insertPills(TestData.getPills())
 
         mPillDao.getPills()
