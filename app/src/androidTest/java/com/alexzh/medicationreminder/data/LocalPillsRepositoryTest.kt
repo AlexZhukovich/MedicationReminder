@@ -35,4 +35,13 @@ class LocalPillsRepositoryTest {
                 .test()
                 .assertValue(TestData.getPills())
     }
+
+    @Test
+    fun shouldGetExistingPillById() {
+        mPillsDao.insertPill(TestData.getFirstPill())
+
+        mPillsRepository.getPillById(TestData.getFirstPill().id)
+                .test()
+                .assertValue(TestData.getFirstPill())
+    }
 }
