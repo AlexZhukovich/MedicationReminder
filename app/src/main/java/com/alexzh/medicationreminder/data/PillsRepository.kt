@@ -8,4 +8,5 @@ interface PillsRepository {
     fun getPillById(id: Long) : Single<Pill>
     fun insertPill(pill: Pill)
     fun updatePill(pill: Pill)
+    fun deletePill(pill: Pill)
 }

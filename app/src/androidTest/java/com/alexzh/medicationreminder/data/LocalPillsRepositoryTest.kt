@@ -73,4 +73,15 @@ class LocalPillsRepositoryTest {
                 .test()
                 .assertValue(listOf(updatedPill))
     }
+
+    @Test
+    fun shouldDeleteExistingPill() {
+        mPillsRepository.insertPill(TestData.getFirstPill())
+
+        mPillsRepository.deletePill(TestData.getFirstPill())
+
+        mPillsRepository.getPills()
+                .test()
+                .assertValue(listOf())
+    }
 }
