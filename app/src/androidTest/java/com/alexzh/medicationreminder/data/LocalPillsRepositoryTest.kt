@@ -52,4 +52,13 @@ class LocalPillsRepositoryTest {
                 .test()
                 .assertError(EmptyResultSetException::class.java)
     }
+
+    @Test
+    fun shouldInsertNewPill() {
+        mPillsRepository.insertPill(TestData.getFirstPill())
+
+        mPillsRepository.getPills()
+                .test()
+                .assertValue(listOf(TestData.getFirstPill()))
+    }
 }

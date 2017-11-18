@@ -22,4 +22,11 @@ class LocalPillsRepository(private val pillDao: PillDao) : PillsRepository {
      * @return the pill from the database.
      */
     override fun getPillById(id: Long): Single<Pill> = pillDao.getPillById(id)
+
+    /**
+     * Insert a new pill. If the pill already exists, replace it.
+     *
+     * @param pill the pill to be inserted.
+     */
+    override fun insertPill(pill: Pill) = pillDao.insertPill(pill)
 }
