@@ -68,6 +68,16 @@ class PillDaoTest {
     }
 
     @Test
+    fun shouldInsertTheSamePillTwice() {
+        mPillDao.insertPill(TestData.getFirstPill())
+        mPillDao.insertPill(TestData.getFirstPill())
+
+        mPillDao.getPills()
+                .test()
+                .assertValue(listOf(TestData.getFirstPill()))
+    }
+
+    @Test
     fun shouldInsertListOfPills () {
         mPillDao.insertPills(TestData.getPills())
 
