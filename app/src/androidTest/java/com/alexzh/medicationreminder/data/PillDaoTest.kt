@@ -8,7 +8,6 @@ import android.support.test.runner.AndroidJUnit4
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
 import com.alexzh.medicationreminder.data.local.PillDao
-import com.alexzh.medicationreminder.data.model.Pill
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -16,10 +15,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class PillDaoTest {
-
-    companion object {
-        val EMPTY_PILL_LIST = listOf<Pill>()
-    }
 
     private lateinit var mPillDao: PillDao
 
@@ -39,7 +34,7 @@ class PillDaoTest {
     fun shouldLoadPillsFromEmptyTable() {
         mPillDao.getPills()
                 .test()
-                .assertValue(EMPTY_PILL_LIST)
+                .assertValue(TestData.EMPTY_LIST_OF_PILLS)
     }
 
     @Test
@@ -79,11 +74,11 @@ class PillDaoTest {
 
     @Test
     fun shouldInsertEmptyListOfPills() {
-        mPillDao.insertPills(EMPTY_PILL_LIST)
+        mPillDao.insertPills(TestData.EMPTY_LIST_OF_PILLS)
 
         mPillDao.getPills()
                 .test()
-                .assertValue(EMPTY_PILL_LIST)
+                .assertValue(TestData.EMPTY_LIST_OF_PILLS)
     }
 
     @Test
@@ -126,7 +121,7 @@ class PillDaoTest {
 
         mPillDao.getPills()
                 .test()
-                .assertValue(EMPTY_PILL_LIST)
+                .assertValue(TestData.EMPTY_LIST_OF_PILLS)
     }
 
     @Test
@@ -147,7 +142,7 @@ class PillDaoTest {
 
         mPillDao.getPills()
                 .test()
-                .assertValue(EMPTY_PILL_LIST)
+                .assertValue(TestData.EMPTY_LIST_OF_PILLS)
     }
 
     @Test
@@ -158,7 +153,7 @@ class PillDaoTest {
 
         mPillDao.getPills()
                 .test()
-                .assertValue(EMPTY_PILL_LIST)
+                .assertValue(TestData.EMPTY_LIST_OF_PILLS)
     }
 
     @Test
@@ -167,6 +162,6 @@ class PillDaoTest {
 
         mPillDao.getPills()
                 .test()
-                .assertValue(EMPTY_PILL_LIST)
+                .assertValue(TestData.EMPTY_LIST_OF_PILLS)
     }
 }

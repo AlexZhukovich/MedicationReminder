@@ -14,6 +14,8 @@ class TestData {
         private val SECOND_PILL_DESCRIPTION = "pill description 2"
         private val SECOND_PILL_DOSAGE = "200 mg"
 
+        val EMPTY_LIST_OF_PILLS = listOf<Pill>()
+
         fun getFirstPill() : Pill = Pill(FIRST_PILL_ID, FIRST_PILL_NAME, FIRST_PILL_DESCRIPTION, FIRST_PILL_DOSAGE)
 
         fun getSecondPill() : Pill = Pill(SECOND_PILL_ID, SECOND_PILL_NAME, SECOND_PILL_DESCRIPTION, SECOND_PILL_DOSAGE)

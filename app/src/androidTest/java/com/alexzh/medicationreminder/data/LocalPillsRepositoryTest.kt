@@ -7,7 +7,6 @@ import android.support.test.runner.AndroidJUnit4
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.local.LocalPillsRepository
 import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
-import com.alexzh.medicationreminder.data.local.PillDao
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,7 +15,6 @@ import org.junit.runner.RunWith
 class LocalPillsRepositoryTest {
 
     private lateinit var mPillsRepository: PillsRepository
-    private lateinit var mPillsDao: PillDao
 
     @Before
     fun setUp() {
@@ -24,13 +22,12 @@ class LocalPillsRepositoryTest {
         val database = Room.inMemoryDatabaseBuilder(context, MedicationReminderDatabase::class.java)
                 .allowMainThreadQueries()
                 .build()
-        mPillsDao = database.pillDao()
-        mPillsRepository = LocalPillsRepository(mPillsDao)
+        mPillsRepository = LocalPillsRepository(database.pillDao())
     }
 
     @Test
     fun shouldGetAllPills() {
-        mPillsDao.insertPills(TestData.getPills())
+        mPillsRepository.insertPills(TestData.getPills())
 
         mPillsRepository.getPills()
                 .test()
@@ -39,7 +36,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun shouldGetExistingPillById() {
-        mPillsDao.insertPill(TestData.getFirstPill())
+        mPillsRepository.insertPill(TestData.getFirstPill())
 
         mPillsRepository.getPillById(TestData.getFirstPill().id)
                 .test()
@@ -91,7 +88,7 @@ class LocalPillsRepositoryTest {
 
         mPillsRepository.getPills()
                 .test()
-                .assertValue(listOf())
+                .assertValue(TestData.EMPTY_LIST_OF_PILLS)
     }
 
     @Test
@@ -102,6 +99,6 @@ class LocalPillsRepositoryTest {
 
         mPillsRepository.getPills()
                 .test()
-                .assertValue(listOf())
+                .assertValue(TestData.EMPTY_LIST_OF_PILLS)
     }
 }
