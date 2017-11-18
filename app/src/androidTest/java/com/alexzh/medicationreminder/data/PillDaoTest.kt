@@ -121,7 +121,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldUpdateNotInsertNewPill() {
+    fun shouldUpdateNotExistingPill() {
         mPillDao.updatePill(TestData.getFirstPill())
 
         mPillDao.getPills()
