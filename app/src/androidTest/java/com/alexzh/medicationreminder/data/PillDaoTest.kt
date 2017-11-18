@@ -36,6 +36,13 @@ class PillDaoTest {
     }
 
     @Test
+    fun shouldLoadPillsFromEmptyTable() {
+        mPillDao.getPills()
+                .test()
+                .assertValue(EMPTY_PILL_LIST)
+    }
+
+    @Test
     fun shouldLoadExistingPillById() {
         mPillDao.insertPill(TestData.getFirstPill())
 
