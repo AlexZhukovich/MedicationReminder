@@ -16,7 +16,7 @@ class HomePresenter(private val view: Home.View,
     private var mDisposable: Disposable? = null
 
     override fun loadMore() {
-        mDisposable = pillsRepository.getMorePills()
+        mDisposable = pillsRepository.getPills()
                 .subscribeOn(ioScheduler)
                 .observeOn(uiScheduler)
                 .doOnSubscribe { view.showLoader() }

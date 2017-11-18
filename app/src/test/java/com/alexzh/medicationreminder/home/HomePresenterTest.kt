@@ -20,7 +20,7 @@ class HomePresenterTest {
 
     private val homeView = mock<Home.View>()
     private val repository = mock<PillsRepository>().apply {
-        whenever(this.getMorePills()).thenReturn(pillsSubject)
+        whenever(this.getPills()).thenReturn(pillsSubject)
     }
 
     private val homePresenter = HomePresenter(homeView, repository, Schedulers.trampoline(), Schedulers.trampoline())
@@ -34,7 +34,7 @@ class HomePresenterTest {
     @Test
     fun `Call repository during loading additional data`() {
         homePresenter.loadMore()
-        verify(repository).getMorePills()
+        verify(repository).getPills()
     }
 
     @Test

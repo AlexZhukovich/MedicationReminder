@@ -29,7 +29,7 @@ class HomeActivityMockUITest {
         override fun beforeActivityLaunched() {
             HomeActivity.mPillsRepository = mRepository
 
-            whenever(mRepository.getMorePills()).thenReturn(mPillsSubject)
+            whenever(mRepository.getPills()).thenReturn(mPillsSubject)
         }
     }
 

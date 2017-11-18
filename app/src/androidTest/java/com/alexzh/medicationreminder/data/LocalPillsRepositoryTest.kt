@@ -32,7 +32,7 @@ class LocalPillsRepositoryTest {
     fun shouldGetAllPills() {
         mPillsDao.insertPills(TestData.getPills())
 
-        mPillsRepository.getMorePills()
+        mPillsRepository.getPills()
                 .test()
                 .assertValue(TestData.getPills())
     }

@@ -4,6 +4,6 @@ import com.alexzh.medicationreminder.data.model.Pill
 import io.reactivex.Single
 
 interface PillsRepository {
-    fun getMorePills() : Single<List<Pill>>
+    fun getPills() : Single<List<Pill>>
     fun getPillById(id: Long) : Single<Pill>
 }

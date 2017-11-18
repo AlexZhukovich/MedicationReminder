@@ -42,7 +42,7 @@ class AppMockUITest {
             HomeActivity.mPillsRepository = mRepository
             PillDetailActivity.mPillsRepository = mRepository
 
-            whenever(mRepository.getMorePills()).thenReturn(mPillsSubject)
+            whenever(mRepository.getPills()).thenReturn(mPillsSubject)
             whenever(mRepository.getPillById(any())).thenReturn(mPillSubject)
         }
     }
