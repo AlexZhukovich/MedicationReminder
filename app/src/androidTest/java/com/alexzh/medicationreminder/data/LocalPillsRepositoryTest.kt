@@ -93,4 +93,15 @@ class LocalPillsRepositoryTest {
                 .test()
                 .assertValue(listOf())
     }
+
+    @Test
+    fun shouldDeleteAllPills() {
+        mPillsRepository.insertPills(TestData.getPills())
+
+        mPillsRepository.deleteAllPills()
+
+        mPillsRepository.getPills()
+                .test()
+                .assertValue(listOf())
+    }
 }
