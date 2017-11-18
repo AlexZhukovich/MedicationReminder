@@ -5,7 +5,7 @@ import com.alexzh.medicationreminder.data.model.Pill
 import io.reactivex.Single
 
 /**
- * Access Point for managing pills data.
+ * Room implementation for managing pills data.
  */
 class LocalPillsRepository(private val pillDao: PillDao) : PillsRepository {
     /**
