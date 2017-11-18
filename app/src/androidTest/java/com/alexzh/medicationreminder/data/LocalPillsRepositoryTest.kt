@@ -1,5 +1,6 @@
 package com.alexzh.medicationreminder.data
 
+import android.arch.persistence.room.EmptyResultSetException
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -43,5 +44,12 @@ class LocalPillsRepositoryTest {
         mPillsRepository.getPillById(TestData.getFirstPill().id)
                 .test()
                 .assertValue(TestData.getFirstPill())
+    }
+
+    @Test
+    fun shouldReturnErrorForNonExistingPillById() {
+        mPillsRepository.getPillById(TestData.getFirstPill().id)
+                .test()
+                .assertError(EmptyResultSetException::class.java)
     }
 }
