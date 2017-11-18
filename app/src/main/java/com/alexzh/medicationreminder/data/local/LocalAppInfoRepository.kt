@@ -14,7 +14,6 @@ class LocalAppInfoRepository(private val context: Context) : AppInfoRepository {
      *
      * @return the version of the app.
      */
-    override fun getAppVersion(): Single<String> {
-        return Single.just(context.packageManager.getPackageInfo(context.packageName, 0).versionName)
-    }
+    override fun getAppVersion(): Single<String> =
+        Single.just(context.packageManager.getPackageInfo(context.packageName, 0).versionName)
 }
