@@ -151,7 +151,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldRemoveAllPills() {
+    fun shouldDeleteAllPillsFromFilledTable() {
         mPillDao.insertPills(TestData.getPills())
 
         mPillDao.deleteAllPills()
@@ -162,7 +162,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldPillsTableStayEmptyAfterRemovingAllPillsFromEmptyTable() {
+    fun shouldDeleteAllPillsFromEmptyTable() {
         mPillDao.deleteAllPills()
 
         mPillDao.getPills()
