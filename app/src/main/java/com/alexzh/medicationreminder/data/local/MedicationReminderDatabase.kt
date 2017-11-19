@@ -1,13 +1,16 @@
 package com.alexzh.medicationreminder.data.local
 
+import android.arch.persistence.room.Room
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
+import android.arch.persistence.room.TypeConverters
 import com.alexzh.medicationreminder.data.model.Pill
-import android.arch.persistence.room.Room
 import android.content.Context
+import com.alexzh.medicationreminder.data.model.Reminder
+import com.alexzh.medicationreminder.data.utils.DateConverter
 
-
-@Database(entities = arrayOf(Pill::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(Pill::class, Reminder::class), version = 1, exportSchema = false)
+@TypeConverters(DateConverter::class)
 abstract class MedicationReminderDatabase : RoomDatabase() {
 
     companion object {
@@ -32,4 +35,6 @@ abstract class MedicationReminderDatabase : RoomDatabase() {
     }
 
     abstract fun pillDao(): PillDao
+
+    abstract fun reminderDao(): ReminderDao
 }

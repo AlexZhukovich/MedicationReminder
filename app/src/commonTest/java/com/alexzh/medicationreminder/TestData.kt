@@ -1,6 +1,7 @@
 package com.alexzh.medicationreminder
 
 import com.alexzh.medicationreminder.data.model.Pill
+import com.alexzh.medicationreminder.data.model.Reminder
 
 class TestData {
     companion object {
@@ -15,6 +16,7 @@ class TestData {
         private val SECOND_PILL_DOSAGE = "200 mg"
 
         val EMPTY_LIST_OF_PILLS = listOf<Pill>()
+        val EMPTY_LIST_OF_REMINDERS = listOf<Reminder>()
 
         fun getFirstPill() : Pill = Pill(FIRST_PILL_ID, FIRST_PILL_NAME, FIRST_PILL_DESCRIPTION, FIRST_PILL_DOSAGE)
 
