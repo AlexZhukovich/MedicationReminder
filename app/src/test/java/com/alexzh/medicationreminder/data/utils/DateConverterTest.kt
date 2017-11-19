@@ -8,22 +8,22 @@ import java.util.Date
 
 class DateConverterTest {
 
+    companion object {
+        val DATE_IN_LONG = 1511049600000L
+    }
+
+    private val converter = DateConverter()
+
     @Test
     fun `Verify converting Long to Date`() {
-        val converter = DateConverter()
-        val dateLong = 1511049600000L
-
-        assertEquals(Date(dateLong), converter.fromTimeStamp(dateLong))
+        assertEquals(Date(DATE_IN_LONG), converter.fromTimeStamp(DATE_IN_LONG))
     }
 
     @Test
     fun `Verify converting Date to Long`() {
-        val converter = DateConverter()
-        val dateLong = 1511049600000L
-
         val date = Date()
-        date.time = dateLong
+        date.time = DATE_IN_LONG
 
-        assertEquals(dateLong, converter.fromDate(date))
+        assertEquals(DATE_IN_LONG, converter.fromDate(date))
     }
 }
