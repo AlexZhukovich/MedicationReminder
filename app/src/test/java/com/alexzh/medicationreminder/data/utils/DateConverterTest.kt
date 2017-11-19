@@ -15,4 +15,15 @@ class DateConverterTest {
 
         assertEquals(Date(dateLong), converter.fromTimeStamp(dateLong))
     }
+
+    @Test
+    fun `Verify converting Date to Long`() {
+        val converter = DateConverter()
+        val dateLong = 1511049600000L
+
+        val date = Date()
+        date.time = dateLong
+
+        assertEquals(dateLong, converter.fromDate(date))
+    }
 }
