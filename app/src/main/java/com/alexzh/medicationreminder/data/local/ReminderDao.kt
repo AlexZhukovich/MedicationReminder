@@ -29,6 +29,15 @@ interface ReminderDao {
     fun insert(reminder: Reminder)
 
     /**
+     * Insert a reminder in the database. All reminders inserted in one transaction.
+     * If the reminder already exists, replace it.
+     *
+     * @param reminders the list of reminders to be inserted.
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(reminders: List<Reminder>)
+
+    /**
      * Update a reminder in the database.
      *
      * @param reminder the reminder to be updated.

@@ -21,6 +21,11 @@ class TestData {
         private val SECOND_PILL_DESCRIPTION = "pill description 2"
         private val SECOND_PILL_DOSAGE = "200 mg"
 
+        private val SECOND_REMINDER_ID = 2L
+        private val SECOND_START_DATE_REMINDER = Date()
+        private val SECOND_END_DATE_REMINDER = Date()
+        private val SECOND_REMINDER_TIME = Date()
+
         val EMPTY_LIST_OF_PILLS = listOf<Pill>()
         val EMPTY_LIST_OF_REMINDERS = listOf<Reminder>()
 
@@ -35,5 +40,13 @@ class TestData {
                 FIRST_START_DATE_REMINDER,
                 FIRST_END_DATE_REMINDER,
                 FIRST_REMINDER_TIME)
+
+        fun getSecondReminder() : Reminder = Reminder(
+                SECOND_REMINDER_ID,
+                SECOND_START_DATE_REMINDER,
+                SECOND_END_DATE_REMINDER,
+                SECOND_REMINDER_TIME)
+
+        fun getReminders(): List<Reminder> = listOf(getFirstReminder(), getSecondReminder())
     }
 }
