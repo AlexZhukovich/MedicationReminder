@@ -49,4 +49,13 @@ class ReminderDaoTest {
                 .test()
                 .assertValue(listOf(TestData.getFirstReminder()))
     }
+
+    @Test
+    fun shouldUpdateNonExistingReminder() {
+        mReminderDao.update(TestData.getFirstReminder())
+
+        mReminderDao.getReminders()
+                .test()
+                .assertValue(TestData.EMPTY_LIST_OF_REMINDERS)
+    }
 }

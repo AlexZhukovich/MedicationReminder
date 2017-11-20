@@ -1,9 +1,10 @@
 package com.alexzh.medicationreminder.data.local
 
 import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.Update
+import android.arch.persistence.room.OnConflictStrategy
 import com.alexzh.medicationreminder.data.model.Reminder
 import io.reactivex.Single
 
@@ -25,4 +26,12 @@ interface ReminderDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(reminder: Reminder)
+
+    /**
+     * Update a reminder in the database.
+     *
+     * @param reminder the reminder to be updated.
+     */
+    @Update
+    fun update(reminder: Reminder)
 }
