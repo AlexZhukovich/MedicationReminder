@@ -30,4 +30,13 @@ class ReminderDaoTest {
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_REMINDERS)
     }
+
+    @Test
+    fun shouldInsertReminder() {
+        mReminderDao.insert(TestData.getFirstReminder())
+
+        mReminderDao.getReminders()
+                .test()
+                .assertValue(listOf(TestData.getFirstReminder()))
+    }
 }
