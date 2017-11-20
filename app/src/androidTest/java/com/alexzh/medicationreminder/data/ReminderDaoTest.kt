@@ -39,4 +39,14 @@ class ReminderDaoTest {
                 .test()
                 .assertValue(listOf(TestData.getFirstReminder()))
     }
+
+    @Test
+    fun shouldInsertTheSameReminderTwice() {
+        mReminderDao.insert(TestData.getFirstReminder())
+        mReminderDao.insert(TestData.getFirstReminder())
+
+        mReminderDao.getReminders()
+                .test()
+                .assertValue(listOf(TestData.getFirstReminder()))
+    }
 }
