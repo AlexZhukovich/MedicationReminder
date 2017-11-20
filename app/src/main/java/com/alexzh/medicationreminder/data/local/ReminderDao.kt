@@ -52,4 +52,12 @@ interface ReminderDao {
      */
     @Delete
     fun delete(reminder: Reminder)
+
+    /**
+     * Delete list of reminders from the table.
+     *
+     * @param reminders the list of reminders to be deleted.
+     */
+    @Delete
+    fun delete(reminders: List<Reminder>)
 }
