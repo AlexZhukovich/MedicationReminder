@@ -60,4 +60,10 @@ interface ReminderDao {
      */
     @Delete
     fun delete(reminders: List<Reminder>)
+
+    /**
+     * Delete all reminders from the database.
+     */
+    @Query("DELETE FROM reminders")
+    fun deleteAll()
 }
