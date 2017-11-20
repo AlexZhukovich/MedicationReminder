@@ -61,6 +61,16 @@ class ReminderDaoTest {
     }
 
     @Test
+    fun shouldInsertListOfRemindersTwice() {
+        mReminderDao.insert(TestData.getReminders())
+        mReminderDao.insert(TestData.getReminders())
+
+        mReminderDao.getReminders()
+                .test()
+                .assertValue(TestData.getReminders())
+    }
+
+    @Test
     fun shouldUpdateNonExistingReminder() {
         mReminderDao.update(TestData.getFirstReminder())
 
