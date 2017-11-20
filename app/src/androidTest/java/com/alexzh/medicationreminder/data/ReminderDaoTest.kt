@@ -119,4 +119,15 @@ class ReminderDaoTest {
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_REMINDERS)
     }
+
+    @Test
+    fun shouldDeleteExistingReminders() {
+        mReminderDao.insert(TestData.getReminders())
+
+        mReminderDao.delete(listOf(TestData.getFirstReminder()))
+
+        mReminderDao.getReminders()
+                .test()
+                .assertValue(listOf(TestData.getSecondReminder()))
+    }
 }
