@@ -9,6 +9,7 @@ import com.alexzh.medicationreminder.data.local.ReminderDao
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.Date
 
 @RunWith(AndroidJUnit4::class)
 class ReminderDaoTest {
@@ -57,5 +58,17 @@ class ReminderDaoTest {
         mReminderDao.getReminders()
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_REMINDERS)
+    }
+
+    @Test
+    fun shouldUpdateExistingReminder() {
+        mReminderDao.insert(TestData.getFirstReminder())
+
+        val reminder = TestData.getFirstReminder().copy(startDate = Date())
+        mReminderDao.update(reminder)
+
+        mReminderDao.getReminders()
+                .test()
+                .assertValue(listOf(reminder))
     }
 }
