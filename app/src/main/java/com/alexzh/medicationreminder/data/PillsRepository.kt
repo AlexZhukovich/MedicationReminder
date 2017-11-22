@@ -1,6 +1,7 @@
 package com.alexzh.medicationreminder.data
 
 import com.alexzh.medicationreminder.data.model.Pill
+import com.alexzh.medicationreminder.data.model.Reminder
 import io.reactivex.Single
 
 /**
@@ -28,14 +29,14 @@ interface PillsRepository {
      *
      * @param pill the pill to be inserted.
      */
-    fun insertPill(pill: Pill)
+    fun insertPill(pill: Pill, reminder: Reminder)
 
     /**
      * Insert a list of pills.
      *
      * @param pills the list of pills to be inserted.
      */
-    fun insertPills(pills: List<Pill>)
+    fun insertPills(pills: List<Pill>, reminders: List<Reminder>)
 
     /**
      * Update an existing pill.

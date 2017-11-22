@@ -8,6 +8,7 @@ import android.support.test.runner.AndroidJUnit4
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
 import com.alexzh.medicationreminder.data.local.PillDao
+import com.alexzh.medicationreminder.data.local.ReminderDao
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -17,6 +18,7 @@ import org.junit.runner.RunWith
 class PillDaoTest {
 
     private lateinit var mPillDao: PillDao
+    private lateinit var mReminderDao: ReminderDao
 
     @Rule @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -27,6 +29,7 @@ class PillDaoTest {
         val database = Room.inMemoryDatabaseBuilder(context, MedicationReminderDatabase::class.java)
                 .allowMainThreadQueries()
                 .build()
+        mReminderDao = database.reminderDao()
         mPillDao = database.pillDao()
     }
 
@@ -39,6 +42,7 @@ class PillDaoTest {
 
     @Test
     fun should_getPillById_afterInserting() {
+        mReminderDao.insert(TestData.getFirstReminder())
         mPillDao.insertPill(TestData.getFirstPill())
 
         mPillDao.getPillById(TestData.getFirstPill().id)
@@ -55,6 +59,7 @@ class PillDaoTest {
 
     @Test
     fun should_insert_newPill() {
+        mReminderDao.insert(TestData.getFirstReminder())
         mPillDao.insertPill(TestData.getFirstPill())
 
         mPillDao.getPills()
@@ -64,6 +69,8 @@ class PillDaoTest {
 
     @Test
     fun should_notInsert_theSamePillTwice() {
+        mReminderDao.insert(TestData.getFirstReminder())
+
         mPillDao.insertPill(TestData.getFirstPill())
         mPillDao.insertPill(TestData.getFirstPill())
 
@@ -83,6 +90,7 @@ class PillDaoTest {
 
     @Test
     fun should_insert_listOfPills() {
+        mReminderDao.insert(TestData.getReminders())
         mPillDao.insertPills(TestData.getPills())
 
         mPillDao.getPills()
@@ -92,6 +100,7 @@ class PillDaoTest {
 
     @Test
     fun should_notInsert_listOfPillsTwice() {
+        mReminderDao.insert(TestData.getReminders())
         mPillDao.insertPills(TestData.getPills())
         mPillDao.insertPills(TestData.getPills())
 
@@ -102,6 +111,7 @@ class PillDaoTest {
 
     @Test
     fun should_update_existingPill() {
+        mReminderDao.insert(TestData.getSecondReminder())
         mPillDao.insertPill(TestData.getSecondPill())
 
         val pill = TestData.getSecondPill().copy(
@@ -126,6 +136,9 @@ class PillDaoTest {
 
     @Test
     fun should_delete_existingPill() {
+        mReminderDao.insert(TestData.getFirstReminder())
+        mReminderDao.insert(TestData.getSecondReminder())
+
         mPillDao.insertPill(TestData.getFirstPill())
         mPillDao.insertPill(TestData.getSecondPill())
 
@@ -147,6 +160,7 @@ class PillDaoTest {
 
     @Test
     fun should_delete_allPills() {
+        mReminderDao.insert(TestData.getReminders())
         mPillDao.insertPills(TestData.getPills())
 
         mPillDao.deleteAllPills()

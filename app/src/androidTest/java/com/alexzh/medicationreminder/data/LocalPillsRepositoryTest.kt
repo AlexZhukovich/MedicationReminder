@@ -22,12 +22,12 @@ class LocalPillsRepositoryTest {
         val database = Room.inMemoryDatabaseBuilder(context, MedicationReminderDatabase::class.java)
                 .allowMainThreadQueries()
                 .build()
-        mPillsRepository = LocalPillsRepository(database.pillDao())
+        mPillsRepository = LocalPillsRepository(database.pillDao(), database.reminderDao())
     }
 
     @Test
     fun should_getPills_afterInserting() {
-        mPillsRepository.insertPills(TestData.getPills())
+        mPillsRepository.insertPills(TestData.getPills(), TestData.getReminders())
 
         mPillsRepository.getPills()
                 .test()
@@ -36,7 +36,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_getPillById_afterInsertingPill() {
-        mPillsRepository.insertPill(TestData.getFirstPill())
+        mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
 
         mPillsRepository.getPillById(TestData.getFirstPill().id)
                 .test()
@@ -52,7 +52,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_insert_nonExistingPill() {
-        mPillsRepository.insertPill(TestData.getFirstPill())
+        mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
 
         mPillsRepository.getPills()
                 .test()
@@ -61,7 +61,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_insert_nonExistingListOfPills() {
-        mPillsRepository.insertPills(TestData.getPills())
+        mPillsRepository.insertPills(TestData.getPills(), TestData.getReminders())
 
         mPillsRepository.getPills()
                 .test()
@@ -70,7 +70,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_update_existingPill() {
-        mPillsRepository.insertPill(TestData.getFirstPill())
+        mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
 
         val updatedPill = TestData.getFirstPill().copy(name = "updated pill name")
         mPillsRepository.updatePill(updatedPill)
@@ -82,7 +82,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_delete_existingPill() {
-        mPillsRepository.insertPill(TestData.getFirstPill())
+        mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
 
         mPillsRepository.deletePill(TestData.getFirstPill())
 
@@ -93,7 +93,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_delete_allPills() {
-        mPillsRepository.insertPills(TestData.getPills())
+        mPillsRepository.insertPills(TestData.getPills(), TestData.getReminders())
 
         mPillsRepository.deleteAllPills()
 

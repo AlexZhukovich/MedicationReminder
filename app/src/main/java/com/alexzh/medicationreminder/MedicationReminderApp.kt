@@ -13,7 +13,9 @@ import com.alexzh.medicationreminder.data.PillsRepository
 class MedicationReminderApp : Application() {
 
     private val mPillRepository: PillsRepository by lazy {
-        LocalPillsRepository(MedicationReminderDatabase.getInstance(this).pillDao())
+        LocalPillsRepository(
+                MedicationReminderDatabase.getInstance(this).pillDao(),
+                MedicationReminderDatabase.getInstance(this).reminderDao())
     }
 
     override fun onCreate() {
