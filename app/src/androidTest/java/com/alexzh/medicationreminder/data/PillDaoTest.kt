@@ -31,14 +31,14 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldLoadPillsFromEmptyTable() {
+    fun should_getEmptyListOfPills_fromEmptyTable() {
         mPillDao.getPills()
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_PILLS)
     }
 
     @Test
-    fun shouldLoadExistingPillById() {
+    fun should_getPillById_afterInserting() {
         mPillDao.insertPill(TestData.getFirstPill())
 
         mPillDao.getPillById(TestData.getFirstPill().id)
@@ -47,14 +47,14 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldLoadNonExistingPillById() {
+    fun should_getError_afterLoadingPillByIdFromNonExistingPill() {
         mPillDao.getPillById(TestData.getFirstPill().id)
                 .test()
                 .assertError(EmptyResultSetException::class.java)
     }
 
     @Test
-    fun shouldInsertPill() {
+    fun should_insert_newPill() {
         mPillDao.insertPill(TestData.getFirstPill())
 
         mPillDao.getPills()
@@ -63,7 +63,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldInsertTheSamePillTwice() {
+    fun should_notInsert_theSamePillTwice() {
         mPillDao.insertPill(TestData.getFirstPill())
         mPillDao.insertPill(TestData.getFirstPill())
 
@@ -73,7 +73,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldInsertEmptyListOfPills() {
+    fun should_notInsert_emptyListOfPills() {
         mPillDao.insertPills(TestData.EMPTY_LIST_OF_PILLS)
 
         mPillDao.getPills()
@@ -82,7 +82,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldInsertListOfPills() {
+    fun should_insert_listOfPills() {
         mPillDao.insertPills(TestData.getPills())
 
         mPillDao.getPills()
@@ -91,7 +91,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldInsertListOfPillsTwice() {
+    fun should_notInsert_listOfPillsTwice() {
         mPillDao.insertPills(TestData.getPills())
         mPillDao.insertPills(TestData.getPills())
 
@@ -101,7 +101,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldUpdateExistingPill() {
+    fun should_update_existingPill() {
         mPillDao.insertPill(TestData.getSecondPill())
 
         val pill = TestData.getSecondPill().copy(
@@ -116,7 +116,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldUpdateNotExistingPill() {
+    fun should_notUpdate_nonExistingPill() {
         mPillDao.updatePill(TestData.getFirstPill())
 
         mPillDao.getPills()
@@ -125,7 +125,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldDeleteExistingPill() {
+    fun should_delete_existingPill() {
         mPillDao.insertPill(TestData.getFirstPill())
         mPillDao.insertPill(TestData.getSecondPill())
 
@@ -137,7 +137,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldDeleteNonExistingPill () {
+    fun should_notDelete_NonExistingPill () {
         mPillDao.deletePill(TestData.getFirstPill())
 
         mPillDao.getPills()
@@ -146,7 +146,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldDeleteAllPillsFromFilledTable() {
+    fun should_delete_allPills() {
         mPillDao.insertPills(TestData.getPills())
 
         mPillDao.deleteAllPills()
@@ -157,7 +157,7 @@ class PillDaoTest {
     }
 
     @Test
-    fun shouldDeleteAllPillsFromEmptyTable() {
+    fun should_notDelete_allPillsFromEmptyTable() {
         mPillDao.deleteAllPills()
 
         mPillDao.getPills()

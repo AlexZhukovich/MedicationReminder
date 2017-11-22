@@ -26,14 +26,14 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldLoadRemindersFromEmptyTable() {
+    fun should_getEmpyListOfReminders_fromEmptyTable() {
         mReminderDao.getReminders()
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_REMINDERS)
     }
 
     @Test
-    fun shouldInsertReminder() {
+    fun should_insert_newReminder() {
         mReminderDao.insert(TestData.getFirstReminder())
 
         mReminderDao.getReminders()
@@ -42,7 +42,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldInsertTheSameReminderTwice() {
+    fun should_notInsert_theSameReminderTwice() {
         mReminderDao.insert(TestData.getFirstReminder())
         mReminderDao.insert(TestData.getFirstReminder())
 
@@ -52,7 +52,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldInsertListOfReminders() {
+    fun should_insert_listOfReminders() {
         mReminderDao.insert(TestData.getReminders())
 
         mReminderDao.getReminders()
@@ -61,7 +61,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldInsertListOfRemindersTwice() {
+    fun should_notInsert_listOfRemindersTwice() {
         mReminderDao.insert(TestData.getReminders())
         mReminderDao.insert(TestData.getReminders())
 
@@ -71,7 +71,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldUpdateNonExistingReminder() {
+    fun should_notUpdate_nonExistingReminder() {
         mReminderDao.update(TestData.getFirstReminder())
 
         mReminderDao.getReminders()
@@ -80,7 +80,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldUpdateExistingReminder() {
+    fun should_update_existingReminder() {
         mReminderDao.insert(TestData.getFirstReminder())
 
         val reminder = TestData.getFirstReminder().copy(startDate = Date())
@@ -92,7 +92,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldNotDeleteReminderFromEmptyTable() {
+    fun should_notDelete_reminderFromEmptyTable() {
         mReminderDao.delete(TestData.getFirstReminder())
 
         mReminderDao.getReminders()
@@ -101,7 +101,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldDeleteExistingReminder() {
+    fun should_delete_existingReminder() {
         mReminderDao.insert(TestData.getReminders())
 
         mReminderDao.delete(TestData.getFirstReminder())
@@ -112,7 +112,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldDeleteListOfRemindersFromEmptyTable() {
+    fun should_notDelete_ListOfRemindersFromEmptyTable() {
         mReminderDao.delete(TestData.getReminders())
 
         mReminderDao.getReminders()
@@ -121,7 +121,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldDeleteExistingReminders() {
+    fun should_delete_existingReminders() {
         mReminderDao.insert(TestData.getReminders())
 
         mReminderDao.delete(listOf(TestData.getFirstReminder()))
@@ -132,7 +132,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldDeleteAllRemindersFromEmptyTable() {
+    fun should_notDelete_allRemindersFromEmptyTable() {
         mReminderDao.deleteAll()
 
         mReminderDao.getReminders()
@@ -141,7 +141,7 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun shouldDeleteAllRemindersFromFilledTable() {
+    fun should_delete_allRemindersFromFilledTable() {
         mReminderDao.insert(TestData.getReminders())
 
         mReminderDao.deleteAll()

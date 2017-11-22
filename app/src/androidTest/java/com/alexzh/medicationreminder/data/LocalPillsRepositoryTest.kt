@@ -26,7 +26,7 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
-    fun shouldGetAllPills() {
+    fun should_getPills_afterInserting() {
         mPillsRepository.insertPills(TestData.getPills())
 
         mPillsRepository.getPills()
@@ -35,7 +35,7 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
-    fun shouldGetExistingPillById() {
+    fun should_getPillById_afterInsertingPill() {
         mPillsRepository.insertPill(TestData.getFirstPill())
 
         mPillsRepository.getPillById(TestData.getFirstPill().id)
@@ -44,14 +44,14 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
-    fun shouldReturnErrorForNonExistingPillById() {
+    fun should_returnError_afterLoadingPillByIdForNonExistingPill() {
         mPillsRepository.getPillById(TestData.getFirstPill().id)
                 .test()
                 .assertError(EmptyResultSetException::class.java)
     }
 
     @Test
-    fun shouldInsertNewPill() {
+    fun should_insert_nonExistingPill() {
         mPillsRepository.insertPill(TestData.getFirstPill())
 
         mPillsRepository.getPills()
@@ -60,7 +60,7 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
-    fun shouldInsertListOfPills() {
+    fun should_insert_nonExistingListOfPills() {
         mPillsRepository.insertPills(TestData.getPills())
 
         mPillsRepository.getPills()
@@ -69,7 +69,7 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
-    fun shouldUpdateExistingPill() {
+    fun should_update_existingPill() {
         mPillsRepository.insertPill(TestData.getFirstPill())
 
         val updatedPill = TestData.getFirstPill().copy(name = "updated pill name")
@@ -81,7 +81,7 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
-    fun shouldDeleteExistingPill() {
+    fun should_delete_existingPill() {
         mPillsRepository.insertPill(TestData.getFirstPill())
 
         mPillsRepository.deletePill(TestData.getFirstPill())
@@ -92,7 +92,7 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
-    fun shouldDeleteAllPills() {
+    fun should_delete_allPills() {
         mPillsRepository.insertPills(TestData.getPills())
 
         mPillsRepository.deleteAllPills()
