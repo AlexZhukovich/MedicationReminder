@@ -114,15 +114,11 @@ class PillDaoTest {
         mReminderDao.insert(TestData.getSecondReminder())
         mPillDao.insertPill(TestData.getSecondPill())
 
-        val pill = TestData.getSecondPill().copy(
-                name = "updated second pill name",
-                description = "updated second pill description")
-
-        mPillDao.updatePill(pill)
+        mPillDao.updatePill(TestData.getSecondUpdatedPill())
 
         mPillDao.getPills()
                 .test()
-                .assertValue(listOf(pill))
+                .assertValue(listOf(TestData.getSecondUpdatedPill()))
     }
 
     @Test
