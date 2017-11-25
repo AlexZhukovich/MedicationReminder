@@ -9,7 +9,6 @@ import android.util.AttributeSet
 import android.widget.ProgressBar
 import com.alexzh.medicationreminder.R
 
-
 class TestableProgressBar : ProgressBar {
 
     constructor(context: Context) : this(context, null)
