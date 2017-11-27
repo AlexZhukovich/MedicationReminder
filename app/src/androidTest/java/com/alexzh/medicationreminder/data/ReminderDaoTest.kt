@@ -102,6 +102,15 @@ class ReminderDaoTest {
     }
 
     @Test
+    fun should_update_returnNumberOfUpdatedRows() {
+        mReminderDao.insert(TestData.getFirstReminder())
+
+        val count = mReminderDao.update(TestData.getFirstUpdatedReminder())
+
+        assertEquals(1, count)
+    }
+
+    @Test
     fun should_update_existingReminder() {
         mReminderDao.insert(TestData.getFirstReminder())
 
