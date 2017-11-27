@@ -61,9 +61,10 @@ interface ReminderDao {
      * Delete list of reminders from the table.
      *
      * @param reminders the list of reminders to be deleted.
+     * @return the number of deleted rows.
      */
     @Delete
-    fun delete(reminders: List<Reminder>)
+    fun delete(reminders: List<Reminder>) : Int
 
     /**
      * Delete all reminders from the database.

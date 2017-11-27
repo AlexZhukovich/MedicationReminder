@@ -160,6 +160,15 @@ class ReminderDaoTest {
     }
 
     @Test
+    fun should_deleteList_returnNumberOfDeletedRows() {
+        mReminderDao.insert(TestData.getReminders())
+
+        val count = mReminderDao.delete(TestData.getReminders())
+
+        assertEquals(TestData.getReminders().size, count)
+    }
+
+    @Test
     fun should_delete_existingReminders() {
         mReminderDao.insert(TestData.getReminders())
 
