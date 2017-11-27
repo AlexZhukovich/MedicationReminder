@@ -59,6 +59,14 @@ class ReminderDaoTest {
     }
 
     @Test
+    fun should_insert_returnListOfIdsForReminders() {
+        val expectedIds = listOf(TestData.FIRST_REMINDER_ID, TestData.SECOND_REMINDER_ID)
+        val ids = mReminderDao.insert(TestData.getReminders())
+
+        assertEquals(expectedIds, ids)
+    }
+
+    @Test
     fun should_insert_listOfReminders() {
         mReminderDao.insert(TestData.getReminders())
 

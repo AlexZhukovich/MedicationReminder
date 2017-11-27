@@ -24,7 +24,7 @@ class TestData {
         private val SECOND_PILL_DOSAGE = "200 mg"
         private val SECOND_PILL_UPDATED_NAME = "updated pill 2"
 
-        private val SECOND_REMINDER_ID = 20L
+        val SECOND_REMINDER_ID = 20L
         private val SECOND_START_DATE_REMINDER = Date()
         private val SECOND_END_DATE_REMINDER = Date()
         private val SECOND_REMINDER_TIME = Date()
