@@ -31,7 +31,7 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
      */
     override fun insertPill(pill: Pill, reminder: Reminder) {
         reminderDao.insert(reminder)
-        pillDao.insertPill(pill)
+        pillDao.insert(pill)
     }
 
     /**
@@ -41,7 +41,7 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
      */
     override fun insertPills(pills: List<Pill>, reminders: List<Reminder>) {
         reminderDao.insert(reminders)
-        pillDao.insertPills(pills)
+        pillDao.insert(pills)
     }
 
     /**
@@ -49,14 +49,14 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
      *
      * @param pill the pill to be updated.
      */
-    override fun updatePill(pill: Pill) = pillDao.updatePill(pill)
+    override fun updatePill(pill: Pill) = pillDao.update(pill)
 
     /**
      * Delete an existing pill.
      *
      * @param pill the pill to be deleted.
      */
-    override fun deletePill(pill: Pill) = pillDao.deletePill(pill)
+    override fun deletePill(pill: Pill) = pillDao.delete(pill)
 
     /**
      * Delete all pills.

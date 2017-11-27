@@ -33,7 +33,7 @@ interface PillDao {
      * @param pill the pill to be inserted.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPill(pill: Pill)
+    fun insert(pill: Pill)
 
     /**
      * Insert list of pills in the database. All pills inserted in one transaction.
@@ -42,7 +42,7 @@ interface PillDao {
      * @param pills the list of pills to be inserted.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPills(pills: List<Pill>)
+    fun insert(pills: List<Pill>)
 
     /**
      * Update an existing pill in the database.
@@ -50,7 +50,7 @@ interface PillDao {
      * @param pill the pill to be updated.
      */
     @Update
-    fun updatePill(pill: Pill)
+    fun update(pill: Pill)
 
     /**
      * Delete an existing pill from the database.
@@ -58,7 +58,7 @@ interface PillDao {
      * @param pill the pill to be removed.
      */
     @Delete
-    fun deletePill(pill: Pill)
+    fun delete(pill: Pill)
 
     /**
      * Delete all pills from the database.

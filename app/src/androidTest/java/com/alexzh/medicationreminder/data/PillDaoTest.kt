@@ -43,7 +43,7 @@ class PillDaoTest {
     @Test
     fun should_getPillById_afterInserting() {
         mReminderDao.insert(TestData.getFirstReminder())
-        mPillDao.insertPill(TestData.getFirstPill())
+        mPillDao.insert(TestData.getFirstPill())
 
         mPillDao.getPillById(TestData.getFirstPill().id)
                 .test()
@@ -60,7 +60,7 @@ class PillDaoTest {
     @Test
     fun should_insert_newPill() {
         mReminderDao.insert(TestData.getFirstReminder())
-        mPillDao.insertPill(TestData.getFirstPill())
+        mPillDao.insert(TestData.getFirstPill())
 
         mPillDao.getPills()
                 .test()
@@ -71,8 +71,8 @@ class PillDaoTest {
     fun should_notInsert_theSamePillTwice() {
         mReminderDao.insert(TestData.getFirstReminder())
 
-        mPillDao.insertPill(TestData.getFirstPill())
-        mPillDao.insertPill(TestData.getFirstPill())
+        mPillDao.insert(TestData.getFirstPill())
+        mPillDao.insert(TestData.getFirstPill())
 
         mPillDao.getPills()
                 .test()
@@ -81,7 +81,7 @@ class PillDaoTest {
 
     @Test
     fun should_notInsert_emptyListOfPills() {
-        mPillDao.insertPills(TestData.EMPTY_LIST_OF_PILLS)
+        mPillDao.insert(TestData.EMPTY_LIST_OF_PILLS)
 
         mPillDao.getPills()
                 .test()
@@ -91,7 +91,7 @@ class PillDaoTest {
     @Test
     fun should_insert_listOfPills() {
         mReminderDao.insert(TestData.getReminders())
-        mPillDao.insertPills(TestData.getPills())
+        mPillDao.insert(TestData.getPills())
 
         mPillDao.getPills()
                 .test()
@@ -101,8 +101,8 @@ class PillDaoTest {
     @Test
     fun should_notInsert_listOfPillsTwice() {
         mReminderDao.insert(TestData.getReminders())
-        mPillDao.insertPills(TestData.getPills())
-        mPillDao.insertPills(TestData.getPills())
+        mPillDao.insert(TestData.getPills())
+        mPillDao.insert(TestData.getPills())
 
         mPillDao.getPills()
                 .test()
@@ -112,9 +112,9 @@ class PillDaoTest {
     @Test
     fun should_update_existingPill() {
         mReminderDao.insert(TestData.getSecondReminder())
-        mPillDao.insertPill(TestData.getSecondPill())
+        mPillDao.insert(TestData.getSecondPill())
 
-        mPillDao.updatePill(TestData.getSecondUpdatedPill())
+        mPillDao.update(TestData.getSecondUpdatedPill())
 
         mPillDao.getPills()
                 .test()
@@ -123,7 +123,7 @@ class PillDaoTest {
 
     @Test
     fun should_notUpdate_nonExistingPill() {
-        mPillDao.updatePill(TestData.getFirstPill())
+        mPillDao.update(TestData.getFirstPill())
 
         mPillDao.getPills()
                 .test()
@@ -135,10 +135,10 @@ class PillDaoTest {
         mReminderDao.insert(TestData.getFirstReminder())
         mReminderDao.insert(TestData.getSecondReminder())
 
-        mPillDao.insertPill(TestData.getFirstPill())
-        mPillDao.insertPill(TestData.getSecondPill())
+        mPillDao.insert(TestData.getFirstPill())
+        mPillDao.insert(TestData.getSecondPill())
 
-        mPillDao.deletePill(TestData.getFirstPill())
+        mPillDao.delete(TestData.getFirstPill())
 
         mPillDao.getPills()
                 .test()
@@ -147,7 +147,7 @@ class PillDaoTest {
 
     @Test
     fun should_notDelete_NonExistingPill () {
-        mPillDao.deletePill(TestData.getFirstPill())
+        mPillDao.delete(TestData.getFirstPill())
 
         mPillDao.getPills()
                 .test()
@@ -157,7 +157,7 @@ class PillDaoTest {
     @Test
     fun should_delete_allPills() {
         mReminderDao.insert(TestData.getReminders())
-        mPillDao.insertPills(TestData.getPills())
+        mPillDao.insert(TestData.getPills())
 
         mPillDao.deleteAllPills()
 
