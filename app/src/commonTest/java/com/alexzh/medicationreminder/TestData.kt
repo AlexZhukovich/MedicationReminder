@@ -6,19 +6,19 @@ import java.util.Date
 
 class TestData {
     companion object {
-        private val FIRST_PILL_ID = 1L
+        private val FIRST_PILL_ID = 100L
         private val FIRST_PILL_NAME = "pill"
         private val FIRST_PILL_DESCRIPTION = "pill description"
         private val FIRST_PILL_DOSAGE = "100 mg"
         private val FIRST_PILL_UPDATED_NAME = "updated pill"
 
-        private val FIRST_REMINDER_ID = 10L
+        val FIRST_REMINDER_ID = 10L
         private val FIRST_START_DATE_REMINDER = Date()
         private val FIRST_END_DATE_REMINDER = Date()
         private val FIRST_REMINDER_TIME = Date()
         private val FIRST_REMINDER_UPDATED_TIME = Date()
 
-        private val SECOND_PILL_ID = 2L
+        private val SECOND_PILL_ID = 200L
         private val SECOND_PILL_NAME = "pill 2"
         private val SECOND_PILL_DESCRIPTION = "pill description 2"
         private val SECOND_PILL_DOSAGE = "200 mg"
