@@ -43,9 +43,10 @@ interface ReminderDao {
      * Update a reminder in the database.
      *
      * @param reminder the reminder to be updated.
+     * @return the number of updated rows.
      */
     @Update
-    fun update(reminder: Reminder)
+    fun update(reminder: Reminder) : Int
 
     /**
      * Delete a reminder from the database.

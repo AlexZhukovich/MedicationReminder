@@ -86,6 +86,13 @@ class ReminderDaoTest {
     }
 
     @Test
+    fun should_notUpdate_returnZeroCountOfUpdatedRow() {
+        val count = mReminderDao.update(TestData.getFirstReminder())
+
+        assertEquals(0, count)
+    }
+
+    @Test
     fun should_notUpdate_nonExistingReminder() {
         mReminderDao.update(TestData.getFirstReminder())
 
