@@ -130,8 +130,9 @@ class PillDaoTest {
 
     @Test
     fun should_notUpdate_nonExistingPill() {
-        mPillDao.update(TestData.getFirstPill())
+        val count = mPillDao.update(TestData.getFirstPill())
 
+        assertEquals(0, count)
         mPillDao.getPills()
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_PILLS)
