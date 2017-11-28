@@ -94,9 +94,11 @@ class PillDaoTest {
 
     @Test
     fun should_insert_listOfPills() {
+        val expectedIds = listOf(TestData.FIRST_PILL_ID, TestData.SECOND_PILL_ID)
         mReminderDao.insert(TestData.getReminders())
-        mPillDao.insert(TestData.getPills())
+        val ids = mPillDao.insert(TestData.getPills())
 
+        assertEquals(expectedIds, ids)
         mPillDao.getPills()
                 .test()
                 .assertValue(TestData.getPills())
