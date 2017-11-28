@@ -59,9 +59,10 @@ interface PillDao {
      * Delete an existing pill from the database.
      *
      * @param pill the pill to be removed.
+     * @return the number of deleted rows.
      */
     @Delete
-    fun delete(pill: Pill)
+    fun delete(pill: Pill) : Int
 
     /**
      * Delete all pills from the database.

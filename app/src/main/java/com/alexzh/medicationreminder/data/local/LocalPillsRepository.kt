@@ -58,7 +58,9 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
      *
      * @param pill the pill to be deleted.
      */
-    override fun deletePill(pill: Pill) = pillDao.delete(pill)
+    override fun deletePill(pill: Pill) {
+        pillDao.delete(pill)
+    }
 
     /**
      * Delete all pills.

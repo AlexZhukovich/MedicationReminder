@@ -146,8 +146,9 @@ class PillDaoTest {
         mPillDao.insert(TestData.getFirstPill())
         mPillDao.insert(TestData.getSecondPill())
 
-        mPillDao.delete(TestData.getFirstPill())
+        val count = mPillDao.delete(TestData.getFirstPill())
 
+        assertEquals(1, count)
         mPillDao.getPills()
                 .test()
                 .assertValue(listOf(TestData.getSecondPill()))
