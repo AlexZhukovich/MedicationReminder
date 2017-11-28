@@ -33,16 +33,10 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun should_insert_returnIdOfReminder() {
+    fun should_insert_newReminder() {
         val reminderId = mReminderDao.insert(TestData.getFirstReminder())
 
         assertEquals(TestData.FIRST_REMINDER_ID, reminderId)
-    }
-
-    @Test
-    fun should_insert_newReminder() {
-        mReminderDao.insert(TestData.getFirstReminder())
-
         mReminderDao.getReminders()
                 .test()
                 .assertValue(listOf(TestData.getFirstReminder()))
@@ -59,17 +53,11 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun should_insert_returnListOfIdsForReminders() {
+    fun should_insert_listOfReminders() {
         val expectedIds = listOf(TestData.FIRST_REMINDER_ID, TestData.SECOND_REMINDER_ID)
         val ids = mReminderDao.insert(TestData.getReminders())
 
         assertEquals(expectedIds, ids)
-    }
-
-    @Test
-    fun should_insert_listOfReminders() {
-        mReminderDao.insert(TestData.getReminders())
-
         mReminderDao.getReminders()
                 .test()
                 .assertValue(TestData.getReminders())
@@ -86,36 +74,22 @@ class ReminderDaoTest {
     }
 
     @Test
-    fun should_notUpdate_returnZeroCountOfUpdatedRow() {
+    fun should_notUpdate_nonExistingReminder() {
         val count = mReminderDao.update(TestData.getFirstReminder())
 
         assertEquals(0, count)
-    }
-
-    @Test
-    fun should_notUpdate_nonExistingReminder() {
-        mReminderDao.update(TestData.getFirstReminder())
-
         mReminderDao.getReminders()
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_REMINDERS)
     }
 
     @Test
-    fun should_update_returnNumberOfUpdatedRows() {
+    fun should_update_existingReminder() {
         mReminderDao.insert(TestData.getFirstReminder())
 
         val count = mReminderDao.update(TestData.getFirstUpdatedReminder())
 
         assertEquals(1, count)
-    }
-
-    @Test
-    fun should_update_existingReminder() {
-        mReminderDao.insert(TestData.getFirstReminder())
-
-        mReminderDao.update(TestData.getFirstUpdatedReminder())
-
         mReminderDao.getReminders()
                 .test()
                 .assertValue(listOf(TestData.getFirstUpdatedReminder()))
@@ -123,28 +97,20 @@ class ReminderDaoTest {
 
     @Test
     fun should_notDelete_reminderFromEmptyTable() {
-        mReminderDao.delete(TestData.getFirstReminder())
+        val count = mReminderDao.delete(TestData.getFirstReminder())
 
+        assertEquals(0, count)
         mReminderDao.getReminders()
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_REMINDERS)
     }
 
     @Test
-    fun should_delete_returnNumberOfDeletedRows() {
+    fun should_delete_existingReminder() {
         mReminderDao.insert(TestData.getReminders())
-
         val count = mReminderDao.delete(TestData.getFirstReminder())
 
         assertEquals(1, count)
-    }
-
-    @Test
-    fun should_delete_existingReminder() {
-        mReminderDao.insert(TestData.getReminders())
-
-        mReminderDao.delete(TestData.getFirstReminder())
-
         mReminderDao.getReminders()
                 .test()
                 .assertValue(listOf(TestData.getSecondReminder()))
@@ -152,28 +118,20 @@ class ReminderDaoTest {
 
     @Test
     fun should_notDelete_ListOfRemindersFromEmptyTable() {
-        mReminderDao.delete(TestData.getReminders())
+        val count = mReminderDao.delete(TestData.getReminders())
 
+        assertEquals(0, count)
         mReminderDao.getReminders()
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_REMINDERS)
     }
 
     @Test
-    fun should_deleteList_returnNumberOfDeletedRows() {
-        mReminderDao.insert(TestData.getReminders())
-
-        val count = mReminderDao.delete(TestData.getReminders())
-
-        assertEquals(TestData.getReminders().size, count)
-    }
-
-    @Test
     fun should_delete_existingReminders() {
         mReminderDao.insert(TestData.getReminders())
+        val count = mReminderDao.delete(listOf(TestData.getFirstReminder()))
 
-        mReminderDao.delete(listOf(TestData.getFirstReminder()))
-
+        assertEquals(1, count)
         mReminderDao.getReminders()
                 .test()
                 .assertValue(listOf(TestData.getSecondReminder()))
