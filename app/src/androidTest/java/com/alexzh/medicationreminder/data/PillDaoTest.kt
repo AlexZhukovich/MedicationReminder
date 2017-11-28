@@ -84,8 +84,9 @@ class PillDaoTest {
 
     @Test
     fun should_notInsert_emptyListOfPills() {
-        mPillDao.insert(TestData.EMPTY_LIST_OF_PILLS)
+        val ids = mPillDao.insert(TestData.EMPTY_LIST_OF_PILLS)
 
+        assertEquals(listOf<Long>(), ids)
         mPillDao.getPills()
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_PILLS)
