@@ -24,7 +24,7 @@ interface PillDao {
      * @param pillId the id of the existing pill.
      * @return the pill.
      */
-    @Query("SELECT * FROM pills WHERE pill_id = :pillId")
+    @Query("SELECT * FROM pills WHERE id = :pillId")
     fun getPillById(pillId: Long) : Single<Pill>
 
     /**

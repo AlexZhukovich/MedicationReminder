@@ -36,38 +36,37 @@ class TestData {
         fun getFirstPill() : Pill = Pill(
                 FIRST_PILL_NAME,
                 FIRST_PILL_DESCRIPTION,
-                FIRST_PILL_DOSAGE,
-                FIRST_REMINDER_ID).apply { id = FIRST_PILL_ID }
+                FIRST_PILL_DOSAGE).apply { id = FIRST_PILL_ID }
 
         fun getFirstUpdatedPill() : Pill = Pill(
                 FIRST_PILL_UPDATED_NAME,
                 FIRST_PILL_DESCRIPTION,
-                FIRST_PILL_DOSAGE,
-                FIRST_REMINDER_ID).apply { id = FIRST_PILL_ID }
+                FIRST_PILL_DOSAGE).apply { id = FIRST_PILL_ID }
 
         fun getSecondPill() : Pill = Pill(
                 SECOND_PILL_NAME,
                 SECOND_PILL_DESCRIPTION,
-                SECOND_PILL_DOSAGE,
-                SECOND_REMINDER_ID).apply { id =  SECOND_PILL_ID}
+                SECOND_PILL_DOSAGE).apply { id =  SECOND_PILL_ID}
 
         fun getSecondUpdatedPill() : Pill = Pill(
                 SECOND_PILL_UPDATED_NAME,
                 SECOND_PILL_DESCRIPTION,
-                SECOND_PILL_DOSAGE,
-                SECOND_REMINDER_ID).apply { id =  SECOND_PILL_ID}
+                SECOND_PILL_DOSAGE).apply { id =  SECOND_PILL_ID}
 
         fun getFirstReminder() : Reminder = Reminder(
+                FIRST_PILL_ID,
                 FIRST_START_DATE_REMINDER,
                 FIRST_END_DATE_REMINDER,
                 FIRST_REMINDER_TIME).apply { reminderId = FIRST_REMINDER_ID }
 
         fun getFirstUpdatedReminder() : Reminder = Reminder(
+                FIRST_PILL_ID,
                 FIRST_START_DATE_REMINDER,
                 FIRST_END_DATE_REMINDER,
                 FIRST_REMINDER_UPDATED_TIME).apply { reminderId = FIRST_REMINDER_ID }
 
         fun getSecondReminder() : Reminder = Reminder(
+                SECOND_PILL_ID,
                 SECOND_START_DATE_REMINDER,
                 SECOND_END_DATE_REMINDER,
                 SECOND_REMINDER_TIME).apply { reminderId = SECOND_REMINDER_ID }

@@ -5,6 +5,7 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
+import com.alexzh.medicationreminder.data.local.PillDao
 import com.alexzh.medicationreminder.data.local.ReminderDao
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -15,6 +16,7 @@ import org.junit.runner.RunWith
 class ReminderDaoTest {
 
     private lateinit var mReminderDao : ReminderDao
+    private lateinit var mPillDao : PillDao
 
     @Before
     fun setUp() {
@@ -23,6 +25,7 @@ class ReminderDaoTest {
                 .allowMainThreadQueries()
                 .build()
         mReminderDao = database.reminderDao()
+        mPillDao = database.pillDao()
     }
 
     @Test
@@ -34,6 +37,7 @@ class ReminderDaoTest {
 
     @Test
     fun should_insert_newReminder() {
+        mPillDao.insert(TestData.getFirstPill())
         val reminderId = mReminderDao.insert(TestData.getFirstReminder())
 
         assertEquals(TestData.FIRST_REMINDER_ID, reminderId)
@@ -44,6 +48,8 @@ class ReminderDaoTest {
 
     @Test
     fun should_notInsert_theSameReminderTwice() {
+        mPillDao.insert(TestData.getFirstPill())
+
         mReminderDao.insert(TestData.getFirstReminder())
         mReminderDao.insert(TestData.getFirstReminder())
 
@@ -54,6 +60,8 @@ class ReminderDaoTest {
 
     @Test
     fun should_insert_listOfReminders() {
+        mPillDao.insert(TestData.getPills())
+
         val expectedIds = listOf(TestData.FIRST_REMINDER_ID, TestData.SECOND_REMINDER_ID)
         val ids = mReminderDao.insert(TestData.getReminders())
 
@@ -65,6 +73,7 @@ class ReminderDaoTest {
 
     @Test
     fun should_notInsert_listOfRemindersTwice() {
+        mPillDao.insert(TestData.getPills())
         mReminderDao.insert(TestData.getReminders())
         mReminderDao.insert(TestData.getReminders())
 
@@ -85,6 +94,7 @@ class ReminderDaoTest {
 
     @Test
     fun should_update_existingReminder() {
+        mPillDao.insert(TestData.getFirstPill())
         mReminderDao.insert(TestData.getFirstReminder())
 
         val count = mReminderDao.update(TestData.getFirstUpdatedReminder())
@@ -107,6 +117,7 @@ class ReminderDaoTest {
 
     @Test
     fun should_delete_existingReminder() {
+        mPillDao.insert(TestData.getPills())
         mReminderDao.insert(TestData.getReminders())
         val count = mReminderDao.delete(TestData.getFirstReminder())
 
@@ -128,6 +139,7 @@ class ReminderDaoTest {
 
     @Test
     fun should_delete_existingReminders() {
+        mPillDao.insert(TestData.getPills())
         mReminderDao.insert(TestData.getReminders())
         val count = mReminderDao.delete(listOf(TestData.getFirstReminder()))
 
@@ -148,6 +160,7 @@ class ReminderDaoTest {
 
     @Test
     fun should_delete_allRemindersFromFilledTable() {
+        mPillDao.insert(TestData.getPills())
         mReminderDao.insert(TestData.getReminders())
 
         mReminderDao.deleteAll()

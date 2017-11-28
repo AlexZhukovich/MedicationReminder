@@ -8,7 +8,6 @@ import android.support.test.runner.AndroidJUnit4
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
 import com.alexzh.medicationreminder.data.local.PillDao
-import com.alexzh.medicationreminder.data.local.ReminderDao
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -19,7 +18,6 @@ import org.junit.runner.RunWith
 class PillDaoTest {
 
     private lateinit var mPillDao: PillDao
-    private lateinit var mReminderDao: ReminderDao
 
     @Rule @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -30,7 +28,6 @@ class PillDaoTest {
         val database = Room.inMemoryDatabaseBuilder(context, MedicationReminderDatabase::class.java)
                 .allowMainThreadQueries()
                 .build()
-        mReminderDao = database.reminderDao()
         mPillDao = database.pillDao()
     }
 
@@ -43,7 +40,6 @@ class PillDaoTest {
 
     @Test
     fun should_getPillById_afterInserting() {
-        mReminderDao.insert(TestData.getFirstReminder())
         mPillDao.insert(TestData.getFirstPill())
 
         mPillDao.getPillById(TestData.getFirstPill().id)
@@ -60,7 +56,6 @@ class PillDaoTest {
 
     @Test
     fun should_insert_newPill() {
-        mReminderDao.insert(TestData.getFirstReminder())
         val pillId = mPillDao.insert(TestData.getFirstPill())
 
         assertEquals(TestData.FIRST_PILL_ID, pillId)
@@ -71,8 +66,6 @@ class PillDaoTest {
 
     @Test
     fun should_notInsert_theSamePillTwice() {
-        mReminderDao.insert(TestData.getFirstReminder())
-
         mPillDao.insert(TestData.getFirstPill())
         mPillDao.insert(TestData.getFirstPill())
 
@@ -94,7 +87,6 @@ class PillDaoTest {
     @Test
     fun should_insert_listOfPills() {
         val expectedIds = listOf(TestData.FIRST_PILL_ID, TestData.SECOND_PILL_ID)
-        mReminderDao.insert(TestData.getReminders())
         val ids = mPillDao.insert(TestData.getPills())
 
         assertEquals(expectedIds, ids)
@@ -105,7 +97,6 @@ class PillDaoTest {
 
     @Test
     fun should_notInsert_listOfPillsTwice() {
-        mReminderDao.insert(TestData.getReminders())
         mPillDao.insert(TestData.getPills())
         mPillDao.insert(TestData.getPills())
 
@@ -116,7 +107,6 @@ class PillDaoTest {
 
     @Test
     fun should_update_existingPill() {
-        mReminderDao.insert(TestData.getSecondReminder())
         mPillDao.insert(TestData.getSecondPill())
 
         val count = mPillDao.update(TestData.getSecondUpdatedPill())
@@ -139,9 +129,6 @@ class PillDaoTest {
 
     @Test
     fun should_delete_existingPill() {
-        mReminderDao.insert(TestData.getFirstReminder())
-        mReminderDao.insert(TestData.getSecondReminder())
-
         mPillDao.insert(TestData.getFirstPill())
         mPillDao.insert(TestData.getSecondPill())
 
@@ -165,7 +152,6 @@ class PillDaoTest {
 
     @Test
     fun should_delete_allPills() {
-        mReminderDao.insert(TestData.getReminders())
         mPillDao.insert(TestData.getPills())
 
         mPillDao.deleteAllPills()
