@@ -62,8 +62,9 @@ class PillDaoTest {
     @Test
     fun should_insert_newPill() {
         mReminderDao.insert(TestData.getFirstReminder())
-        mPillDao.insert(TestData.getFirstPill())
+        val pillId = mPillDao.insert(TestData.getFirstPill())
 
+        assertEquals(TestData.FIRST_PILL_ID, pillId)
         mPillDao.getPills()
                 .test()
                 .assertValue(listOf(TestData.getFirstPill()))
