@@ -31,6 +31,7 @@ class TestData {
 
         val EMPTY_LIST_OF_PILLS = listOf<Pill>()
         val EMPTY_LIST_OF_REMINDERS = listOf<Reminder>()
+        val EMPTY_LIST_OF_IDS = listOf<Long>()
 
         fun getFirstPill() : Pill = Pill(
                 FIRST_PILL_NAME,

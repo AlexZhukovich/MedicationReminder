@@ -44,9 +44,8 @@ class PillDaoTest {
     @Test
     fun should_getPillById_afterInserting() {
         mReminderDao.insert(TestData.getFirstReminder())
-        val pillId = mPillDao.insert(TestData.getFirstPill())
+        mPillDao.insert(TestData.getFirstPill())
 
-        assertEquals(TestData.FIRST_PILL_ID, pillId)
         mPillDao.getPillById(TestData.getFirstPill().id)
                 .test()
                 .assertValue(TestData.getFirstPill())
@@ -86,7 +85,7 @@ class PillDaoTest {
     fun should_notInsert_emptyListOfPills() {
         val ids = mPillDao.insert(TestData.EMPTY_LIST_OF_PILLS)
 
-        assertEquals(listOf<Long>(), ids)
+        assertEquals(TestData.EMPTY_LIST_OF_IDS, ids)
         mPillDao.getPills()
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_PILLS)
