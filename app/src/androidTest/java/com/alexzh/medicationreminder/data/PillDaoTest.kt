@@ -156,8 +156,9 @@ class PillDaoTest {
 
     @Test
     fun should_notDelete_NonExistingPill () {
-        mPillDao.delete(TestData.getFirstPill())
+        val count = mPillDao.delete(TestData.getFirstPill())
 
+        assertEquals(0, count)
         mPillDao.getPills()
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_PILLS)
