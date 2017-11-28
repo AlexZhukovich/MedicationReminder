@@ -9,6 +9,7 @@ import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
 import com.alexzh.medicationreminder.data.local.PillDao
 import com.alexzh.medicationreminder.data.local.ReminderDao
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -43,8 +44,9 @@ class PillDaoTest {
     @Test
     fun should_getPillById_afterInserting() {
         mReminderDao.insert(TestData.getFirstReminder())
-        mPillDao.insert(TestData.getFirstPill())
+        val pillId = mPillDao.insert(TestData.getFirstPill())
 
+        assertEquals(TestData.FIRST_PILL_ID, pillId)
         mPillDao.getPillById(TestData.getFirstPill().id)
                 .test()
                 .assertValue(TestData.getFirstPill())

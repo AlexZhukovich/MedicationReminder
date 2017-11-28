@@ -6,7 +6,7 @@ import java.util.Date
 
 class TestData {
     companion object {
-        private val FIRST_PILL_ID = 100L
+        val FIRST_PILL_ID = 100L
         private val FIRST_PILL_NAME = "pill"
         private val FIRST_PILL_DESCRIPTION = "pill description"
         private val FIRST_PILL_DOSAGE = "100 mg"

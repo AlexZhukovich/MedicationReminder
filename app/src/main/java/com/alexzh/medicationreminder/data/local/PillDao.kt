@@ -31,9 +31,10 @@ interface PillDao {
      * Insert a pill in the database. If the pill already exists, replace it.
      *
      * @param pill the pill to be inserted.
+     * @return the pill ID.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(pill: Pill)
+    fun insert(pill: Pill) : Long
 
     /**
      * Insert list of pills in the database. All pills inserted in one transaction.
