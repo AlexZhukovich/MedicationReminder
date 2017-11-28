@@ -50,9 +50,10 @@ interface PillDao {
      * Update an existing pill in the database.
      *
      * @param pill the pill to be updated.
+     * @return the number of updated rows.
      */
     @Update
-    fun update(pill: Pill)
+    fun update(pill: Pill) : Int
 
     /**
      * Delete an existing pill from the database.

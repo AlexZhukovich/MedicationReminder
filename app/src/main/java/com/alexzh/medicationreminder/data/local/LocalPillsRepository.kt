@@ -49,7 +49,9 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
      *
      * @param pill the pill to be updated.
      */
-    override fun updatePill(pill: Pill) = pillDao.update(pill)
+    override fun updatePill(pill: Pill) {
+        pillDao.update(pill)
+    }
 
     /**
      * Delete an existing pill.

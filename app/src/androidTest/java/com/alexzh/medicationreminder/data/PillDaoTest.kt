@@ -120,8 +120,9 @@ class PillDaoTest {
         mReminderDao.insert(TestData.getSecondReminder())
         mPillDao.insert(TestData.getSecondPill())
 
-        mPillDao.update(TestData.getSecondUpdatedPill())
+        val count = mPillDao.update(TestData.getSecondUpdatedPill())
 
+        assertEquals(1, count)
         mPillDao.getPills()
                 .test()
                 .assertValue(listOf(TestData.getSecondUpdatedPill()))
