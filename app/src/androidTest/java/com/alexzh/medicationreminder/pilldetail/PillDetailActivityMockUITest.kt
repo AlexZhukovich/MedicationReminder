@@ -78,20 +78,13 @@ class PillDetailActivityMockUITest {
     }
 
     @Test
-    fun shouldPillNameHasTextInputType() {
+    fun shouldCheckInputTypes() {
         mActivityRule.launchActivity(Intent(
                 InstrumentationRegistry.getTargetContext(),
                 PillDetailActivity::class.java))
 
         onView(withId(R.id.pillName))
                 .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
-    }
-
-    @Test
-    fun shouldPillDosageHasNumberInputType() {
-        mActivityRule.launchActivity(Intent(
-                InstrumentationRegistry.getTargetContext(),
-                PillDetailActivity::class.java))
 
         onView(withId(R.id.pillDosage))
                 .check(matches(withInputType(InputType.TYPE_CLASS_NUMBER)))
