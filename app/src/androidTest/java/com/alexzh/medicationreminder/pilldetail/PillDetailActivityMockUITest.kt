@@ -9,7 +9,9 @@ import android.support.test.espresso.matcher.ViewMatchers.withHint
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
+import android.support.test.espresso.matcher.ViewMatchers.withInputType
 import android.support.test.rule.ActivityTestRule
+import android.text.InputType
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.PillsRepository
@@ -73,5 +75,15 @@ class PillDetailActivityMockUITest {
 
         onView(withId(R.id.pillDosage))
                 .check(matches(withText(TestData.getFirstPill().dosage)))
+    }
+
+    @Test
+    fun shouldPillNameHasTextInputType() {
+        mActivityRule.launchActivity(Intent(
+                InstrumentationRegistry.getTargetContext(),
+                PillDetailActivity::class.java))
+
+        onView(withId(R.id.pillName))
+                .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
     }
 }

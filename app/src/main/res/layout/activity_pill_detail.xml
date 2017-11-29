@@ -31,9 +31,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="64dp"
-                    android:inputType="numberDecimal"
-                    android:textSize="36sp"
-                    android:hint="@string/hint_medication_name"/>
+                    android:hint="@string/hint_medication_name"
+                    android:inputType="text"
+                    android:textSize="36sp" />
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/pillDosage"
