@@ -7,6 +7,7 @@
 
     <string name="hint_medication_name">Medication name</string>
     <string name="hint_medication_dosage">Dosage</string>
+    <string name="hint_medication_description">Description</string>
 
     <string name="message_load_data_error">Something went wrong</string>
 

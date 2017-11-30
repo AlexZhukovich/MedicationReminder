@@ -51,7 +51,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/pillDosage"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:hint="@string/hint_medication_description"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"

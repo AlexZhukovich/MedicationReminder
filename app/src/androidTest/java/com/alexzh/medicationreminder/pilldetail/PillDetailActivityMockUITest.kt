@@ -110,4 +110,14 @@ class PillDetailActivityMockUITest {
                 .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
     }
 
+    @Test
+    fun shouldCheckDescriptionHint() {
+        mActivityRule.launchActivity(Intent(
+                InstrumentationRegistry.getTargetContext(),
+                PillDetailActivity::class.java))
+
+        onView(withId(R.id.pillDescription))
+                .check(matches(withHint(R.string.hint_medication_description)))
+    }
+
 }
