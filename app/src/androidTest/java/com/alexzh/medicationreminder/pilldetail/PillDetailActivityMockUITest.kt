@@ -99,4 +99,15 @@ class PillDetailActivityMockUITest {
         onView(withId(R.id.pillDescription))
                 .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun shouldCheckDescriptionInputType() {
+        mActivityRule.launchActivity(Intent(
+                InstrumentationRegistry.getTargetContext(),
+                PillDetailActivity::class.java))
+
+        onView(withId(R.id.pillDescription))
+                .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
+    }
+
 }
