@@ -50,10 +50,19 @@ class PillDetailActivityMockUITest {
                 .check(matches(isDisplayed()))
 
         onView(withId(R.id.pillName))
+                .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
                 .check(matches(withHint(R.string.hint_medication_name)))
+                .check(matches(isDisplayed()))
 
         onView(withId(R.id.pillDosage))
                 .check(matches(withHint(R.string.hint_medication_dosage)))
+                .check(matches(withInputType(InputType.TYPE_CLASS_NUMBER)))
+                .check(matches(isDisplayed()))
+
+        onView(withId(R.id.pillDescription))
+                .check(matches(withHint(R.string.hint_medication_description)))
+                .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
+                .check(matches(isDisplayed()))
     }
 
     @Test
@@ -71,53 +80,16 @@ class PillDetailActivityMockUITest {
                 .check(matches(isDisplayed()))
 
         onView(withId(R.id.pillName))
+                .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
                 .check(matches(withText(TestData.getFirstPill().name)))
 
         onView(withId(R.id.pillDosage))
                 .check(matches(withText(TestData.getFirstPill().dosage)))
-    }
-
-    @Test
-    fun shouldCheckInputTypes() {
-        mActivityRule.launchActivity(Intent(
-                InstrumentationRegistry.getTargetContext(),
-                PillDetailActivity::class.java))
-
-        onView(withId(R.id.pillName))
-                .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
-
-        onView(withId(R.id.pillDosage))
                 .check(matches(withInputType(InputType.TYPE_CLASS_NUMBER)))
-    }
-
-    @Test
-    fun shouldCheckPillDescription() {
-        mActivityRule.launchActivity(Intent(
-                InstrumentationRegistry.getTargetContext(),
-                PillDetailActivity::class.java))
 
         onView(withId(R.id.pillDescription))
+                .check(matches(withText(TestData.getFirstPill().description)))
+                .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
                 .check(matches(isDisplayed()))
     }
-
-    @Test
-    fun shouldCheckDescriptionInputType() {
-        mActivityRule.launchActivity(Intent(
-                InstrumentationRegistry.getTargetContext(),
-                PillDetailActivity::class.java))
-
-        onView(withId(R.id.pillDescription))
-                .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
-    }
-
-    @Test
-    fun shouldCheckDescriptionHint() {
-        mActivityRule.launchActivity(Intent(
-                InstrumentationRegistry.getTargetContext(),
-                PillDetailActivity::class.java))
-
-        onView(withId(R.id.pillDescription))
-                .check(matches(withHint(R.string.hint_medication_description)))
-    }
-
 }
