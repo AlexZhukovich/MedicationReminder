@@ -37,6 +37,7 @@ class LocalPillsRepositoryTest {
     @Test
     fun should_getPillById_afterInsertingPill() {
         mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
+                .test()
 
         mPillsRepository.getPillById(TestData.getFirstPill().id)
                 .test()
@@ -53,6 +54,7 @@ class LocalPillsRepositoryTest {
     @Test
     fun should_insert_nonExistingPill() {
         mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
+                .test()
 
         mPillsRepository.getPills()
                 .test()
@@ -71,7 +73,7 @@ class LocalPillsRepositoryTest {
     @Test
     fun should_update_existingPill() {
         mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
-
+                .test()
         mPillsRepository.updatePill(TestData.getFirstUpdatedPill())
 
         mPillsRepository.getPills()

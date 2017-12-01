@@ -3,6 +3,7 @@ package com.alexzh.medicationreminder.data.local
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.alexzh.medicationreminder.data.model.Reminder
+import io.reactivex.Completable
 import io.reactivex.Single
 
 /**
@@ -28,10 +29,13 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
      * Insert a new pill. If the pill already exists, replace it.
      *
      * @param pill the pill to be inserted.
+     * @return the completable of inserting pill with reminder.
      */
-    override fun insertPill(pill: Pill, reminder: Reminder) {
-        pillDao.insert(pill)
-        reminderDao.insert(reminder)
+    override fun insertPill(pill: Pill, reminder: Reminder) : Completable {
+        return Completable.fromAction({
+            pillDao.insert(pill)
+            reminderDao.insert(reminder)
+        })
     }
 
     /**

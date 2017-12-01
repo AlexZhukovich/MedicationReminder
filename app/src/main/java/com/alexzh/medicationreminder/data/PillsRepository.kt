@@ -2,6 +2,7 @@ package com.alexzh.medicationreminder.data
 
 import com.alexzh.medicationreminder.data.model.Pill
 import com.alexzh.medicationreminder.data.model.Reminder
+import io.reactivex.Completable
 import io.reactivex.Single
 
 /**
@@ -28,8 +29,9 @@ interface PillsRepository {
      * Insert a new pill.
      *
      * @param pill the pill to be inserted.
+     * @return the completable of inserting pill with reminder.
      */
-    fun insertPill(pill: Pill, reminder: Reminder)
+    fun insertPill(pill: Pill, reminder: Reminder) : Completable
 
     /**
      * Insert a list of pills.
