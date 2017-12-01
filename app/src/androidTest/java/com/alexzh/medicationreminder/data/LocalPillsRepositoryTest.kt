@@ -27,7 +27,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_getPills_afterInserting() {
-        mPillsRepository.insertPills(TestData.getPills(), TestData.getReminders())
+        mPillsRepository.savePills(TestData.getPills())
                 .test()
 
         mPillsRepository.getPills()
@@ -37,7 +37,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_getPillById_afterInsertingPill() {
-        mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
+        mPillsRepository.savePill(TestData.getFirstPill())
                 .test()
 
         mPillsRepository.getPillById(TestData.getFirstPill().id)
@@ -54,7 +54,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_insert_nonExistingPill() {
-        mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
+        mPillsRepository.savePill(TestData.getFirstPill())
                 .test()
 
         mPillsRepository.getPills()
@@ -64,7 +64,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_insert_nonExistingListOfPills() {
-        mPillsRepository.insertPills(TestData.getPills(), TestData.getReminders())
+        mPillsRepository.savePills(TestData.getPills())
                 .test()
 
         mPillsRepository.getPills()
@@ -74,7 +74,7 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_update_existingPill() {
-        mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
+        mPillsRepository.savePill(TestData.getFirstPill())
                 .test()
 
         mPillsRepository.updatePill(TestData.getFirstUpdatedPill())
@@ -87,20 +87,9 @@ class LocalPillsRepositoryTest {
 
     @Test
     fun should_delete_existingPill() {
-        mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
+        mPillsRepository.savePill(TestData.getFirstPill())
 
-        mPillsRepository.deletePill(TestData.getFirstPill())
-
-        mPillsRepository.getPills()
-                .test()
-                .assertValue(TestData.EMPTY_LIST_OF_PILLS)
-    }
-
-    @Test
-    fun should_delete_allPills() {
-        mPillsRepository.insertPills(TestData.getPills(), TestData.getReminders())
-
-        mPillsRepository.deleteAllPills()
+        mPillsRepository.removePill(TestData.getFirstPill())
 
         mPillsRepository.getPills()
                 .test()

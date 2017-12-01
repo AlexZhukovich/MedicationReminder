@@ -10,6 +10,7 @@ import io.reactivex.Single
  * Room implementation for managing pills data.
  */
 class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao: ReminderDao) : PillsRepository {
+
     /**
      * Get pills from the database.
      *
@@ -26,28 +27,26 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
     override fun getPillById(id: Long): Single<Pill> = pillDao.getPillById(id)
 
     /**
-     * Insert a new pill. If the pill already exists, replace it.
+     * Save a new pill. If the pill already exists, replace it.
      *
-     * @param pill the pill to be inserted.
-     * @return the completable of inserting pill with reminder.
+     * @param pill the pill to be saved.
+     * @return the Completable for saving the pill.
      */
-    override fun insertPill(pill: Pill, reminder: Reminder) : Completable {
+    override fun savePill(pill: Pill): Completable {
         return Completable.fromAction({
             pillDao.insert(pill)
-            reminderDao.insert(reminder)
         })
     }
 
     /**
-     * Insert list of pills in the database. If the pill already exists, replace it.
+     * Save a list of pill. If the pills already exist, replace them.
      *
-     * @param pills the list of pills.
-     * @return the completable for inserting list of pills with list of reminders.
+     * @param pills the list of pills to be saved.
+     * @return the Completable for saving the list of pills.
      */
-    override fun insertPills(pills: List<Pill>, reminders: List<Reminder>) : Completable {
+    override fun savePills(pills: List<Pill>) : Completable {
         return Completable.fromAction({
             pillDao.insert(pills)
-            reminderDao.insert(reminders)
         })
     }
 
@@ -64,22 +63,38 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
     }
 
     /**
-     * Delete an existing pill.
+     * Update an existing reminder.
      *
-     * @param pill the pill to be deleted.
-     * @return the completable for deleting pill.
+     * @param reminder to be updated.
+     * @return the Completable for updating a reminder.
      */
-    override fun deletePill(pill: Pill) : Completable {
+    override fun updateReminder(reminder: Reminder): Completable {
+        return Completable.fromAction({
+            reminderDao.update(reminder)
+        })
+    }
+
+    /**
+     * Remove an existing pill by pill ID.
+     *
+     * @param pill the pill to be removed.
+     * @return the Completable for removing a pill.
+     */
+    override fun removePill(pill: Pill): Completable {
         return Completable.fromAction({
             pillDao.delete(pill)
         })
     }
 
     /**
-     * Delete all pills.
+     * Remove an existing reminder by reminder ID.
+     *
+     * @param reminder the reminder to be removed.
+     * @return the Completable for removing a reminder.
      */
-    override fun deleteAllPills() {
-        reminderDao.deleteAll()
-        pillDao.deleteAllPills()
+    override fun removeReminder(reminder: Reminder): Completable {
+        return Completable.fromAction({
+            reminderDao.delete(reminder)
+        })
     }
 }

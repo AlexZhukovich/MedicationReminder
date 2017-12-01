@@ -26,39 +26,50 @@ interface PillsRepository {
     fun getPillById(id: Long) : Single<Pill>
 
     /**
-     * Insert a new pill.
+     * Save a new pill.
      *
-     * @param pill the pill to be inserted.
-     * @return the completable of inserting pill with reminder.
+     * @param pill the pill to be saved.
+     * @return the Completable for saving the pill.
      */
-    fun insertPill(pill: Pill, reminder: Reminder) : Completable
+    fun savePill(pill: Pill) : Completable
 
     /**
-     * Insert a list of pills.
+     * Save a list of pill.
      *
-     * @param pills the list of pills to be inserted.
-     * @return the completable for inserting list of pills with list of reminders.
+     * @param pills the list of pills to be saved.
+     * @return the Completable for saving the list of pills.
      */
-    fun insertPills(pills: List<Pill>, reminders: List<Reminder>) : Completable
+    fun savePills(pills: List<Pill>) : Completable
 
     /**
      * Update an existing pill.
      *
-     * @param pill the pill to be inserted.
-     * @return the completable for updating pill.
+     * @param pill the pill to be updated.
+     * @return the Completable for updating a pill.
      */
     fun updatePill(pill: Pill) : Completable
 
     /**
-     * Delete an existing pill.
+     * Update an existing reminder.
      *
-     * @param pill the pill to be updated.
-     * @return the completable for deleting pill.
+     * @param reminder to be updated.
+     * @return the Completable for updating a reminder.
      */
-    fun deletePill(pill: Pill) : Completable
+    fun updateReminder(reminder: Reminder) : Completable
 
     /**
-     * Delete all pills.
+     * Remove an existing pill by pill ID.
+     *
+     * @param pill the pill to be removed.
+     * @return the Completable for removing a pill.
      */
-    fun deleteAllPills()
+    fun removePill(pill: Pill) : Completable
+
+    /**
+     * Remove an existing reminder by reminder ID.
+     *
+     * @param reminder the reminder to be removed.
+     * @return the Completable for removing a reminder.
+     */
+    fun removeReminder(reminder: Reminder) : Completable
 }
