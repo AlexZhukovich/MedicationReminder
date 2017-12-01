@@ -42,28 +42,37 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
      * Insert list of pills in the database. If the pill already exists, replace it.
      *
      * @param pills the list of pills.
+     * @return the completable for inserting list of pills with list of reminders.
      */
-    override fun insertPills(pills: List<Pill>, reminders: List<Reminder>) {
-        pillDao.insert(pills)
-        reminderDao.insert(reminders)
+    override fun insertPills(pills: List<Pill>, reminders: List<Reminder>) : Completable {
+        return Completable.fromAction({
+            pillDao.insert(pills)
+            reminderDao.insert(reminders)
+        })
     }
 
     /**
      * Update an existing pill.
      *
      * @param pill the pill to be updated.
+     * @return the completable for updating pill.
      */
-    override fun updatePill(pill: Pill) {
-        pillDao.update(pill)
+    override fun updatePill(pill: Pill) : Completable {
+        return Completable.fromAction({
+            pillDao.update(pill)
+        })
     }
 
     /**
      * Delete an existing pill.
      *
      * @param pill the pill to be deleted.
+     * @return the completable for deleting pill.
      */
-    override fun deletePill(pill: Pill) {
-        pillDao.delete(pill)
+    override fun deletePill(pill: Pill) : Completable {
+        return Completable.fromAction({
+            pillDao.delete(pill)
+        })
     }
 
     /**

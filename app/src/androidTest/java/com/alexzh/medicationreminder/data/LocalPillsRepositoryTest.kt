@@ -28,6 +28,7 @@ class LocalPillsRepositoryTest {
     @Test
     fun should_getPills_afterInserting() {
         mPillsRepository.insertPills(TestData.getPills(), TestData.getReminders())
+                .test()
 
         mPillsRepository.getPills()
                 .test()
@@ -64,6 +65,7 @@ class LocalPillsRepositoryTest {
     @Test
     fun should_insert_nonExistingListOfPills() {
         mPillsRepository.insertPills(TestData.getPills(), TestData.getReminders())
+                .test()
 
         mPillsRepository.getPills()
                 .test()
@@ -74,7 +76,9 @@ class LocalPillsRepositoryTest {
     fun should_update_existingPill() {
         mPillsRepository.insertPill(TestData.getFirstPill(), TestData.getFirstReminder())
                 .test()
+
         mPillsRepository.updatePill(TestData.getFirstUpdatedPill())
+                .test()
 
         mPillsRepository.getPills()
                 .test()
