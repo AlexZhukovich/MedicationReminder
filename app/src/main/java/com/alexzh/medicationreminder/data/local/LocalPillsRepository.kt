@@ -58,6 +58,18 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
     }
 
     /**
+     * Save a new reminder. If the reminder already exists, replace it.
+     *
+     * @param reminder the reminder to be saved.
+     * @return the Completable for saving the reminder.
+     */
+    override fun saveReminder(reminder: Reminder): Completable {
+        return Completable.fromAction({
+            reminderDao.insert(reminder)
+        })
+    }
+
+    /**
      * Update an existing pill.
      *
      * @param pill the pill to be updated.

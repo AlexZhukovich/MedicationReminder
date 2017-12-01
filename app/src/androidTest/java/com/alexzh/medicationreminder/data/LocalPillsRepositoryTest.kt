@@ -43,6 +43,19 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
+    fun should_getReminder_afterInserting() {
+        mPillsRepository.savePill(TestData.getFirstPill())
+                .test()
+
+        mPillsRepository.saveReminder(TestData.getFirstReminder())
+                .test()
+
+        mPillsRepository.getReminder()
+                .test()
+                .assertValue(listOf(TestData.getFirstReminder()))
+    }
+
+    @Test
     fun should_getPillById_afterInsertingPill() {
         mPillsRepository.savePill(TestData.getFirstPill())
                 .test()

@@ -49,6 +49,14 @@ interface PillsRepository {
     fun savePills(pills: List<Pill>) : Completable
 
     /**
+     * Save a new reminder. If the reminder already exists, replace it.
+     *
+     * @param reminder the reminder to be saved.
+     * @return the Completable for saving the reminder.
+     */
+    fun saveReminder(reminder: Reminder): Completable
+
+    /**
      * Update an existing pill.
      *
      * @param pill the pill to be updated.
