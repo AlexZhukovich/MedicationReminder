@@ -19,6 +19,13 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
     override fun getPills(): Single<List<Pill>> = pillDao.getPills()
 
     /**
+     * Get all reminders.
+     *
+     * @return the list of reminders.
+     */
+    override fun getReminder(): Single<List<Reminder>> = reminderDao.getReminders()
+
+    /**
      * Get pill by ID from the database.
      *
      * @param id the id of the pill.

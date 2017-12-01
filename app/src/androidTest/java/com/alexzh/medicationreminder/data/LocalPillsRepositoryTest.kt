@@ -36,6 +36,13 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
+    fun should_getReminders_fromEmptyTable() {
+        mPillsRepository.getReminder()
+                .test()
+                .assertValue(TestData.EMPTY_LIST_OF_REMINDERS)
+    }
+
+    @Test
     fun should_getPillById_afterInsertingPill() {
         mPillsRepository.savePill(TestData.getFirstPill())
                 .test()

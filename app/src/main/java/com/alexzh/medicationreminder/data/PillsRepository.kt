@@ -18,6 +18,13 @@ interface PillsRepository {
     fun getPills() : Single<List<Pill>>
 
     /**
+     * Get all reminders.
+     *
+     * @return the list of reminders.
+     */
+    fun getReminder(): Single<List<Reminder>>
+
+    /**
      * Get pill by id.
      *
      * @param id the id of the pill.
