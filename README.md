@@ -4,15 +4,21 @@
 Language:
 * Kotlin
 
-Frameworks and Libraries:
+Frameworks and Libraries.
+
+Development:
 * Android Support Library
 * RxJava & RxAndroid
 * Glide
 * Timber
+
+Testing:
 * Junit
 * Robolectric
 * Mockito-Android
 * Mockito-Kotlin
 * Espresso
 * UiAutomator
+
+Test coverage:
 * JaCoCo
