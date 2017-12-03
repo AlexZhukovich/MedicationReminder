@@ -43,6 +43,15 @@ class ReminderDaoTest {
     }
 
     @Test
+    fun should_getListOfReminders_forExistingPill() {
+        val pillId = mPillDao.insert(TestData.getFirstPill())
+        mReminderDao.insert(TestData.getFirstReminder())
+
+        val reminders = mReminderDao.getRemindersByPillId(pillId)
+        assertEquals(listOf(TestData.getFirstReminder()), reminders)
+    }
+
+    @Test
     fun should_insert_newReminder() {
         mPillDao.insert(TestData.getFirstPill())
         val reminderId = mReminderDao.insert(TestData.getFirstReminder())
