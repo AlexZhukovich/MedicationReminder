@@ -36,6 +36,13 @@ class ReminderDaoTest {
     }
 
     @Test
+    fun should_getEmptyListOfReminder_forNonExistingPill() {
+        val reminders = mReminderDao.getRemindersByPillId(TestData.INVALID_ID)
+
+        assertEquals(TestData.EMPTY_LIST_OF_REMINDERS, reminders)
+    }
+
+    @Test
     fun should_insert_newReminder() {
         mPillDao.insert(TestData.getFirstPill())
         val reminderId = mReminderDao.insert(TestData.getFirstReminder())

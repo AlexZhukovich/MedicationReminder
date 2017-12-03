@@ -21,6 +21,15 @@ interface ReminderDao {
     fun getReminders() : Single<List<Reminder>>
 
     /**
+     * Get all reminder for the pill.
+     *
+     * @param pillId the ID of the pill for looking all reminders.
+     * @return the list of reminders for the pill.
+     */
+    @Query("SELECT * FROM reminders WHERE pill_id = :pillId")
+    fun getRemindersByPillId(pillId: Long) : List<Reminder>
+
+    /**
      * Insert a reminder in the database. If the reminder already exists, replace it.
      *
      * @param reminder the reminder to be inserted.
