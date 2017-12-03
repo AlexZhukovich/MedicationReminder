@@ -93,6 +93,19 @@ class LocalPillsRepositoryTest {
     }
 
     @Test
+    fun should_insert_nonExistingListOfReminders() {
+        mPillsRepository.savePills(TestData.getPills())
+                .test()
+
+        mPillsRepository.saveReminders(TestData.getReminders())
+                .test()
+
+        mPillsRepository.getReminder()
+                .test()
+                .assertValue(TestData.getReminders())
+    }
+
+    @Test
     fun should_update_existingPill() {
         mPillsRepository.savePill(TestData.getFirstPill())
                 .test()

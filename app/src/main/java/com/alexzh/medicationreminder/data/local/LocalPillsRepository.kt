@@ -70,6 +70,18 @@ class LocalPillsRepository(private val pillDao: PillDao, private val reminderDao
     }
 
     /**
+     * Save a list or reminders.
+     *
+     * @param reminders the list of reminders to be saved.
+     * @return the Completable for saving reminders.
+     */
+    override fun saveReminders(reminders: List<Reminder>): Completable {
+        return Completable.fromAction({
+            reminderDao.insert(reminders)
+        })
+    }
+
+    /**
      * Update an existing pill.
      *
      * @param pill the pill to be updated.
