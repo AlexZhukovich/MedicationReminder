@@ -84,4 +84,18 @@ class HomeActivityMockUITest {
         onView(withText(R.string.action_settings))
                 .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun shouldCheckPillItem() {
+        val pill = TestData.getFirstPill()
+        mPillsSubject.onSuccess(listOf(pill))
+
+        onView(withId(R.id.pillTitle))
+                .check(matches(withText(pill.name)))
+                .check(matches(isDisplayed()))
+
+        onView(withId(R.id.pillDosage))
+                .check(matches(withText(pill.dosage)))
+                .check(matches(isDisplayed()))
+    }
 }
