@@ -61,6 +61,10 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
         Toast.makeText(this, R.string.message_load_data_error, Toast.LENGTH_SHORT).show()
     }
 
+    override fun getPillName(): String {
+        return ""
+    }
+
     override fun onStop() {
         mPresenter.onDestroy()
         super.onStop()

@@ -22,6 +22,10 @@ class PillDetailPresenter(private val view: PillDetail.View,
                 .subscribe(this::handleSuccess, this::handleError)
     }
 
+    override fun savePill() {
+        view.getPillName()
+    }
+
     override fun onDestroy() {
         mDisposable?.dispose()
     }
