@@ -83,4 +83,11 @@ class PillDetailPresenterTest {
 
         verify(view).getPillDescription()
     }
+
+    @Test
+    fun `Get information about dosage during saving a pill`() {
+        presenter.savePill()
+
+        verify(view).getPillDosage()
+    }
 }

@@ -69,6 +69,10 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
         return ""
     }
 
+    override fun getPillDosage(): String {
+        return ""
+    }
+
     override fun onStop() {
         mPresenter.onDestroy()
         super.onStop()

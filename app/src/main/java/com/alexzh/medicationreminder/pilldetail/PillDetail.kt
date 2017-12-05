@@ -14,6 +14,7 @@ interface PillDetail {
         fun showErrorMessage()
         fun getPillName() : String
         fun getPillDescription() : String
+        fun getPillDosage() : String
         fun close()
     }
 }
