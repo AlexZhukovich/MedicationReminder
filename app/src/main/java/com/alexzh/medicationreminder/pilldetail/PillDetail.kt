@@ -13,6 +13,7 @@ interface PillDetail {
         fun showPillInfo(pill: Pill)
         fun showErrorMessage()
         fun getPillName() : String
+        fun getPillDescription() : String
         fun close()
     }
 }

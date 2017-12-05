@@ -24,6 +24,7 @@ class PillDetailPresenter(private val view: PillDetail.View,
 
     override fun savePill() {
         view.getPillName()
+        view.getPillDescription()
     }
 
     override fun onDestroy() {

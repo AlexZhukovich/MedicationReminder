@@ -76,4 +76,11 @@ class PillDetailPresenterTest {
 
         verify(view).getPillName()
     }
+
+    @Test
+    fun `Get information about description during saving a pill`() {
+        presenter.savePill()
+
+        verify(view).getPillDescription()
+    }
 }
