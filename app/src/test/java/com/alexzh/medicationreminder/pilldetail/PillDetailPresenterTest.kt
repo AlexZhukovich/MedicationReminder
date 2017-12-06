@@ -14,6 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.SingleSubject
 import org.junit.Test
 import java.lang.RuntimeException
+import io.reactivex.Completable
 
 class PillDetailPresenterTest {
 
@@ -22,6 +23,7 @@ class PillDetailPresenterTest {
     private val view = mock<PillDetail.View>()
     private val repository = mock<PillsRepository>().apply {
         whenever(this.getPillById(any())).thenReturn(pillSubject)
+        whenever(this.savePill(any())).thenReturn(Completable.complete())
     }
 
     private val presenter = PillDetailPresenter(view, repository, Schedulers.trampoline(), Schedulers.trampoline())
@@ -71,6 +73,10 @@ class PillDetailPresenterTest {
 
     @Test
     fun `Get information about pill during saving a pill`() {
+        whenever(view.getPillName()).thenReturn(TestData.getFirstPill().name)
+        whenever(view.getPillDescription()).thenReturn(TestData.getFirstPill().description)
+        whenever(view.getPillDosage()).thenReturn(TestData.getFirstPill().dosage)
+
         presenter.savePill()
 
         verify(view).getPillName()

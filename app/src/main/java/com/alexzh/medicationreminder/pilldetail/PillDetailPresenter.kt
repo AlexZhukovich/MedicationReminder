@@ -23,9 +23,14 @@ class PillDetailPresenter(private val view: PillDetail.View,
     }
 
     override fun savePill() {
-        view.getPillName()
-        view.getPillDescription()
-        view.getPillDosage()
+        val pill = Pill(view.getPillName(),
+                        view.getPillDescription(),
+                        view.getPillDosage())
+
+        mDisposable = repository.savePill(pill)
+                .subscribeOn(ioScheduler)
+                .observeOn(uiScheduler)
+                .subscribe({ Timber.i("New pill was saved") })
     }
 
     override fun onDestroy() {
