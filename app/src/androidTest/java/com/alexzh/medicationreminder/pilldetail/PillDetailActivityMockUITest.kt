@@ -3,6 +3,8 @@ package com.alexzh.medicationreminder.pilldetail
 import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.action.ViewActions.click
+import android.support.test.espresso.action.ViewActions.replaceText
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withHint
@@ -18,7 +20,9 @@ import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Completable
 import io.reactivex.subjects.SingleSubject
 import org.junit.Rule
 import org.junit.Test
@@ -32,6 +36,7 @@ class PillDetailActivityMockUITest {
     private val mPillSubject = SingleSubject.create<Pill>()
     private val mRepository = mock<PillsRepository>().apply {
         whenever(this.getPillById(any())).thenReturn(mPillSubject)
+        whenever(this.savePill(any())).thenReturn(Completable.complete())
     }
 
     @Rule @JvmField
@@ -91,5 +96,32 @@ class PillDetailActivityMockUITest {
                 .check(matches(withText(TestData.getFirstPill().description)))
                 .check(matches(withInputType(InputType.TYPE_CLASS_TEXT)))
                 .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun shouldSavePillAfterClickToNavigateUp() {
+        PillDetailActivity.mPillsRepository = mRepository
+        val pill = TestData.getFirstPill().apply { id = 0 }
+
+        mActivityRule.launchActivity(Intent(
+                InstrumentationRegistry.getTargetContext(),
+                PillDetailActivity::class.java))
+
+        onView(withId(R.id.pillName))
+                .perform(replaceText(pill.name))
+                .check(matches(withText(pill.name)))
+
+        onView(withId(R.id.pillDosage))
+                .perform(replaceText(pill.dosage))
+                .check(matches(withText(pill.dosage)))
+
+        onView(withId(R.id.pillDescription))
+                .perform(replaceText(pill.description))
+                .check(matches(withText(pill.description)))
+
+        onView(withContentDescription(NAVIGATE_UP_DESCRIPTION))
+                .perform(click())
+
+        verify(mRepository).savePill(pill)
     }
 }

@@ -20,6 +20,7 @@ import com.alexzh.medicationreminder.pilldetail.PillDetailActivity
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Completable
 import io.reactivex.subjects.SingleSubject
 import org.junit.Rule
 import org.junit.Test
@@ -44,6 +45,7 @@ class AppMockUITest {
 
             whenever(mRepository.getPills()).thenReturn(mPillsSubject)
             whenever(mRepository.getPillById(any())).thenReturn(mPillSubject)
+            whenever(mRepository.savePill(any())).thenReturn(Completable.complete())
         }
     }
 

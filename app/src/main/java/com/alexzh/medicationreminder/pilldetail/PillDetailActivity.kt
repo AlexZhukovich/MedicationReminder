@@ -62,15 +62,15 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
     }
 
     override fun getPillName(): String {
-        return ""
+        return pillName.text.toString()
     }
 
     override fun getPillDescription(): String {
-        return ""
+        return pillDescription.text.toString()
     }
 
     override fun getPillDosage(): String {
-        return ""
+        return pillDosage.text.toString()
     }
 
     override fun onStop() {
@@ -83,6 +83,7 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
     }
 
     override fun onSupportNavigateUp(): Boolean {
+        mPresenter.savePill()
         onBackPressed()
         return true
     }
