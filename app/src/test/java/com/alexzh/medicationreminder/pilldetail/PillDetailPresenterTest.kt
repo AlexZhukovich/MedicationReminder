@@ -121,4 +121,15 @@ class PillDetailPresenterTest {
 
         verify(repository).updatePill(pill)
     }
+
+    @Test
+    fun `Don't call repository during updating empty pill`() {
+        whenever(view.getPillName()).thenReturn("")
+        whenever(view.getPillDescription()).thenReturn("")
+        whenever(view.getPillDosage()).thenReturn("")
+
+        presenter.updatePill(TestData.FIRST_PILL_ID)
+
+        verify(repository, never()).updatePill(any())
+    }
 }
