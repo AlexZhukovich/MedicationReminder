@@ -83,4 +83,17 @@ class PillDetailPresenterTest {
         verify(view).getPillDescription()
         verify(view).getPillDosage()
     }
+
+    @Test
+    fun `Call repository during saving new pill`() {
+        val pill = TestData.getFirstPill().apply { id = 0 }
+
+        whenever(view.getPillName()).thenReturn(pill.name)
+        whenever(view.getPillDescription()).thenReturn(pill.description)
+        whenever(view.getPillDosage()).thenReturn(pill.dosage)
+
+        presenter.savePill()
+
+        verify(repository).savePill(pill)
+    }
 }
