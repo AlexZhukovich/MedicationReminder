@@ -20,6 +20,7 @@ import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.never
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Completable
@@ -31,6 +32,7 @@ class PillDetailActivityMockUITest {
 
     companion object {
         val NAVIGATE_UP_DESCRIPTION = "Navigate up"
+        val EMPTY_TEXT = ""
     }
 
     private val mPillSubject = SingleSubject.create<Pill>()
@@ -123,5 +125,25 @@ class PillDetailActivityMockUITest {
                 .perform(click())
 
         verify(mRepository).savePill(pill)
+    }
+
+    @Test
+    fun shouldNotSaveEmptyPillAfterClickToNavigationUp() {
+        PillDetailActivity.mPillsRepository = mRepository
+
+        mActivityRule.launchActivity(Intent(
+                InstrumentationRegistry.getTargetContext(),
+                PillDetailActivity::class.java))
+
+        onView(withId(R.id.pillName))
+                .check(matches(withText(EMPTY_TEXT)))
+
+        onView(withId(R.id.pillDosage))
+                .check(matches(withText(EMPTY_TEXT)))
+
+        onView(withContentDescription(NAVIGATE_UP_DESCRIPTION))
+                .perform(click())
+
+        verify(mRepository, never()).savePill(any())
     }
 }

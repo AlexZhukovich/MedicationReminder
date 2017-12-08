@@ -23,9 +23,15 @@ class PillDetailPresenter(private val view: PillDetail.View,
     }
 
     override fun savePill() {
-        val pill = Pill(view.getPillName(),
-                        view.getPillDescription(),
-                        view.getPillDosage())
+        val name = view.getPillName()
+        val dosage = view.getPillDosage()
+        val description = view.getPillDescription()
+
+        if (name.isEmpty() && dosage.isEmpty()) {
+            return
+        }
+
+        val pill = Pill(name, description, dosage)
 
         mDisposable = repository.savePill(pill)
                 .subscribeOn(ioScheduler)
