@@ -24,6 +24,7 @@ class PillDetailPresenterTest {
     private val repository = mock<PillsRepository>().apply {
         whenever(this.getPillById(any())).thenReturn(pillSubject)
         whenever(this.savePill(any())).thenReturn(Completable.complete())
+        whenever(this.updatePill(any())).thenReturn(Completable.complete())
     }
 
     private val presenter = PillDetailPresenter(view, repository, Schedulers.trampoline(), Schedulers.trampoline())
@@ -106,5 +107,18 @@ class PillDetailPresenterTest {
         presenter.savePill()
 
         verify(repository, never()).savePill(any())
+    }
+
+    @Test
+    fun `Call repository during updating existing pill`() {
+        val pill = TestData.getFirstUpdatedPill()
+
+        whenever(view.getPillName()).thenReturn(pill.name)
+        whenever(view.getPillDescription()).thenReturn(pill.description)
+        whenever(view.getPillDosage()).thenReturn(pill.dosage)
+
+        presenter.updatePill(TestData.FIRST_PILL_ID)
+
+        verify(repository).updatePill(pill)
     }
 }
