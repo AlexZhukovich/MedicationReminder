@@ -96,4 +96,15 @@ class PillDetailPresenterTest {
 
         verify(repository).savePill(pill)
     }
+
+    @Test
+    fun `Don't call repository during saving pill with empty name and dosage`() {
+        whenever(view.getPillName()).thenReturn("")
+        whenever(view.getPillDescription()).thenReturn(TestData.getFirstPill().description)
+        whenever(view.getPillDosage()).thenReturn("")
+
+        presenter.savePill()
+
+        verify(repository, never()).savePill(any())
+    }
 }
