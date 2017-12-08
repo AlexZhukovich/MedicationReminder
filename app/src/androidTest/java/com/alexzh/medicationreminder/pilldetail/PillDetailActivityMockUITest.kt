@@ -39,6 +39,7 @@ class PillDetailActivityMockUITest {
     private val mRepository = mock<PillsRepository>().apply {
         whenever(this.getPillById(any())).thenReturn(mPillSubject)
         whenever(this.savePill(any())).thenReturn(Completable.complete())
+        whenever(this.updatePill(any())).thenReturn(Completable.complete())
     }
 
     @Rule @JvmField
@@ -145,5 +146,33 @@ class PillDetailActivityMockUITest {
                 .perform(click())
 
         verify(mRepository, never()).savePill(any())
+    }
+
+    @Test
+    fun shouldUpdateExistingPillAfterClickToNavigationUp() {
+        PillDetailActivity.mPillsRepository = mRepository
+        val updatedPill = TestData.getFirstUpdatedPill()
+
+        val intent = PillDetailActivity.newIntent(
+                InstrumentationRegistry.getTargetContext(),
+                TestData.getFirstPill().id)
+        mActivityRule.launchActivity(intent)
+
+        onView(withId(R.id.pillName))
+                .perform(replaceText(updatedPill.name))
+                .check(matches(withText(updatedPill.name)))
+
+        onView(withId(R.id.pillDosage))
+                .perform(replaceText(updatedPill.dosage))
+                .check(matches(withText(updatedPill.dosage)))
+
+        onView(withId(R.id.pillDescription))
+                .perform(replaceText(updatedPill.description))
+                .check(matches(withText(updatedPill.description)))
+
+        onView(withContentDescription(NAVIGATE_UP_DESCRIPTION))
+                .perform(click())
+
+        verify(mRepository).updatePill(updatedPill)
     }
 }

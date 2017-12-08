@@ -83,7 +83,12 @@ class PillDetailActivity : AppCompatActivity(), PillDetail.View {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        mPresenter.savePill()
+        val pillId = getPillId(intent)
+        if (pillId == PILL_ID_INVALID) {
+            mPresenter.savePill()
+        } else {
+            mPresenter.updatePill(pillId)
+        }
         onBackPressed()
         return true
     }

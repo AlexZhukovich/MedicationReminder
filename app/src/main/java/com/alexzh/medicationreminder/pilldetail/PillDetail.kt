@@ -6,6 +6,7 @@ interface PillDetail {
     interface Presenter {
         fun loadPillInfo(pillId : Long)
         fun savePill()
+        fun updatePill(pillId: Long)
         fun onDestroy()
     }
 

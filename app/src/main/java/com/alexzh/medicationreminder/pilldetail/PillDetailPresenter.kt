@@ -39,6 +39,23 @@ class PillDetailPresenter(private val view: PillDetail.View,
                 .subscribe({ Timber.i("New pill was saved") })
     }
 
+    override fun updatePill(pillId: Long) {
+        val name = view.getPillName()
+        val dosage = view.getPillDosage()
+        val description = view.getPillDescription()
+
+        if (name.isEmpty() && dosage.isEmpty()) {
+            return
+        }
+
+        val pill = Pill(name, description, dosage).apply { id = pillId }
+
+        mDisposable = repository.updatePill(pill)
+                .subscribeOn(ioScheduler)
+                .observeOn(uiScheduler)
+                .subscribe({ Timber.i("Existing pill was updated") })
+    }
+
     override fun onDestroy() {
         mDisposable?.dispose()
     }
