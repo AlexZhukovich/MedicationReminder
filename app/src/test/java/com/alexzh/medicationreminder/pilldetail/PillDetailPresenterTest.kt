@@ -10,6 +10,8 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import com.nhaarman.mockito_kotlin.never
 import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.verifyZeroInteractions
+import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.SingleSubject
 import org.junit.Test
@@ -17,6 +19,10 @@ import java.lang.RuntimeException
 import io.reactivex.Completable
 
 class PillDetailPresenterTest {
+
+    companion object {
+        val EMPTY_TEXT = ""
+    }
 
     private val pillSubject = SingleSubject.create<Pill>()
 
@@ -34,6 +40,7 @@ class PillDetailPresenterTest {
         presenter.loadPillInfo(TestData.getFirstPill().id)
 
         verify(repository).getPillById(TestData.getFirstPill().id)
+        verifyNoMoreInteractions(repository)
     }
 
     @Test
@@ -43,24 +50,18 @@ class PillDetailPresenterTest {
         pillSubject.onSuccess(TestData.getFirstPill())
 
         verify(view).showPillInfo(any())
+        verifyNoMoreInteractions(view)
     }
 
     @Test
-    fun `Show error message after loading error`() {
+    fun `Show error message and close activity after loading error`() {
         presenter.loadPillInfo(TestData.getFirstPill().id)
 
         pillSubject.onError(RuntimeException())
 
         verify(view).showErrorMessage()
-    }
-
-    @Test
-    fun `Close activity after loading error`() {
-        presenter.loadPillInfo(TestData.getFirstPill().id)
-
-        pillSubject.onError(RuntimeException())
-
         verify(view).close()
+        verifyNoMoreInteractions(view)
     }
 
     @Test
@@ -96,17 +97,18 @@ class PillDetailPresenterTest {
         presenter.savePill()
 
         verify(repository).savePill(pill)
+        verifyNoMoreInteractions(repository)
     }
 
     @Test
     fun `Don't call repository during saving pill with empty name and dosage`() {
-        whenever(view.getPillName()).thenReturn("")
+        whenever(view.getPillName()).thenReturn(EMPTY_TEXT)
         whenever(view.getPillDescription()).thenReturn(TestData.getFirstPill().description)
-        whenever(view.getPillDosage()).thenReturn("")
+        whenever(view.getPillDosage()).thenReturn(EMPTY_TEXT)
 
         presenter.savePill()
 
-        verify(repository, never()).savePill(any())
+        verifyZeroInteractions(repository)
     }
 
     @Test
@@ -120,16 +122,17 @@ class PillDetailPresenterTest {
         presenter.updatePill(TestData.FIRST_PILL_ID)
 
         verify(repository).updatePill(pill)
+        verifyNoMoreInteractions(repository)
     }
 
     @Test
     fun `Don't call repository during updating empty pill`() {
-        whenever(view.getPillName()).thenReturn("")
-        whenever(view.getPillDescription()).thenReturn("")
-        whenever(view.getPillDosage()).thenReturn("")
+        whenever(view.getPillName()).thenReturn(EMPTY_TEXT)
+        whenever(view.getPillDescription()).thenReturn(EMPTY_TEXT)
+        whenever(view.getPillDosage()).thenReturn(EMPTY_TEXT)
 
         presenter.updatePill(TestData.FIRST_PILL_ID)
 
-        verify(repository, never()).updatePill(any())
+        verifyZeroInteractions(repository)
     }
 }
