@@ -44,7 +44,7 @@ class PillDetailPresenter(private val view: PillDetail.View,
         val dosage = view.getPillDosage()
         val description = view.getPillDescription()
 
-        if (name.isEmpty() && dosage.isEmpty()) {
+        if (name.isEmpty() || dosage.isEmpty()) {
             return
         }
 
