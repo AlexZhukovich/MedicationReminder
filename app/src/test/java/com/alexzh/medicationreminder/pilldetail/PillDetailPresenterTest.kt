@@ -123,6 +123,17 @@ class PillDetailPresenterTest {
     }
 
     @Test
+    fun `Don't call repository during saving pill with empty dosage`() {
+        whenever(view.getPillName()).thenReturn(TestData.getFirstPill().name)
+        whenever(view.getPillDescription()).thenReturn(TestData.getFirstPill().description)
+        whenever(view.getPillDosage()).thenReturn(EMPTY_TEXT)
+
+        presenter.savePill()
+
+        verifyZeroInteractions(repository)
+    }
+
+    @Test
     fun `Call repository during updating existing pill`() {
         val pill = TestData.getFirstUpdatedPill()
 
