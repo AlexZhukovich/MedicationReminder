@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/AlexZhukovich/MedicationReminder/branch/master/graph/badge.svg)](https://codecov.io/gh/AlexZhukovich/MedicationReminder)
+
 # MedicationReminder
 [WIP] Application that remind you about medications.
 
