@@ -24,3 +24,4 @@ Testing:
 
 Test coverage:
 * JaCoCo
+* Codecov
