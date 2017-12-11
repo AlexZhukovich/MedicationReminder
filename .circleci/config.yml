@@ -54,6 +54,9 @@ jobs:
       - run:
           name: Run Instrumentation Tests
           command: ./gradlew :app:connectedAndroidTest
+      - run:
+          name: codecov report
+          command: bash <(curl -s https://codecov.io/bash)
       - store_artifacts:
           path: app/build/reports
           destination: reports
