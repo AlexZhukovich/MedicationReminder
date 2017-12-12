@@ -175,4 +175,32 @@ class PillDetailActivityMockUITest {
 
         verify(mRepository).updatePill(updatedPill)
     }
+
+    @Test
+    fun shouldNotUpdateExistingPillAfterRemoveNameAndDosageAndClickToNavigateUp() {
+        PillDetailActivity.mPillsRepository = mRepository
+        val updatedPill = TestData.getFirstUpdatedPill()
+
+        val intent = PillDetailActivity.newIntent(
+                InstrumentationRegistry.getTargetContext(),
+                TestData.getFirstPill().id)
+        mActivityRule.launchActivity(intent)
+
+        onView(withId(R.id.pillName))
+                .perform(replaceText(EMPTY_TEXT))
+                .check(matches(withText(EMPTY_TEXT)))
+
+        onView(withId(R.id.pillDosage))
+                .perform(replaceText(EMPTY_TEXT))
+                .check(matches(withText(EMPTY_TEXT)))
+
+        onView(withId(R.id.pillDescription))
+                .perform(replaceText(updatedPill.description))
+                .check(matches(withText(updatedPill.description)))
+
+        onView(withContentDescription(NAVIGATE_UP_DESCRIPTION))
+                .perform(click())
+
+        verify(mRepository, never()).updatePill(updatedPill)
+    }
 }
