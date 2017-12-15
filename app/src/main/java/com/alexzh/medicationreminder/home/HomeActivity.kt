@@ -68,7 +68,7 @@ class HomeActivity : AppCompatActivity(), Home.View {
     }
 
     override fun showPills(pills: List<Pill>) {
-        mAdapter.addPills(pills)
+        mAdapter.setPills(pills)
     }
 
     private fun handleItemClick(pill: Pill) {

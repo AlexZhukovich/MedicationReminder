@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.item_pill.view.pillDosage
 class PillsAdapter(private val itemClick: (Pill) -> Unit) : RecyclerView.Adapter<PillsAdapter.ViewHolder>() {
     private val mPills = mutableListOf<Pill>()
 
-    fun addPills(pills: List<Pill>) {
+    fun setPills(pills: List<Pill>) {
+        mPills.clear()
         mPills.addAll(pills)
         notifyDataSetChanged()
     }

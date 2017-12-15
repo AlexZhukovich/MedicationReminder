@@ -60,4 +60,35 @@ class AppE2ETest {
         onView(withId(R.id.pillName))
                 .check(matches(withText(TestData.getFirstPill().name)))
     }
+
+    @Test
+    fun shouldInsertNewPillAndBackAfterOpeningExistingPill() {
+        onView(withId(R.id.recyclerView))
+                .check(RecyclerViewItemCountAssertion(0))
+
+        onView(withId(R.id.add))
+                .perform(click())
+
+        onView(withId(R.id.pillName))
+                .perform(replaceText(TestData.getFirstPill().name))
+
+        onView(withId(R.id.pillDosage))
+                .perform(replaceText(TestData.getFirstPill().dosage))
+
+        onView(withContentDescription(NAVIGATE_UP_DESCRIPTION))
+                .perform(click())
+
+        onView(withId(R.id.recyclerView))
+                .check(RecyclerViewItemCountAssertion(1))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(FIRST_ITEM, click()))
+
+        onView(withId(R.id.pillName))
+                .check(matches(withText(TestData.getFirstPill().name)))
+
+        onView(withContentDescription(NAVIGATE_UP_DESCRIPTION))
+                .perform(click())
+
+        onView(withId(R.id.recyclerView))
+                .check(RecyclerViewItemCountAssertion(1))
+    }
 }
