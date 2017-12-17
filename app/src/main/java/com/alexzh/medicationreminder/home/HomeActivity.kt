@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_main.add
 import kotlinx.android.synthetic.main.activity_main.progressBar
 import kotlinx.android.synthetic.main.activity_main.layout
 import kotlinx.android.synthetic.main.content_main.recyclerView
+import android.support.v4.content.ContextCompat
+import com.alexzh.medicationreminder.customview.DivideItemDecoration
 
 class HomeActivity : AppCompatActivity(), Home.View {
     companion object {
@@ -32,7 +34,10 @@ class HomeActivity : AppCompatActivity(), Home.View {
 
         setSupportActionBar(toolbar)
 
+        val divider = ContextCompat.getDrawable(this, R.drawable.item_divider)
+
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.addItemDecoration(DivideItemDecoration(divider))
         recyclerView.adapter = mAdapter
 
         add.setOnClickListener { handleAddButtonClick() }
