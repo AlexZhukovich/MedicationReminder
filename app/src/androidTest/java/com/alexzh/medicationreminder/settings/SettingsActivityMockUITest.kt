@@ -33,13 +33,10 @@ class SettingsActivityMockUITest {
     }
 
     @Test
-    fun shouldDisplayAboutCategory() {
+    fun shouldDisplayAboutCategoryWithVersionPreference() {
         onView(withText(R.string.pref_title_category_about))
                 .check(matches(isDisplayed()))
-    }
 
-    @Test
-    fun shouldDisplayAppVersionPreference() {
         onView(withText(R.string.pref_title_app_version))
                 .check(matches(isDisplayed()))
 
@@ -50,7 +47,10 @@ class SettingsActivityMockUITest {
     }
 
     @Test
-    fun shouldDisplayUnknownAppVersionPreference() {
+    fun shouldDisplayAboutCategoryWithUnknownAppVersionPreference() {
+        onView(withText(R.string.pref_title_category_about))
+                .check(matches(isDisplayed()))
+
         onView(withText(R.string.pref_title_app_version))
                 .check(matches(isDisplayed()))
 
