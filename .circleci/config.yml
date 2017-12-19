@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: runmymind/docker-android-sdk:latest
+      - image: circleci/android:api-27-alpha
     environment:
       _JAVA_OPTIONS: "-Xmx1400m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
     resource_class: large
