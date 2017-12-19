@@ -5,6 +5,9 @@ import android.support.test.espresso.Espresso.openContextualActionModeOverflowMe
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
+import android.support.test.espresso.intent.Intents
+import android.support.test.espresso.intent.Intents.intended
+import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
@@ -17,6 +20,7 @@ import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.alexzh.medicationreminder.home.HomeActivity
 import com.alexzh.medicationreminder.pilldetail.PillDetailActivity
+import com.alexzh.medicationreminder.settings.SettingsActivity
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
@@ -105,21 +109,17 @@ class AppMockUITest {
     }
 
     @Test
-    fun shouldCheckNavigationUpButtonFromSettings() {
+    fun shouldCheckSettingIntent() {
+        Intents.init()
+
         openContextualActionModeOverflowMenu()
 
         onView(withText(R.string.action_settings))
                 .check(matches(isDisplayed()))
                 .perform(click())
 
-        onView(withText(R.string.action_settings))
-                .check(matches(isDisplayed()))
+        intended(hasComponent(SettingsActivity::class.java.name))
 
-        onView(ViewMatchers.withContentDescription(NAVIGATE_UP_DESCRIPTION))
-                .check(matches(isDisplayed()))
-                .perform(click())
-
-        onView(withId(R.id.recyclerView))
-                .check(matches(isDisplayed()))
+        Intents.release()
     }
 }
