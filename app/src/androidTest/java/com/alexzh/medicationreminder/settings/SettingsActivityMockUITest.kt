@@ -8,6 +8,8 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
+import android.support.test.runner.AndroidJUnit4
+import android.view.WindowManager
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.data.AppInfoRepository
 import com.nhaarman.mockito_kotlin.mock
@@ -15,10 +17,13 @@ import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.subjects.SingleSubject
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.CoreMatchers.startsWith
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class SettingsActivityMockUITest {
 
     companion object {
@@ -39,6 +44,18 @@ class SettingsActivityMockUITest {
 
             whenever(mRepository.getAppVersion()).thenReturn(mAppInfoSubject)
         }
+    }
+
+    @Before
+    fun setUp() {
+        val activity = mActivityRule.activity
+        val wakeUpDevice = Runnable {
+            activity.window.addFlags(
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        activity.runOnUiThread(wakeUpDevice)
     }
 
     @Test

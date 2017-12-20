@@ -7,6 +7,8 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.rule.ActivityTestRule
+import android.support.test.runner.AndroidJUnit4
+import android.view.WindowManager
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.RecyclerViewItemCountAssertion
 import com.alexzh.medicationreminder.TestData
@@ -16,9 +18,12 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.subjects.SingleSubject
 import org.hamcrest.Matchers.not
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class HomeActivityMockUITest {
 
     private val mRepository = mock<PillsRepository>()
@@ -31,6 +36,18 @@ class HomeActivityMockUITest {
 
             whenever(mRepository.getPills()).thenReturn(mPillsSubject)
         }
+    }
+
+    @Before
+    fun setUp() {
+        val activity = mActivityRule.activity
+        val wakeUpDevice = Runnable {
+            activity.window.addFlags(
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        activity.runOnUiThread(wakeUpDevice)
     }
 
     @Test

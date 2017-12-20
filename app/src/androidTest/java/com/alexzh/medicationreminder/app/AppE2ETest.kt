@@ -10,15 +10,20 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
 import android.support.test.rule.ActivityTestRule
+import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
+import android.view.WindowManager
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.RecyclerViewItemCountAssertion
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.local.MedicationReminderDatabase
 import com.alexzh.medicationreminder.home.HomeActivity
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class AppE2ETest {
 
     companion object {
@@ -34,6 +39,18 @@ class AppE2ETest {
                     .pillDao()
                     .deleteAllPills()
         }
+    }
+
+    @Before
+    fun setUp() {
+        val activity = activityRule.activity
+        val wakeUpDevice = Runnable {
+            activity.window.addFlags(
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                          WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                          WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        activity.runOnUiThread(wakeUpDevice)
     }
 
     @Test
