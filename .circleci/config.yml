@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       #- image: circleci/android:api-27-alpha
-      - image: bitriseio/docker-android:v2017_09_09-06_45-b744
+      - image: bitriseio/docker-android:v2017_12_16-07_48-b914
     working_directory: ~/workspace
     steps:
       -  run:
@@ -19,9 +19,12 @@ jobs:
           name: Start emulator
           command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
           background: true
-#      - run:
-#          name: Download Dependencies
-#          command: ./gradlew androidDependencies
+      - run:
+          name: chmod permissions
+          command: chmod +x ./gradlew
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
 #      - save_cache:
 #          paths:
 #            - ~/.gradle
@@ -37,14 +40,11 @@ jobs:
           name: Wait for emulator
           command: ./android-wait-for-boot.sh
       - run:
-          name: chmod permissions
-          command: chmod +x ./gradlew
-      - run:
           name: Run Local Tests
           command: ./gradlew lint test
-      - run:
-          name: Wait for device
-          command: circle-android wait-for-boot
+#      - run:
+#          name: Wait for device
+#          command: circle-android wait-for-boot
       - run:
           name: Unlock the device
           command: adb shell input keyevent 82
