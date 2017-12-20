@@ -30,9 +30,12 @@ jobs:
 #            - ~/.gradle
 #          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - checkout
+#      - run:
+#          name: Wait for device
+#          command: circle-android wait-for-boot
       - run:
-          name: Wait for device
-          command: circle-android wait-for-boot
+          name: Wait for emulator
+          command: ./android-wait-for-boot.sh
       - run:
           name: Run Local Tests
           command: ./gradlew lint test
