@@ -26,6 +26,12 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
+      - run:
+          name: Assemble the app
+          command: ./gradlew :app:assemble
+      - run:
+          name: Run Local tests
+          command: ./gradlew test
 #      - save_cache:
 #          paths:
 #            - ~/.gradle
@@ -39,9 +45,9 @@ jobs:
       - run:
           name: Wait for emulator
           command: ./android-wait-for-boot.sh
-      - run:
-          name: Run Local Tests
-          command: ./gradlew lint test
+#      - run:
+#          name: Run Local Tests
+#          command: ./gradlew lint test
 #      - run:
 #          name: Wait for device
 #          command: circle-android wait-for-boot
@@ -63,6 +69,9 @@ jobs:
       - run:
           name: Run Instrumentation Tests
           command: ./gradlew :app:connectedAndroidTest
+      - run:
+          name: Run Lint
+          command: ./gradlew lint
       - run:
           name: Detekt Check
           command: ./gradlew detektCheck
