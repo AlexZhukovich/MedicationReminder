@@ -2,34 +2,37 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/android:api-27-alpha
-    environment:
-      _JAVA_OPTIONS: "-Xmx1400m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
-    resource_class: large
+      #- image: circleci/android:api-27-alpha
+      - image: bitriseio/docker-android:v2017_09_09-06_45-b744
+    working_directory: ~/workspace
     steps:
-      - checkout
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      -  run:
+          name: Lists installed targets
+          command: android list target
       - run:
-          name: Setup emulator
-          command: sdkmanager "system-images;android-24;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-24;default;armeabi-v7a"
+          name: List available targets and other sdk modules
+          command: sdkmanager --list --include_obsolete --verbose
       - run:
-          name: Launch emulator
-          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel on
+          name: Create avd
+          command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-24;default;armeabi-v7a"
+      - run:
+          name: Start emulator
+          command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
           background: true
+#      - run:
+#          name: chmod permissions
+#          command: chmod +x ./gradlew
+#      - run:
+#          name: Download Dependencies
+#          command: ./gradlew androidDependencies
+#      - save_cache:
+#          paths:
+#            - ~/.gradle
+#          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - checkout
       - run:
-          name: chmod permissions
-          command: chmod +x ./gradlew
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Detekt Check
-          command: ./gradlew detektCheck
+          name: Wait for device
+          command: circle-android wait-for-boot
       - run:
           name: Run Local Tests
           command: ./gradlew lint test
@@ -39,9 +42,9 @@ jobs:
       - run:
           name: Unlock the device
           command: adb shell input keyevent 82
-      - run:
-          name: Plug in the device
-          command: adb shell svc power stayon true
+#      - run:
+#          name: Plug in the device
+#          command: adb shell svc power stayon true
       - run:
           name: Turn off the WINDOW ANIMATION SCALE
           command: adb shell settings put global window_animation_scale 0
@@ -54,6 +57,9 @@ jobs:
       - run:
           name: Run Instrumentation Tests
           command: ./gradlew :app:connectedAndroidTest
+      - run:
+          name: Detekt Check
+          command: ./gradlew detektCheck
       - run:
           name: codecov report
           command: bash <(curl -s https://codecov.io/bash)
