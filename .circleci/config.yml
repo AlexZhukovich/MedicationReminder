@@ -20,9 +20,6 @@ jobs:
           command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
           background: true
 #      - run:
-#          name: chmod permissions
-#          command: chmod +x ./gradlew
-#      - run:
 #          name: Download Dependencies
 #          command: ./gradlew androidDependencies
 #      - save_cache:
@@ -39,6 +36,9 @@ jobs:
       - run:
           name: Wait for emulator
           command: ./android-wait-for-boot.sh
+      - run:
+          name: chmod permissions
+          command: chmod +x ./gradlew
       - run:
           name: Run Local Tests
           command: ./gradlew lint test
