@@ -19,6 +19,7 @@ jobs:
           name: Start emulator
           command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
           background: true
+      - checkout
       - run:
           name: chmod permissions
           command: chmod +x ./gradlew
@@ -29,7 +30,6 @@ jobs:
 #          paths:
 #            - ~/.gradle
 #          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - checkout
 #      - run:
 #          name: Wait for device
 #          command: circle-android wait-for-boot
