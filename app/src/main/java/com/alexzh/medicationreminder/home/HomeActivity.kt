@@ -34,7 +34,7 @@ class HomeActivity : AppCompatActivity(), Home.View {
 
         setSupportActionBar(toolbar)
 
-        val divider = ContextCompat.getDrawable(this, R.drawable.item_divider)
+        val divider = ContextCompat.getDrawable(this, R.drawable.item_divider)!!
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DivideItemDecoration(divider))
