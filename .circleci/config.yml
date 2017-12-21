@@ -1,10 +1,14 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/workspace
     docker:
       #- image: circleci/android:api-27-alpha
       - image: bitriseio/docker-android:v2017_12_16-07_48-b914
-    working_directory: ~/workspace
+    environment:
+          TERM: dumb
+          _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+          GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
     steps:
       -  run:
           name: Lists installed targets
