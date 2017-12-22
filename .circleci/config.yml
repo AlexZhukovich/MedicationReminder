@@ -69,6 +69,22 @@ jobs:
           command: |
               circle-android wait-for-boot
 #
+
+      - run:
+          name: Turn off the WINDOW ANIMATION SCALE
+          command: adb shell settings put global window_animation_scale 0
+      - run:
+          name: Turn off the TRANSITION ANIMATION SCALE
+          command: adb shell settings put global transition_animation_scale 0
+      - run:
+          name: Turn off the ANIMATOR DURATION SCALE
+          command: adb shell settings put global animator_duration_scale 0
+
+      - run:
+          name: Unlock the emulator
+          command:
+              adb shell input keyevent 82
+
 #      - run:
 #          name: Turn off the animations
 #          command: |
