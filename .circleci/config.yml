@@ -45,38 +45,38 @@ jobs:
           name: Show list of system-images
           command: sdkmanager --list --verbose | grep system-images
 
-      - run:
-          name: Setup Emulator
-          command: sdkmanager "system-images;android-24;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-24;default;armeabi-v7a"
-
-      - run:
-          name: Launch Emulator
-          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel on
-          background: true
-
-      - run:
-          name: Wait emulator
-          command: |
-              circle-android wait-for-boot
-
-      - run:
-          name: Turn off the animations
-          command: |
-              adb shell settings put global window_animation_scale 0
-              adb shell settings put global transition_animation_scale 0
-              adb shell settings put global animator_duration_scale 0
-
-      - run:
-          name: Wait emulator
-          command: |
-              circle-android wait-for-boot
-              adb shell input keyevent 82
-              adb shell svc power stayon true
-
-
-      - run:
-          name: Run UI test
-          command: ./gradlew connectedCheck
+#      - run:
+#          name: Setup Emulator
+#          command: sdkmanager "system-images;android-24;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-24;default;armeabi-v7a"
+#
+#      - run:
+#          name: Launch Emulator
+#          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel on
+#          background: true
+#
+#      - run:
+#          name: Wait emulator
+#          command: |
+#              circle-android wait-for-boot
+#
+#      - run:
+#          name: Turn off the animations
+#          command: |
+#              adb shell settings put global window_animation_scale 0
+#              adb shell settings put global transition_animation_scale 0
+#              adb shell settings put global animator_duration_scale 0
+#
+#      - run:
+#          name: Wait emulator
+#          command: |
+#              circle-android wait-for-boot
+#              adb shell input keyevent 82
+#              adb shell svc power stayon true
+#
+#
+#      - run:
+#          name: Run UI test
+#          command: ./gradlew connectedCheck
 
       - store_test_results:
           path: app/build/test-results
