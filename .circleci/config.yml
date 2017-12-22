@@ -55,6 +55,11 @@ jobs:
           background: true
 
       - run:
+          name: Wait emulator
+          command: |
+              circle-android wait-for-boot
+
+      - run:
           name: Turn off the animations
           command: |
               adb shell settings put global window_animation_scale 0
