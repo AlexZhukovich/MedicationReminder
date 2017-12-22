@@ -55,18 +55,19 @@ jobs:
           background: true
 
       - run:
+          name: Turn off the animations
+          command: |
+              adb shell settings put global window_animation_scale 0
+              adb shell settings put global transition_animation_scale 0
+              adb shell settings put global animator_duration_scale 0
+
+      - run:
           name: Wait emulator
           command: |
               circle-android wait-for-boot
               adb shell input keyevent 82
               adb shell svc power stayon true
 
-      - run:
-          name: Turn off the animations
-          command: |
-              adb shell settings put global window_animation_scale 0
-              adb shell settings put global transition_animation_scale 0
-              adb shell settings put global animator_duration_scale 0
 
       - run:
           name: Run UI test
@@ -78,93 +79,93 @@ jobs:
       - store_artifacts:
           path: app/build/reports
           destination: reports
-
-#version: 2
-#jobs:
-#  build:
-#    working_directory: ~/workspace
-#    docker:
-#      #- image: circleci/android:api-27-alpha
-#      - image: bitriseio/docker-android:v2017_12_16-07_48-b914
-#    environment:
-#          TERM: dumb
-#          _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
-#          GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
-#    steps:
-#      -  run:
-#          name: Lists installed targets
-#          command: android list target
-#      - run:
-#          name: List available targets and other sdk modules
-#          command: sdkmanager --list --include_obsolete --verbose
-#      - run:
-#          name: Create avd
-#          command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-24;default;armeabi-v7a"
-#      - run:
-#          name: Start emulator
-#          command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
-#          background: true
-#      - checkout
-#      - run:
-#          name: chmod permissions
-#          command: chmod +x ./gradlew
-#      - run:
-#          name: Download Dependencies
-#          command: ./gradlew androidDependencies
-#      - run:
-#          name: Assemble the app
-#          command: ./gradlew :app:assemble
-#      - run:
-#          name: Run Local tests
-#          command: ./gradlew test
-##      - save_cache:
-##          paths:
-##            - ~/.gradle
-##          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#
+##version: 2
+##jobs:
+##  build:
+##    working_directory: ~/workspace
+##    docker:
+##      #- image: circleci/android:api-27-alpha
+##      - image: bitriseio/docker-android:v2017_12_16-07_48-b914
+##    environment:
+##          TERM: dumb
+##          _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+##          GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
+##    steps:
+##      -  run:
+##          name: Lists installed targets
+##          command: android list target
 ##      - run:
-##          name: Wait for device
-##          command: circle-android wait-for-boot
-#      - run:
-#          name: chmod permissions
-#          command: chmod +x ./android-wait-for-boot.sh
-#      - run:
-#          name: Wait for emulator
-#          command: ./android-wait-for-boot.sh
+##          name: List available targets and other sdk modules
+##          command: sdkmanager --list --include_obsolete --verbose
 ##      - run:
-##          name: Run Local Tests
-##          command: ./gradlew lint test
+##          name: Create avd
+##          command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-24;default;armeabi-v7a"
 ##      - run:
-##          name: Wait for device
-##          command: circle-android wait-for-boot
-#      - run:
-#          name: Unlock the device
-#          command: adb shell input keyevent 82
+##          name: Start emulator
+##          command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
+##          background: true
+##      - checkout
 ##      - run:
-##          name: Plug in the device
-##          command: adb shell svc power stayon true
-#      - run:
-#          name: Turn off the WINDOW ANIMATION SCALE
-#          command: adb shell settings put global window_animation_scale 0
-#      - run:
-#          name: Turn off the TRANSITION ANIMATION SCALE
-#          command: adb shell settings put global transition_animation_scale 0
-#      - run:
-#          name: Turn off the ANIMATOR DURATION SCALE
-#          command: adb shell settings put global animator_duration_scale 0
-#      - run:
-#          name: Run Instrumentation Tests
-#          command: ./gradlew :app:connectedAndroidTest
-#      - run:
-#          name: Run Lint
-#          command: ./gradlew lint
-#      - run:
-#          name: Detekt Check
-#          command: ./gradlew detektCheck
-#      - run:
-#          name: codecov report
-#          command: bash <(curl -s https://codecov.io/bash)
-#      - store_artifacts:
-#          path: app/build/reports
-#          destination: reports
-#      - store_test_results:
-#          path: app/build/test-results
+##          name: chmod permissions
+##          command: chmod +x ./gradlew
+##      - run:
+##          name: Download Dependencies
+##          command: ./gradlew androidDependencies
+##      - run:
+##          name: Assemble the app
+##          command: ./gradlew :app:assemble
+##      - run:
+##          name: Run Local tests
+##          command: ./gradlew test
+###      - save_cache:
+###          paths:
+###            - ~/.gradle
+###          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+###      - run:
+###          name: Wait for device
+###          command: circle-android wait-for-boot
+##      - run:
+##          name: chmod permissions
+##          command: chmod +x ./android-wait-for-boot.sh
+##      - run:
+##          name: Wait for emulator
+##          command: ./android-wait-for-boot.sh
+###      - run:
+###          name: Run Local Tests
+###          command: ./gradlew lint test
+###      - run:
+###          name: Wait for device
+###          command: circle-android wait-for-boot
+##      - run:
+##          name: Unlock the device
+##          command: adb shell input keyevent 82
+###      - run:
+###          name: Plug in the device
+###          command: adb shell svc power stayon true
+##      - run:
+##          name: Turn off the WINDOW ANIMATION SCALE
+##          command: adb shell settings put global window_animation_scale 0
+##      - run:
+##          name: Turn off the TRANSITION ANIMATION SCALE
+##          command: adb shell settings put global transition_animation_scale 0
+##      - run:
+##          name: Turn off the ANIMATOR DURATION SCALE
+##          command: adb shell settings put global animator_duration_scale 0
+##      - run:
+##          name: Run Instrumentation Tests
+##          command: ./gradlew :app:connectedAndroidTest
+##      - run:
+##          name: Run Lint
+##          command: ./gradlew lint
+##      - run:
+##          name: Detekt Check
+##          command: ./gradlew detektCheck
+##      - run:
+##          name: codecov report
+##          command: bash <(curl -s https://codecov.io/bash)
+##      - store_artifacts:
+##          path: app/build/reports
+##          destination: reports
+##      - store_test_results:
+##          path: app/build/test-results
