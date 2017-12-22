@@ -7,6 +7,7 @@ jobs:
 
     environment:
       # Customize the JVM maximum heap limit
+      _JAVA_OPTIONS: "-Xmx1400m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
       JVM_OPTS: -Xmx3200m
       TERM: dumb
 
