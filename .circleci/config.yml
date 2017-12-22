@@ -24,6 +24,15 @@ jobs:
               echo y | android update sdk --no-ui --all --filter build-tools-27.0.1
 
       - run:
+          name: Setup emulator
+          command: sdkmanager "system-images;android-22;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-22;default;armeabi-v7a"
+
+      - run:
+          name: Launch emulator
+          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel on
+          background: true
+
+      - run:
           name: chmod permissions
           command: chmod +x ./gradlew
 
@@ -37,13 +46,13 @@ jobs:
 
       # run unit tests!
       - run:
-          name: unit test
+          name: build
           command: |
-              ./gradlew test
+              ./gradlew build
 #              ./gradlew lint test
-      - run:
-          name: Show list of system-images
-          command: sdkmanager --list --verbose | grep system-images
+#      - run:
+#          name: Show list of system-images
+#          command: sdkmanager --list --verbose | grep system-images
 
 #      - run:
 #          name: Setup Emulator
@@ -54,10 +63,10 @@ jobs:
 #          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel on
 #          background: true
 #
-#      - run:
-#          name: Wait emulator
-#          command: |
-#              circle-android wait-for-boot
+      - run:
+          name: Wait emulator
+          command: |
+              circle-android wait-for-boot
 #
 #      - run:
 #          name: Turn off the animations
@@ -74,9 +83,9 @@ jobs:
 #              adb shell svc power stayon true
 #
 #
-#      - run:
-#          name: Run UI test
-#          command: ./gradlew connectedCheck
+      - run:
+          name: Run UI test
+          command: ./gradlew build connectedAndroidTest
 
       - store_test_results:
           path: app/build/test-results
