@@ -27,15 +27,15 @@ import org.junit.runner.RunWith
 class SettingsActivityMockUITest {
 
     companion object {
-        private val NAVIGATE_UP_DESCRIPTION = "Navigate up"
+//        private val NAVIGATE_UP_DESCRIPTION = "Navigate up"
         val APP_VERSION = "0.0.1-dev"
     }
 
     private val mRepository = mock<AppInfoRepository>()
     private val mAppInfoSubject = SingleSubject.create<String>()
 
-    @Rule @JvmField
-    var thrown = ExpectedException.none()
+//    @Rule @JvmField
+//    var thrown = ExpectedException.none()
 
     @Rule @JvmField
     val mActivityRule = object: ActivityTestRule<SettingsActivity>(SettingsActivity::class.java) {
@@ -86,23 +86,23 @@ class SettingsActivityMockUITest {
                 .check(matches(isDisplayed()))
     }
 
-    /**
-     * Test wait for exception, because Activity should be finished.
-     */
-    @Test
-    fun shouldCheckNavigationUpButton() {
-        // Preparing expected exception.
-        thrown.expect(RuntimeException::class.java)
-        thrown.expectMessage(startsWith("No activities found."))
-
-        onView(withText(R.string.pref_title_category_about))
-                .check(matches(isDisplayed()))
-
-        onView(ViewMatchers.withContentDescription(NAVIGATE_UP_DESCRIPTION))
-                .check(matches(isDisplayed()))
-                .perform(ViewActions.click())
-
-        onView(withText(R.string.pref_title_category_about))
-                .check(matches(not(isDisplayed())))
-    }
+//    /**
+//     * Test wait for exception, because Activity should be finished.
+//     */
+//    @Test
+//    fun shouldCheckNavigationUpButton() {
+//        // Preparing expected exception.
+//        thrown.expect(RuntimeException::class.java)
+//        thrown.expectMessage(startsWith("No activities found."))
+//
+//        onView(withText(R.string.pref_title_category_about))
+//                .check(matches(isDisplayed()))
+//
+//        onView(ViewMatchers.withContentDescription(NAVIGATE_UP_DESCRIPTION))
+//                .check(matches(isDisplayed()))
+//                .perform(ViewActions.click())
+//
+//        onView(withText(R.string.pref_title_category_about))
+//                .check(matches(not(isDisplayed())))
+//    }
 }
