@@ -4,7 +4,7 @@ buildscript {
     ext.kotlin_version = '1.2.10'
     ext.gradle_version = '3.0.1'
     ext.gradle_android_cache_fix_version = "0.2.3"
-    ext.support_library_version = '27.0.2'
+    ext.support_library_version = '26.1.0'
     ext.constraint_layout_version = '1.0.2'
     ext.rxjava_version = '2.1.1'
     ext.rxandroid_version = '2.0.1'
