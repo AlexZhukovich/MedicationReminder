@@ -125,18 +125,18 @@ class AppMockUITest {
                 .check(matches(isDisplayed()))
     }
 
-    @Test
-    fun shouldCheckSettingIntent() {
-        Intents.init()
-
-        openContextualActionModeOverflowMenu()
-
-        onView(withText(R.string.action_settings))
-                .check(matches(isDisplayed()))
-                .perform(click())
-
-        intended(hasComponent(SettingsActivity::class.java.name))
-
-        Intents.release()
-    }
+//    @Test
+//    fun shouldCheckSettingIntent() {
+//        Intents.init()
+//
+//        openContextualActionModeOverflowMenu()
+//
+//        onView(withText(R.string.action_settings))
+//                .check(matches(isDisplayed()))
+//                .perform(click())
+//
+//        intended(hasComponent(SettingsActivity::class.java.name))
+//
+//        Intents.release()
+//    }
 }
