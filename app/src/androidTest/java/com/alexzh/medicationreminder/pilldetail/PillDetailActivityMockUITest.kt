@@ -15,7 +15,6 @@ import android.support.test.espresso.matcher.ViewMatchers.withInputType
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.text.InputType
-import android.view.WindowManager
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.PillsRepository
@@ -27,7 +26,6 @@ import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Completable
 import io.reactivex.subjects.SingleSubject
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -49,18 +47,6 @@ class PillDetailActivityMockUITest {
 
     @Rule @JvmField
     val mActivityRule = ActivityTestRule<PillDetailActivity>(PillDetailActivity::class.java, true, false)
-
-    @Before
-    fun setUp() {
-        val activity = mActivityRule.activity
-        val wakeUpDevice = Runnable {
-            activity.window.addFlags(
-                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
-                            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
-                            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        }
-        activity.runOnUiThread(wakeUpDevice)
-    }
 
     @Test
     fun shouldDisplayMedicationNameAndDosageHints() {
