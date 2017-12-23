@@ -20,7 +20,7 @@ class HomePresenter(private val view: Home.View,
                 .subscribeOn(ioScheduler)
                 .observeOn(uiScheduler)
                 .doOnSubscribe { view.showLoader() }
-                .doAfterTerminate { view.hideLoader() }
+                .doFinally { view.hideLoader() }
                 .subscribe(this::handleSuccess, this::handleError)
     }
 
