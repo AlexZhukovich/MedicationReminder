@@ -1,13 +1,9 @@
 package com.alexzh.medicationreminder.app
 
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.Espresso.openContextualActionModeOverflowMenu
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
-import android.support.test.espresso.intent.Intents
-import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
@@ -15,20 +11,17 @@ import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
-import android.view.WindowManager
 import com.alexzh.medicationreminder.R
 import com.alexzh.medicationreminder.TestData
 import com.alexzh.medicationreminder.data.PillsRepository
 import com.alexzh.medicationreminder.data.model.Pill
 import com.alexzh.medicationreminder.home.HomeActivity
 import com.alexzh.medicationreminder.pilldetail.PillDetailActivity
-import com.alexzh.medicationreminder.settings.SettingsActivity
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Completable
 import io.reactivex.subjects.SingleSubject
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -56,18 +49,6 @@ class AppMockUITest {
             whenever(mRepository.getPillById(any())).thenReturn(mPillSubject)
             whenever(mRepository.savePill(any())).thenReturn(Completable.complete())
         }
-    }
-
-    @Before
-    fun setUp() {
-        val activity = mActivityRule.activity
-        val wakeUpDevice = Runnable {
-            activity.window.addFlags(
-                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
-                            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
-                            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        }
-        activity.runOnUiThread(wakeUpDevice)
     }
 
     @Test
