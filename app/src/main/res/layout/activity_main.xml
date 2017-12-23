@@ -23,7 +23,7 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </android.support.design.widget.AppBarLayout>
 
-    <com.alexzh.medicationreminder.customview.TestableProgressBar
+    <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
