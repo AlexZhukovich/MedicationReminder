@@ -21,8 +21,8 @@ jobs:
       - run:
           name: update android sdk
           command: |
-              echo y | android update sdk --no-ui --all --filter tool,extra-android-m2repository,extra-google-google_play_services,extra-google-m2repository,android-27
-              echo y | android update sdk --no-ui --all --filter build-tools-27.0.1
+              echo y | android update sdk --no-ui --all --filter tool,extra-android-m2repository,extra-google-google_play_services,extra-google-m2repository,android-26
+              echo y | android update sdk --no-ui --all --filter build-tools-26.0.2
 
       - run:
           name: Setup emulator
