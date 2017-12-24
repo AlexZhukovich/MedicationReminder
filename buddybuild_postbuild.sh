@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
-#codecov
-bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -J 'scheme'
+
+#echo "ConnectedCheck: "
+#./gradlew connectedCheck
+
+echo "Send report to CodeCov"
+bash <(curl -s https://codecov.io/bash) -t ${CODECOV_TOKEN}
