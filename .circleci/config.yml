@@ -159,6 +159,9 @@ jobs:
       - checkout
       - *restore_cache
       - run:
+          name: chmod permissions
+          command: chmod +x ./gradlew
+      - run:
           name: Download dependencies
           command: ./gradlew androidDependencies
       - *attach_debug_workspace
