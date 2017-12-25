@@ -3,6 +3,7 @@ version: 2
 references:
 
   ## Cache
+
   cache_key: &cache_key
     key: cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
   restore_cache: &restore_cache
@@ -16,6 +17,7 @@ references:
         - ~/.m2
 
   ## Workspace
+
   workspace: &workspace
       ~/workspace
     persist_debug_workspace: &persist_debug_workspace
@@ -108,6 +110,8 @@ workflows:
     jobs:
       - build_debug
       - test_unit
+
+
 
 #version: 2
 #jobs:
