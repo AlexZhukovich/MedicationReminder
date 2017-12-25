@@ -3,8 +3,8 @@
 buildscript {
     ext.kotlin_version = '1.2.10'
     ext.gradle_version = '3.0.1'
-    ext.gradle_android_cache_fix_version = "0.2.3"
-    ext.support_library_version = '27.0.1'
+//    ext.gradle_android_cache_fix_version = "0.2.3"
+    ext.support_library_version = '27.0.2'
     ext.constraint_layout_version = '1.0.2'
     ext.rxjava_version = '2.1.1'
     ext.rxandroid_version = '2.0.1'
@@ -32,10 +32,10 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-//        classpath "com.dicedmelon.gradle:jacoco-android:$jacoco_android_version"
+        classpath "com.dicedmelon.gradle:jacoco-android:$jacoco_android_version"
         classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
 
-        classpath "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin:$gradle_android_cache_fix_version"
+//        classpath "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin:$gradle_android_cache_fix_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
