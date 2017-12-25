@@ -57,12 +57,23 @@ references:
       TERM: dumb
       _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
       GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
-#  gcloud_config: &gcloud_config
-#    working_directory: *workspace
-#    docker:
-#      - image: google/cloud-sdk:latest
-#    environment:
-#      TERM: dumb
+  gcloud_config: &gcloud_config
+    working_directory: *workspace
+    docker:
+      - image: google/cloud-sdk:latest
+    environment:
+      TERM: dumb
+
+  # Google Cloud Service
+
+  export_gcloud_key: &export_gcloud_key
+    run:
+      name: Export Google Cloud Service key environment variable
+      command: echo 'export GCLOUD_SERVICE_KEY="$GCLOUD_SERVICE_KEY"' >> $BASH_ENV
+  decode_gcloud_key: &decode_gcloud_key
+    run:
+      name: Decode Google Cloud credentials
+      command: echo $GCLOUD_SERVICE_KEY | base64 -di > ${HOME}/client-secret.json
 
 jobs:
 
@@ -116,12 +127,42 @@ jobs:
           path: app/build/test-results/
           destination: /test-results/
 
+  test_instrumented:
+      <<: *gcloud_config
+      steps:
+        - *attach_debug_workspace
+        - *export_gcloud_key
+        - *decode_gcloud_key
+        - run:
+            name: Set Google Cloud target project
+            command: gcloud config set project medicationreminder-7179d
+        - run:
+            name: Authenticate with Google Cloud
+            command: gcloud auth activate-service-account firebase-adminsdk-p9qvk@medicationreminder-7179d.iam.gserviceaccount.com --key-file ${HOME}/client-secret.json
+        - run:
+            name: Run instrumented test on Firebase Test Lab
+            command: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/mobile-debug.apk --test app/build/outputs/apk/androidTest/debug/mobile-debug-androidTest.apk --device model=Nexus5X,version=26,locale=en_US,orientation=portrait --environment-variables coverage=true,coverageFile=/sdcard/tmp/code-coverage/connected/coverage.ec --directories-to-pull=/sdcard/tmp --timeout 20m
+        - run:
+            name: Create directory to store test results
+            command: mkdir firebase
+        - run:
+            name: Download instrumented test results from Firebase Test Lab
+            command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-yw8tb0h3910k6-mx6isf1za1zds | tail -1`*" /root/workspace/firebase/
+        - *persist_firebase_workspace
+        - store_artifacts:
+            path: firebase/
+            destination: /firebase/
+
+
 workflows:
   version: 2
   workflow:
     jobs:
       - build_debug
       - test_unit
+      - test_instrumented:
+          requires:
+            - build_debug
 
 
 
