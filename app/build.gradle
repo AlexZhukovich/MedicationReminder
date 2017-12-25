@@ -36,7 +36,14 @@ android {
     testOptions {
         unitTests {
             includeAndroidResources = true
+            returnDefaultValues     = true
             execution 'ANDROID_TEST_ORCHESTRATOR'
+
+            all {
+                jacoco {
+                    includeNoLocationClasses true
+                }
+            }
         }
     }
     sourceSets {
