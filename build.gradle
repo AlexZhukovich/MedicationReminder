@@ -32,7 +32,8 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-        classpath "com.dicedmelon.gradle:jacoco-android:$jacoco_android_version"
+        classpath 'org.jacoco:org.jacoco.core:0.7.9'
+//        classpath "com.dicedmelon.gradle:jacoco-android:$jacoco_android_version"
         classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
 
 //        classpath "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin:$gradle_android_cache_fix_version"

@@ -181,9 +181,9 @@ jobs:
           command: mkdir -p app/build/outputs/code-coverage/connected && cp firebase/Nexus5X-26-en_US-portrait/artifacts/coverage.ec app/build/outputs/code-coverage/connected/coverage.ec
 #      - *export_gservices_key
 #      - *decode_gservices_key
-#      - run:
-#          name: Generate JaCoCo report
-#          command: ./gradlew -PciBuild=true :app:jacocoTestReport
+      - run:
+          name: Generate JaCoCo report
+          command: ./gradlew -PciBuild=true :app:jacocoTestReport
 #      - run:
 #          name: Upload coverage report to Codacy
 #          command: ./gradlew -PciBuild=true uploadCoverageToCodacy
