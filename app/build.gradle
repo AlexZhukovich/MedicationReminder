@@ -47,11 +47,11 @@ android {
             returnDefaultValues     = true
 //            execution 'ANDROID_TEST_ORCHESTRATOR'
 
-            all {
-                jacoco {
-                    includeNoLocationClasses true
-                }
-            }
+//            all {
+//                jacoco {
+//                    includeNoLocationClasses true
+//                }
+//            }
         }
     }
     sourceSets {
@@ -76,40 +76,53 @@ task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
         html.enabled = true
     }
 
-    classDirectories = fileTree(
-            dir      : 'build/intermediates/classes/debug',
-            excludes : [
-                    '**/R.class',
-                    '**/R$*.class',
-                    '**/*$ViewInjector*.*',
-                    '**/*$ViewBinder*.*',
-                    '**/BuildConfig.*',
-                    '**/Manifest*.*',
-                    '**/*RealmProxy.*',
-                    '**/*ColumnInfo.*',
-                    '**/*RealmModule*.*',
-                    '**/AutoValue_*.*',
-                    '**/Dagger*.*',
-                    '**/*Module_Provide*Factory.*',
-                    '**/*_Factory.*',
-                    '**/*_MembersInjector.*',
-                    '**/*_LifecycleAdapter.*'
-            ]
-    )
+//    classDirectories = fileTree(
+//            dir      : 'build/intermediates/classes/debug',
+//            excludes : [
+//                    '**/R.class',
+//                    '**/R$*.class',
+//                    '**/*$ViewInjector*.*',
+//                    '**/*$ViewBinder*.*',
+//                    '**/BuildConfig.*',
+//                    '**/Manifest*.*',
+//                    '**/*RealmProxy.*',
+//                    '**/*ColumnInfo.*',
+//                    '**/*RealmModule*.*',
+//                    '**/AutoValue_*.*',
+//                    '**/Dagger*.*',
+//                    '**/*Module_Provide*Factory.*',
+//                    '**/*_Factory.*',
+//                    '**/*_MembersInjector.*',
+//                    '**/*_LifecycleAdapter.*'
+//            ]
+//    )
 
-    sourceDirectories = files(coverageSourceDirs)
-    executionData     = fileTree(
-            dir     : "$buildDir",
-            include : [ 'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec' ]
-    )
+//    sourceDirectories = files(coverageSourceDirs)
+//    executionData     = fileTree(
+//            dir     : "$buildDir",
+//            include : [ 'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/coverage.ec' ]
+//    )
 
-    doFirst {
-        files('build/intermediates/classes/debug').getFiles().each { file ->
-            if (file.name.contains('$$')) {
-                file.renameTo(file.path.replace('$$', '$'))
-            }
-        }
-    }
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
+                      '**/*Test*.*', 'android/**/*.*', '**/*_ViewBinding*.*', '**/*_MembersInjector*.*',
+                      '**/*_Provide*Factory*.*', "**/*DaggerApplicationComponent*.*", "**/*Factory*.*"]
+
+    def debugJavaTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def debugKotlinTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugJavaTree, debugKotlinTree])
+    executionData = files(["${buildDir}/jacoco/testDebugUnitTest.exec",
+                           "${buildDir}/outputs/code-coverage/connected/coverage.ec"])
+
+//    doFirst {
+//        files('build/intermediates/classes/debug').getFiles().each { file ->
+//            if (file.name.contains('$$')) {
+//                file.renameTo(file.path.replace('$$', '$'))
+//            }
+//        }
+//    }
 }
 
 task uploadCoverageToCodacy(type : JavaExec, dependsOn : jacocoTestReport) {
