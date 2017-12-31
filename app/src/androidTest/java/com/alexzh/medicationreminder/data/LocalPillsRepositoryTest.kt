@@ -128,4 +128,30 @@ class LocalPillsRepositoryTest {
                 .test()
                 .assertValue(TestData.EMPTY_LIST_OF_PILLS)
     }
+
+    @Test
+    fun should_update_existingReminder() {
+        mPillsRepository.savePill(TestData.getFirstPill()).test()
+        mPillsRepository.saveReminder(TestData.getFirstReminder()).test()
+
+        mPillsRepository.updateReminder(TestData.getFirstUpdatedReminder())
+                .test()
+
+        mPillsRepository.getReminder()
+                .test()
+                .assertValue(listOf(TestData.getFirstUpdatedReminder()))
+    }
+
+    @Test
+    fun should_delete_existingReminder() {
+        mPillsRepository.savePill(TestData.getFirstPill()).test()
+        mPillsRepository.saveReminder(TestData.getFirstReminder()).test()
+
+        mPillsRepository.removeReminder(TestData.getFirstReminder())
+                .test()
+
+        mPillsRepository.getReminder()
+                .test()
+                .assertValue(TestData.EMPTY_LIST_OF_REMINDERS)
+    }
 }
