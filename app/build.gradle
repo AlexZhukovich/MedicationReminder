@@ -2,7 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'jacoco-android'
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion "$jacoco_version"
+}
 
 android {
     compileSdkVersion 26
@@ -46,6 +50,33 @@ android {
             java.srcDir commonTestDir
         }
     }
+}
+
+task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
+    group       = 'Reporting'
+    description = 'Generate JaCoCo coverage reports'
+
+    reports {
+        xml.enabled  = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class',
+                      '**/R$*.class',
+                      '**/BuildConfig.*',
+                      '**/Manifest*.*',
+                      '**/*_Impl*.*',
+                      '**/*Test*.*',
+                      'android/**/*.*']
+
+    def debugJavaTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def debugKotlinTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugJavaTree, debugKotlinTree])
+    executionData = files(["${buildDir}/jacoco/testDebugUnitTest.exec",
+                           "${buildDir}/outputs/code-coverage/connected/coverage.ec"])
 }
 
 dependencies {
@@ -100,12 +131,24 @@ dependencies {
     // Espresso
     androidTestImplementation ("com.android.support.test.espresso:espresso-core:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'recyclerview-v7'
     })
     androidTestImplementation ("com.android.support.test.espresso:espresso-contrib:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'recyclerview-v7'
     })
     androidTestImplementation ("com.android.support.test.espresso:espresso-intents:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'recyclerview-v7'
     })
 
     // UiAutomator
