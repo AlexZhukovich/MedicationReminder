@@ -2,15 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'jacoco-android'
 apply plugin: 'jacoco'
 
 jacoco {
     toolVersion '0.7.9'
-}
-
-configurations {
-    codacy
 }
 
 android {
@@ -45,13 +40,6 @@ android {
         unitTests {
             includeAndroidResources = true
             returnDefaultValues     = true
-//            execution 'ANDROID_TEST_ORCHESTRATOR'
-
-//            all {
-//                jacoco {
-//                    includeNoLocationClasses true
-//                }
-//            }
         }
     }
     sourceSets {
@@ -65,8 +53,6 @@ android {
     }
 }
 
-def coverageSourceDirs = ['src/main/java']
-
 task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
     group       = 'Reporting'
     description = 'Generate JaCoCo coverage reports'
@@ -76,37 +62,13 @@ task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
         html.enabled = true
     }
 
-//    classDirectories = fileTree(
-//            dir      : 'build/intermediates/classes/debug',
-//            excludes : [
-//                    '**/R.class',
-//                    '**/R$*.class',
-//                    '**/*$ViewInjector*.*',
-//                    '**/*$ViewBinder*.*',
-//                    '**/BuildConfig.*',
-//                    '**/Manifest*.*',
-//                    '**/*RealmProxy.*',
-//                    '**/*ColumnInfo.*',
-//                    '**/*RealmModule*.*',
-//                    '**/AutoValue_*.*',
-//                    '**/Dagger*.*',
-//                    '**/*Module_Provide*Factory.*',
-//                    '**/*_Factory.*',
-//                    '**/*_MembersInjector.*',
-//                    '**/*_LifecycleAdapter.*'
-//            ]
-//    )
-
-//    sourceDirectories = files(coverageSourceDirs)
-//    executionData     = fileTree(
-//            dir     : "$buildDir",
-//            include : [ 'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/coverage.ec' ]
-//    )
-
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
+    def fileFilter = ['**/R.class',
+                      '**/R$*.class',
+                      '**/BuildConfig.*',
+                      '**/Manifest*.*',
                       '**/*_Impl*.*',
-                      '**/*Test*.*', 'android/**/*.*', '**/*_ViewBinding*.*', '**/*_MembersInjector*.*',
-                      '**/*_Provide*Factory*.*', "**/*DaggerApplicationComponent*.*", "**/*Factory*.*"]
+                      '**/*Test*.*',
+                      'android/**/*.*']
 
     def debugJavaTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
     def debugKotlinTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
@@ -116,53 +78,7 @@ task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
     classDirectories = files([debugJavaTree, debugKotlinTree])
     executionData = files(["${buildDir}/jacoco/testDebugUnitTest.exec",
                            "${buildDir}/outputs/code-coverage/connected/coverage.ec"])
-
-//    doFirst {
-//        files('build/intermediates/classes/debug').getFiles().each { file ->
-//            if (file.name.contains('$$')) {
-//                file.renameTo(file.path.replace('$$', '$'))
-//            }
-//        }
-//    }
 }
-
-//task uploadCoverageToCodacy(type : JavaExec, dependsOn : jacocoTestReport) {
-//    main      = "com.codacy.CodacyCoverageReporter"
-//    classpath = configurations.codacy
-//
-//    args = [
-//            "-l",
-//            "Java",
-//            "-r",
-//            "${buildDir}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
-//    ]
-//}
-//
-//task (codacyDepsize) << {
-//    def size = 0
-//
-//    configurations.codacy.collect {
-//        it.length() / (1024 * 1024)
-//    }.each {
-//        size += it
-//    }
-//
-//    println "Total dependencies size: ${Math.round(size * 100) / 100} MB"
-//
-//    configurations.codacy.sort {
-//        -it.length()
-//    }.each {
-//        println "${it.name}: ${Math.round(it.length() / (1024) * 100) / 100} KB"
-//    }
-//}
-//
-//task (codacyLocs) << {
-//    configurations.codacy.each {
-//        String jarName = it
-//
-//        println jarName
-//    }
-//}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -228,16 +144,14 @@ dependencies {
         exclude group: 'com.android.support', module: 'design'
         exclude module: 'recyclerview-v7'
     })
-//    androidTestImplementation ("com.android.support.test.espresso:espresso-intents:$espresso_version", {
-//        exclude group: 'com.android.support', module: 'support-annotations'
-//        exclude group: 'com.android.support', module: 'appcompat'
-//        exclude group: 'com.android.support', module: 'support-v4'
-//        exclude group: 'com.android.support', module: 'design'
-//        exclude module: 'recyclerview-v7'
-//    })
+    androidTestImplementation ("com.android.support.test.espresso:espresso-intents:$espresso_version", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'recyclerview-v7'
+    })
 
     // UiAutomator
     androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiautomator_version"
-
-//    androidTestUtil 'com.android.support.test:orchestrator:1.0.1'
 }
