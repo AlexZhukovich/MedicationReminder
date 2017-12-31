@@ -55,8 +55,8 @@ references:
       - image: circleci/android:api-27-alpha
     environment:
       TERM: dumb
-      _JAVA_OPTIONS: "-Xmx1400m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
-      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx1400m"'
+      _JAVA_OPTIONS: "-Xmx1800m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx1800m"'
   gcloud_config: &gcloud_config
     working_directory: *workspace
     docker:
