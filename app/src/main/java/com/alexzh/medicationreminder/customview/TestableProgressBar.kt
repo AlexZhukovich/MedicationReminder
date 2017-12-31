@@ -23,7 +23,7 @@ class TestableProgressBar : ProgressBar {
 
     private fun getProgressDrawable(drawable: Drawable) : Drawable {
         return if (isAnimationEnabled())
-            ContextCompat.getDrawable(context, R.drawable.ic_refresh_black_16dp)
+            ContextCompat.getDrawable(context, R.drawable.ic_refresh_black_16dp)!!
         else
             drawable
     }

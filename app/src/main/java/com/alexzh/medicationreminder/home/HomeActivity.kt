@@ -37,7 +37,7 @@ class HomeActivity : AppCompatActivity(), Home.View {
         val divider = ContextCompat.getDrawable(this, R.drawable.item_divider)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.addItemDecoration(DivideItemDecoration(divider))
+        recyclerView.addItemDecoration(DivideItemDecoration(divider!!))
         recyclerView.adapter = mAdapter
 
         add.setOnClickListener { handleAddButtonClick() }
